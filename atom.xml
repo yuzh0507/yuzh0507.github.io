@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2019-11-04T11:37:49.747Z</updated>
+    <updated>2019-11-04T11:43:18.397Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -58,10 +58,9 @@
 <li>an operation that allows a datagram to be sent, specifying the data, source and destination ports and addresses to be sent.</li>
 </ul>
 <h1 id="4-ip-interface">4 IP Interface</h1>
-<p>The UDP module must be able to determine the source and destination internet addresses and the protocol field from the internet header. One possible UDP/IP interface would return the whole internet datagram including all of the internet header in response to a receive operation. Such an interface would also allow the UDP to pass a full internet<br>
-datagram complete with header to the IP to send. The IP would verify certain fields for consistency and compute the internet header checksum.</p>
+<p>The UDP module must be able to determine the source and destination internet addresses and the protocol field from the internet header. One possible UDP/IP interface would return the whole internet datagram including all of the internet header in response to a receive operation. Such an interface would also allow the UDP to pass a full internet datagram complete with header to the IP to send. The IP would verify certain fields for consistency and compute the internet header checksum.</p>
 <h1 id="5-ports">5 Ports</h1>
-<p>The UDP well-known ports is identical to TCP well-known ports. Some frequently used ports are showned as below</p>
+<p>The UDP well-known ports is identical to TCP well-known ports. Some frequently used ports are showned as below.</p>
 <table>
 <thead>
 <tr>
