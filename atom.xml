@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://yuzh0507.github.io</id>
+    <title>Gridea</title>
+    <updated>2019-11-04T08:57:00.817Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://yuzh0507.github.io"/>
+    <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://yuzh0507.github.io/images/avatar.png</logo>
+    <icon>https://yuzh0507.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[README]]></title>
+        <id>https://yuzh0507.github.io/post/readme</id>
+        <link href="https://yuzh0507.github.io/post/readme">
+        </link>
+        <updated>2019-11-04T08:48:32.000Z</updated>
+        <content type="html"><![CDATA[<p>After entering a automotive company, I suddenly started to work on the R&amp;D of automotive Ethernet as a fresh graduate major in machinery. I’ve learned a lot from some awesome people in the Internet. One year after my induction, I’d like to share something I’v learned and discuss with you to improve each other.</p>
+]]></content>
+    </entry>
+</feed>
