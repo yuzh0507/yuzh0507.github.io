@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2019-11-04T11:05:53.012Z</updated>
+    <updated>2019-11-04T11:33:26.178Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -43,10 +43,48 @@
 </tr>
 <tr>
 <td>checksum</td>
-<td>the 16-bit one’s complement of the one’s complement sum of a pseudo header</td>
+<td>The 16-bit one’s complement of the one’s complement sum of a pseudo header</td>
 </tr>
 </tbody>
 </table>
+<h2 id="22-pseudo-header">2.2 Pseudo Header</h2>
+<figure data-type="image" tabindex="2"><img src="https://yuzh0507.github.io/post-images/1572865765825.PNG" alt=""></figure>
+<p>The pseudo header includes IP address in addition to UDP information. The specific implementation will be discussed in next update.</p>
+<h1 id="3-user-interface">3 User Interface</h1>
+<p>A user interface should allow:</p>
+<ul>
+<li>The creation of new receive ports,</li>
+<li>receive operations on the receive ports that return the data octets and an indication of source port and source address,</li>
+<li>an operation that allows a datagram to be sent, specifying the data, source and destination ports and addresses to be sent.</li>
+</ul>
+<h1 id="4-ip-interface">4 IP Interface</h1>
+<p>The UDP module must be able to determine the source and destination internet addresses and the protocol field from the internet header. One possible UDP/IP interface would return the whole internet datagram including all of the internet header in response to a receive operation. Such an interface would also allow the UDP to pass a full internet<br>
+datagram complete with header to the IP to send. The IP would verify certain fields for consistency and compute the internet header checksum.</p>
+<h1 id="5-ports">5 Ports</h1>
+<p>The UDP well-known ports is identical to TCP well-known ports. Some frequently used ports are showned as below</p>
+<table>
+<thead>
+<tr>
+<th>Port Number</th>
+<th>Application Protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>53</td>
+<td>DNS</td>
+</tr>
+<tr>
+<td>67, 68</td>
+<td>DHCP</td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-implementation-in-automotive-ethernet">6 Implementation in Automotive Ethernet</h1>
+<h1 id="61-application-scenarios">6.1 Application Scenarios</h1>
+<p>Most messages within the automotive Environment are considerably important which need reliable service provided by the transport layer. Since the UDP is good at speed but not reliable, the utilization shall be deliberated by designers.</p>
+<h1 id="62-length">6.2 Length</h1>
+<p>Since the MTU of automotive Ethernet is constantly 1500 Bytes, designers may forbid the fragmenation of IP. In this case, The length of UDP messages shall be limited to fulfill the limitation of MTU.</p>
 ]]></content>
     </entry>
     <entry>
