@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2019-11-04T10:51:48.833Z</updated>
+    <updated>2019-11-04T11:04:58.187Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -10,6 +10,45 @@
     <logo>https://yuzh0507.github.io/images/avatar.png</logo>
     <icon>https://yuzh0507.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Station of Alvin</rights>
+    <entry>
+        <title type="html"><![CDATA[UDP Summary]]></title>
+        <id>https://yuzh0507.github.io/post/udp-summary</id>
+        <link href="https://yuzh0507.github.io/post/udp-summary">
+        </link>
+        <updated>2019-11-04T10:52:33.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-summary">1 Summary</h1>
+<p>UDP(User Datagram Protocol) is a regular and simple protocol of the transport layer. It offers service of transmitting messages between applications.</p>
+<h1 id="2-format">2 Format</h1>
+<h2 id="21-udp-header">2.1 UDP Header</h2>
+<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1572865440084.PNG" alt=""></figure>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source Port</td>
+<td>The transport port of sending process</td>
+</tr>
+<tr>
+<td>Destination Port</td>
+<td>The transport port of the destination of the message</td>
+</tr>
+<tr>
+<td>Length</td>
+<td>Length in octets of of this datagram including header and data</td>
+</tr>
+<tr>
+<td>checksum</td>
+<td>the 16-bit one’s complement of the one’s complement sum of a pseudo header</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[README]]></title>
         <id>https://yuzh0507.github.io/post/readme</id>
