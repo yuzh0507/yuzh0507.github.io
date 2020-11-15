@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2020-11-15T14:54:02.096Z</updated>
+    <updated>2020-11-15T15:38:02.762Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -12,15 +12,15 @@
     <rights>All rights reserved 2020, Station of Alvin</rights>
     <entry>
         <title type="html"><![CDATA[UDP Summary]]></title>
-        <id>https://yuzh0507.github.io/post/udp-summary</id>
-        <link href="https://yuzh0507.github.io/post/udp-summary">
+        <id>https://yuzh0507.github.io/post/udp-summary/</id>
+        <link href="https://yuzh0507.github.io/post/udp-summary/">
         </link>
         <updated>2019-11-04T10:52:33.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1-summary">1 Summary</h1>
 <p>UDP(User Datagram Protocol) is a regular and simple protocol of the transport layer. It offers service of transmitting messages between applications.</p>
 <h1 id="2-format">2 Format</h1>
 <h2 id="21-udp-header">2.1 UDP Header</h2>
-<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1572865440084.PNG" alt=""></figure>
+<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1572865440084.PNG" alt="" loading="lazy"></figure>
 <table>
 <thead>
 <tr>
@@ -48,7 +48,7 @@
 </tbody>
 </table>
 <h2 id="22-pseudo-header">2.2 Pseudo Header</h2>
-<figure data-type="image" tabindex="2"><img src="https://yuzh0507.github.io/post-images/1572865765825.PNG" alt=""></figure>
+<figure data-type="image" tabindex="2"><img src="https://yuzh0507.github.io/post-images/1572865765825.PNG" alt="" loading="lazy"></figure>
 <p>The pseudo header includes IP address in addition to UDP information. The specific implementation will be discussed in next update.</p>
 <h1 id="3-user-interface">3 User Interface</h1>
 <p>A user interface should allow:</p>
@@ -88,8 +88,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[README]]></title>
-        <id>https://yuzh0507.github.io/post/readme</id>
-        <link href="https://yuzh0507.github.io/post/readme">
+        <id>https://yuzh0507.github.io/post/readme/</id>
+        <link href="https://yuzh0507.github.io/post/readme/">
         </link>
         <updated>2019-11-04T08:48:32.000Z</updated>
         <content type="html"><![CDATA[<p>After entering an automotive company, I suddenly started to work on the R&amp;D of automotive Ethernet as a fresh graduate major in machinery. I’ve learned a lot from some awesome people in the Internet. One year after my induction, I’d like to share something I’v learned and discuss with you to improve each other.</p>
