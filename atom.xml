@@ -2,14 +2,42 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2020-11-15T15:38:02.762Z</updated>
+    <updated>2022-05-04T01:23:00.877Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
     <subtitle>Record every step of my way</subtitle>
     <logo>https://yuzh0507.github.io/images/avatar.png</logo>
     <icon>https://yuzh0507.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Station of Alvin</rights>
+    <rights>All rights reserved 2022, Station of Alvin</rights>
+    <entry>
+        <title type="html"><![CDATA[LeetCode Record]]></title>
+        <id>https://yuzh0507.github.io/post/leetcode-record/</id>
+        <link href="https://yuzh0507.github.io/post/leetcode-record/">
+        </link>
+        <updated>2022-05-04T00:51:04.000Z</updated>
+        <content type="html"><![CDATA[<p>In order to learn C++ programming skills, I decide to start to do exercises on <a href="https://leetcode.com/">LeetCode</a>.</p>
+<h1 id="easy-problems">Easy Problems</h1>
+<h2 id="1-two-sum">1. Two Sum</h2>
+<p>Link: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
+<pre><code>class Solution {
+public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+        for (int i = 0; i &lt; nums.size(); i++){              // Use i to traverse the nums
+            for (int j = i+1; j &lt; nums.size(); j++){        // Use j to traverse the rest elements from i to the end of nums
+                if(nums[i] + nums[j] == target){        
+                    return {i,j};                   // If the sum of two elements equals the target, return their position.
+                }
+            }
+        }
+        
+        return {0};     // If there are no two elements whose sum equals the target, return 0
+    }
+};
+</code></pre>
+<hr>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[UDP Summary]]></title>
         <id>https://yuzh0507.github.io/post/udp-summary/</id>
