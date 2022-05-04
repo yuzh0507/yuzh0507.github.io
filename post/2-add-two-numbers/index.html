@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About | Station of Alvin</title>
+<title>2. Add Two Numbers | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651677837466">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,45 +79,94 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              About
+              2. Add Two Numbers
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2022-05-04
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
+              
+                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
+                  # C++
+                </a>
+              
+                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+                  # LeetCode
+                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>Welcome to my station!🤝</p>
+                <p>Problem</p>
+<blockquote>
+<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.<br>
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
 </blockquote>
-<h2 id="about-this-station">🏠 About This Station</h2>
-<p>This station is used to record knowledge for myself. I believe every step I take will lead me to a bright future. When I look backward, I hope I can remember all the dots make me different.</p>
-<h2 id="who-am-i">👨‍💻 Who am I</h2>
-<p>An automotive engineer, engage in automotive Ethernet and SOA development.</p>
-<h2 id="hobbies">⛹ Hobbies</h2>
-<p>Basketball, Football, Racing car.</p>
-<h2 id="contact-me">📬 Contact me</h2>
-<p>yuzh0507@gmail.com</p>
+<p>Constraints:</p>
+<blockquote>
+<p>The number of nodes in each linked list is in the range [1, 100].<br>
+0 &lt;= Node.val &lt;= 9<br>
+It is guaranteed that the list represents a number that does not have leading zeros.</p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/add-two-numbers/">https://leetcode.com/problems/add-two-numbers/</a></p>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *sum = nullptr, *sudosum = nullptr;
+        int v = 0, carry = 0;
+        while (l1 || l2)
+        {
+            if(l1 &amp;&amp; l2)
+            {
+                v = carry + l1-&gt;val +l2-&gt;val;
+                l1 = l1-&gt;next;
+                l2 = l2-&gt;next;
+            }
+            else if (!l1)
+            {
+                v = carry +l2-&gt;val;
+                l2 = l2-&gt;next;
+            }
+            else{
+                v = carry + l1-&gt;val;
+                l1 = l1-&gt;next;
+            }
+            carry = v/10;
+        
+            if(!sudosum)
+                sum = sudosum = new ListNode(v%10);
+            else{
+                sum-&gt;next = new ListNode(v%10);
+                sum = sum-&gt;next;
+            }
+
+        }
+
+        if(carry)
+            sum-&gt;next = new ListNode(1);
+    
+    
+        return sudosum;
+    }
+};
+</code></pre>
+<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#about-this-station">🏠 About This Station</a></li>
-<li><a href="#who-am-i">👨‍💻 Who am I</a></li>
-<li><a href="#hobbies">⛹ Hobbies</a></li>
-<li><a href="#contact-me">📬 Contact me</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
