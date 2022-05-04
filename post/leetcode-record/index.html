@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LeetCode Record | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651636854449">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651648924336">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1651636854449" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1651648924336" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -80,7 +80,7 @@
                 2022-05-04
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -97,79 +97,14 @@
               <div class="post-content">
                 <p>In order to learn C++ programming skills, I decide to start to do exercises on <a href="https://leetcode.com/">LeetCode</a>.</p>
 <h1 id="easy-problems">Easy Problems</h1>
-<h2 id="1-two-sum">1. Two Sum</h2>
-<p>Problem</p>
-<blockquote>
-<p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>
-You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>
-You can return the answer in any order.</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
-<pre><code>class Solution {
-public:
-    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
-        for (int i = 0; i &lt; nums.size(); i++){              // Use i to traverse the nums
-            for (int j = i+1; j &lt; nums.size(); j++){        // Use j to traverse the rest elements from i to the end of nums
-                if(nums[i] + nums[j] == target){        
-                    return {i,j};                   // If the sum of two elements equals the target, return their position.
-                }
-            }
-        }
-        
-        return {0};     // If there are no two elements whose sum equals the target, return 0
-    }
-};
-</code></pre>
-<hr>
-<h2 id="9-palindrome-number">9. Palindrome Number</h2>
-<p>Problem</p>
-<blockquote>
-<p>Given an integer x, return true if x is palindrome integer.<br>
-An integer is a palindrome when it reads the same backward as forward.<br>
-For example, 121 is a palindrome while 123 is not.</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/palindrome-number/">https://leetcode.com/problems/palindrome-number/</a></p>
-<pre><code>class Solution {
-public:
-    bool isPalindrome(int x) {
-        vector&lt;int&gt; nums;
-        if (x &lt; 0)
-            return false;
-        if (x == 0)
-            return true;
-   
-        for (int tmp = x; tmp &gt; 0; tmp /= 10){
-            nums.push_back(tmp%10);
-        }
-
-        for (int i = 0, j = nums.size()-1; i &lt;= j;){
-            if (nums[i] == nums[j])
-            {
-
-                i++, j--;
-                if (i &gt;= j)
-                    return true;
-                continue;
-            }
-        
-            return false;
-        }
-
-        return false;
-    }
-};
-</code></pre>
-<hr>
+<p><a href="https://yuzh0507.github.io/post/1-two-sum">1. Two Sum</a><br>
+<a href="https://yuzh0507.github.io/post/9-palindrome-number">9. Palindrome Number</a><br>
+<a href="https://yuzh0507.github.io/post/13-roman-to-integer">13. Roman to Integer</a></p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li><a href="#easy-problems">Easy Problems</a>
-<ul>
-<li><a href="#1-two-sum">1. Two Sum</a></li>
-<li><a href="#9-palindrome-number">9. Palindrome Number</a></li>
-</ul>
-</li>
+<li><a href="#easy-problems">Easy Problems</a></li>
 </ul>
 
               </div>

@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>README | Station of Alvin</title>
+<title>13. Roman to Integer | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651648924336">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,21 +73,126 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              README
+              13. Roman to Integer
             </h2>
             <div class="post-info">
               <span>
-                2019-11-04
+                2022-05-04
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
+              
+                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
+                  # C++
+                </a>
+              
+                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+                  # LeetCode
+                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>After entering an automotive company, I suddenly started to work on the R&amp;D of automotive Ethernet as a fresh graduate major in machinery. I’ve learned a lot from some awesome people in the Internet. One year after my induction, I’d like to share something I’v learned and discuss with you to improve each other.</p>
+                <p>Problem</p>
+<blockquote>
+<p>Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>1</td>
+</tr>
+<tr>
+<td>V</td>
+<td>5</td>
+</tr>
+<tr>
+<td>X</td>
+<td>10</td>
+</tr>
+<tr>
+<td>L</td>
+<td>50</td>
+</tr>
+<tr>
+<td>C</td>
+<td>100</td>
+</tr>
+<tr>
+<td>D</td>
+<td>500</td>
+</tr>
+<tr>
+<td>M</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<p>For example, 2 is written as II in Roman numeral, just two one's added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.<br>
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:<br>
+· I can be placed before V (5) and X (10) to make 4 and 9. <br>
+· X can be placed before L (50) and C (100) to make 40 and 90. <br>
+· C can be placed before D (500) and M (1000) to make 400 and 900.<br>
+Given a roman numeral, convert it to an integer.</p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/roman-to-integer/">https://leetcode.com/problems/roman-to-integer/</a></p>
+<pre><code class="language-C++">class Solution {
+public:
+    int romanToInt(string s) {
+        int sum = 0;
+        for(int i = 0; i &lt; s.size(); i++){
+            // Use switch() to seperate characters
+            switch (s[i])
+            {
+            // If 'I' occurs befor 'V' or 'X', the summary shall subtract 1, otherwise plus 1
+            case 'I': 
+                if (s[i+1] == 'V' || s[i+1] == 'X' )
+                    sum -= 1;
+                else
+                    sum += 1;
+                break;
+            case 'V': 
+                sum += 5;
+                break;
+            // If 'X' occurs befor 'L' or 'C', the summary shall subtract 10, otherwise plus 10
+            case 'X': 
+                if (s[i+1] == 'L' || s[i+1] == 'C' )
+                    sum -= 10;
+                else
+                    sum += 10;
+                break;
+            case 'L': 
+                sum += 50;
+                break;
+            // If 'C' occurs befor 'D' or 'M', the summary shall subtract 100, otherwise plus 100
+            case 'C': 
+                if (s[i+1] == 'D' || s[i+1] == 'M' )
+                    sum -= 100;
+                else
+                    sum += 100;
+                break;
+            case 'D': 
+                sum += 500;
+                break;
+            case 'M': 
+                sum += 1000;
+                break;        
+            default:
+                break;
+            }
+        }
+        return sum;
+    }
+};
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -97,6 +202,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://yuzh0507.github.io/post/9-palindrome-number/">
+              <h3 class="post-title">
+                9. Palindrome Number
+              </h3>
+            </a>
+          </div>
         
 
         

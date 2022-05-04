@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>README | Station of Alvin</title>
+<title>9. Palindrome Number | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651648924336">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,21 +73,68 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              README
+              9. Palindrome Number
             </h2>
             <div class="post-info">
               <span>
-                2019-11-04
+                2022-05-04
               </span>
               <span>
                 1 min read
               </span>
               
+                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
+                  # C++
+                </a>
+              
+                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+                  # LeetCode
+                </a>
+              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>After entering an automotive company, I suddenly started to work on the R&amp;D of automotive Ethernet as a fresh graduate major in machinery. I’ve learned a lot from some awesome people in the Internet. One year after my induction, I’d like to share something I’v learned and discuss with you to improve each other.</p>
+                <p>Problem</p>
+<blockquote>
+<p>Given an integer x, return true if x is palindrome integer.<br>
+An integer is a palindrome when it reads the same backward as forward.<br>
+For example, 121 is a palindrome while 123 is not.</p>
+</blockquote>
+<p>Constraints</p>
+<blockquote>
+<p>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/palindrome-number/">https://leetcode.com/problems/palindrome-number/</a></p>
+<pre><code class="language-C++">class Solution {
+public:
+    bool isPalindrome(int x) {
+        vector&lt;int&gt; nums;
+        if (x &lt; 0)
+            return false;
+        if (x == 0)
+            return true;
+   
+        for (int tmp = x; tmp &gt; 0; tmp /= 10){
+            nums.push_back(tmp%10);     // Push back every number into the vector
+        }
+
+        for (int i = 0, j = nums.size()-1; i &lt;= j;){
+            // Compare numbers from both sides to the middle.
+            // If any pair is not equal, return false. If every pair is equal, return true
+            if (nums[i] == nums[j])
+            {
+                i++, j--;
+                if (i &gt;= j)
+                    return true;
+                continue;
+            }       
+            return false;
+        }
+        return false;
+    }
+};
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -97,6 +144,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://yuzh0507.github.io/post/1-two-sum/">
+              <h3 class="post-title">
+                1. Two Sum
+              </h3>
+            </a>
+          </div>
         
 
         
