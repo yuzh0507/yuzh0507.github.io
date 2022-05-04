@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-05-04T02:47:20.554Z</updated>
+    <updated>2022-05-04T03:54:11.264Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -17,7 +17,6 @@
         </link>
         <updated>2022-05-04T00:51:04.000Z</updated>
         <content type="html"><![CDATA[<p>In order to learn C++ programming skills, I decide to start to do exercises on <a href="https://leetcode.com/">LeetCode</a>.</p>
-<p>[toc]</p>
 <h1 id="easy-problems">Easy Problems</h1>
 <h2 id="1-two-sum">1. Two Sum</h2>
 <p>Problem</p>
@@ -42,6 +41,47 @@ public:
     }
 };
 </code></pre>
+<hr>
+<h2 id="9-palindrome-number">9. Palindrome Number</h2>
+<p>Problem</p>
+<blockquote>
+<p>Given an integer x, return true if x is palindrome integer.<br>
+An integer is a palindrome when it reads the same backward as forward.<br>
+For example, 121 is a palindrome while 123 is not.<br>
+Link: <a href="https://leetcode.com/problems/palindrome-number/">https://leetcode.com/problems/palindrome-number/</a><br>
+'''<br>
+class Solution {<br>
+public:<br>
+bool isPalindrome(int x) {<br>
+vector<int> nums;<br>
+if (x &lt; 0)<br>
+return false;<br>
+if (x == 0)<br>
+return true;</p>
+</blockquote>
+<pre><code>    for (int tmp = x; tmp &gt; 0; tmp /= 10){
+        nums.push_back(tmp%10);
+    }
+
+
+    for (int i = 0, j = nums.size()-1; i &lt;= j;){
+        if (nums[i] == nums[j])
+        {
+
+            i++, j--;
+            if (i &gt;= j)
+                return true;
+            continue;
+        }
+    
+        return false;
+    }
+
+    return false;
+}
+</code></pre>
+<p>};<br>
+'''</p>
 <hr>
 ]]></content>
     </entry>
