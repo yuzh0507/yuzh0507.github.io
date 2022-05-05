@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>9. Palindrome Number | Station of Alvin</title>
+<title>3. Longest Substring Without Repeating Characters | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651767273419">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,23 +79,15 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              9. Palindrome Number
+              3. Longest Substring Without Repeating Characters
             </h2>
             <div class="post-info">
               <span>
-                2022-05-04
+                2022-05-05
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
-              
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
@@ -103,41 +95,50 @@
               <div class="post-content">
                 <p>Problem</p>
 <blockquote>
-<p>Given an integer x, return true if x is palindrome integer.<br>
-An integer is a palindrome when it reads the same backward as forward.<br>
-For example, 121 is a palindrome while 123 is not.</p>
+<p>Given a string s, find the length of the longest substring without repeating characters.</p>
 </blockquote>
 <p>Constraints</p>
 <blockquote>
-<p>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</p>
+<p>0 &lt;= s.length &lt;= 5 * 10<sup>4</sup><br>
+s consists of English letters, digits, symbols and spaces.</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/palindrome-number/">https://leetcode.com/problems/palindrome-number/</a></p>
+<p>Link: <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">https://leetcode.com/problems/longest-substring-without-repeating-characters/</a></p>
 <pre><code class="language-C++">class Solution {
 public:
-    bool isPalindrome(int x) {
-        vector&lt;int&gt; nums;
-        if (x &lt; 0)
-            return false;
-        if (x == 0)
-            return true;
-   
-        for (int tmp = x; tmp &gt; 0; tmp /= 10){
-            nums.push_back(tmp%10);     // Push back every number into the vector
-        }
+    int lengthOfLongestSubstring(string s) {
+        if (s.size() == 0)
+            return 0;
+    
+        vector&lt;char&gt; substring;     // Store the substring
+        int n = s.size();
+        int right = 0;              // Right pointer of the s
+        int left = 0;               // Left pointer of the s
+        int ans = 1;
 
-        for (int i = 0, j = nums.size()-1; i &lt;= j;){
-            // Compare numbers from both sides to the middle.
-            // If any pair is not equal, return false. If every pair is equal, return true
-            if (nums[i] == nums[j])
+
+        for (; left &lt; n; left++)
+        {
+            //Move one step to the right
+            if(left != 0)
             {
-                i++, j--;
-                if (i &gt;= j)
-                    return true;
-                continue;
-            }       
-            return false;
+                // Erase elements from the beginning to the repeting element
+                substring.erase(substring.begin(), find(substring.begin(), substring.end(), s[right]));     
+                if(!substring.empty())
+                    substring.erase(substring.begin());
+            }
+
+            while(right &lt; n &amp;&amp; find(substring.begin(), substring.end(), s[right])==substring.end())
+            {
+                // Push the value pointed by the right into the substring
+                substring.push_back(s[right]);
+                //Move one step to the right
+                right++;
+            }
+
+            if(ans &lt; substring.size())
+                ans = substring.size();
         }
-        return false;
+        return ans;
     }
 };
 </code></pre>
