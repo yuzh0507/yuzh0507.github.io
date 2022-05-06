@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>5. Longest Palindromic Substring | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651842043852">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1651844061586">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1651842043852" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1651844061586" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -86,7 +86,7 @@
                 2022-05-06
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
@@ -103,8 +103,66 @@
 s consist of only digits and English letters.</p>
 </blockquote>
 <p>Link: <a href="https://leetcode.com/problems/longest-palindromic-substring/">https://leetcode.com/problems/longest-palindromic-substring/</a></p>
-<pre><code class="language-C++">
+<pre><code class="language-C++">class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        if(n&lt;2)
+            return s;
+        
+        int begin = 0;
+        int maxLen = 1;
+
+        // Build a matrix PalindromicMatrix to record whether s[i]~s[j] is a palindromic substring
+        vector&lt;vector&lt;bool&gt;&gt; PM(n,vector&lt;bool&gt;(n));     
+        
+        // PM Initialization
+        for (int i = 0; i &lt; n; i++)
+        {
+            for (int j = 0; j &lt; n; j++)
+            {
+                if (i == j)
+                    PM[i][j] == true;
+                else
+                    PM[i][j] == false;
+            }
+            
+        }
+        
+        // Enumerate substring length
+        for (int L = 1; L &lt; n; L++)
+        {
+            // Start from the left side
+            for(int left = 0; left+L &lt; n; left++)
+            {
+                if (s[left] != s[left+L])
+                    PM[left][left+L] = false;
+                    
+
+                else if (L&lt;=2)
+                    PM[left][left+L] = true;
+                    
+                else
+                    // if (s[i] == s[j]) &amp;&amp; (s[i+1] == s[j-1]), the bigger substring is palindromic  
+                    PM[left][left+L] = PM[left+1][left+L-1];
+                
+                // Record the position of longest palindromic substring 
+                if(PM[left][left+L] &amp;&amp; maxLen &lt; L+1)
+                {
+                    begin = left;
+                    maxLen = L+1;
+                }
+            }
+        }
+        return s.substr(begin, maxLen);
+    }
+};
 </code></pre>
+<p>Result</p>
+<blockquote>
+<p>Runtime: 1724 ms, faster than 5.02% of C++ online submissions for Longest Palindromic Substring.<br>
+Memory Usage: 30.1 MB, less than 33.45% of C++ online submissions for Longest Palindromic Substring.</p>
+</blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
