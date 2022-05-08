@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LeetCode Record | Station of Alvin</title>
+<title>6. Zigzag Conversion | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652018026911">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,62 +79,95 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              LeetCode Record
+              6. Zigzag Conversion
             </h2>
             <div class="post-info">
               <span>
-                2022-05-04
+                2022-05-08
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
-              
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>In order to learn C++ programming skills, I decide to start to do exercises on <a href="https://leetcode.com/">LeetCode</a>.</p>
-<h1 id="easy-problems">Easy Problems</h1>
-<p><a href="https://yuzh0507.github.io/post/1-two-sum">1. Two Sum</a><br>
-<a href="https://yuzh0507.github.io/post/9-palindrome-number">9. Palindrome Number</a><br>
-<a href="https://yuzh0507.github.io/post/13-roman-to-integer">13. Roman to Integer</a></p>
-<h1 id="medium-problems">Medium Problems</h1>
-<p><a href="https://yuzh0507.github.io/post/2-add-two-numbers">2. Add Two Numbers</a><br>
-<a href="https://yuzh0507.github.io/post/3-longest-substring-without-repeating-characters">3. Longest Substring Without Repeating Characters</a><br>
-<a href="https://yuzh0507.github.io/post/5-longest-palindromic-substring">5. Longest Palindromic Number</a><br>
-<a href="https://yuzh0507.github.io/post/6-zigzag-conversion">6. Zigzag Conversion</a></p>
-<h1 id="hard-problems">Hard Problems</h1>
+                <p><strong>Problem</strong></p>
+<blockquote>
+<p>The string &quot;PAYPALISHIRING&quot; is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+<pre><code>P   A   H   N
+A P L S I I G
+Y   I   R
+</code></pre>
+</blockquote>
+<blockquote>
+<p>And then read line by line: &quot;PAHNAPLSIIGYIR&quot;<br>
+Write the code that will take a string and make this conversion given a number of rows:</p>
+<pre><code>string convert(string s, int numRows);
+</code></pre>
+</blockquote>
+<p><strong>Constraints</strong></p>
+<blockquote>
+<p>1 &lt;= s.length &lt;= 1000<br>
+s consists of English letters (lower-case and upper-case), ',' and '.'.<br>
+1 &lt;= numRows &lt;= 1000</p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/zigzag-conversion/">https://leetcode.com/problems/zigzag-conversion/</a></p>
+<p><strong>Description</strong><br>
+Split the 'N' into '|' '' '|'.</p>
+<p>For the first row an the last row, they only need to put characters on the '|'. The next charcter is (2*numRows - 2) offset from the last.</p>
+<p>For other rows, they need to put characters on the '' in addition to '|'. the middle character is (2*(numRows-curRow)-2) offset from the last '|' character.</p>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    string convert(string s, int numRows)
+    {
+        if (numRows == 1)
+            return s;
+
+        string outstring ;
+        
+        //Start from the first row
+        for(int curRow = 0; curRow &lt; numRows; curRow++)
+        {
+            //Every row will add one or two character from the s
+            for(int index = curRow; index &lt; s.size();)
+            {
+                outstring.push_back(s[index]);
+                //If this row is not the first or the last, it will additionally add a character from the s 
+                if(curRow%(numRows-1) != 0)
+                {
+                    // Calculate the offset of the additional character from the above added character
+                    int plus = 2*(numRows-curRow)-2;
+                    if (index + plus &lt; s.size())
+                        outstring.push_back(s[index + plus]);
+
+                }
+                index += 2*numRows-2;
+            }
+        }
+        
+
+        return outstring;
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<blockquote>
+<p>Runtime: 9 ms, faster than 76.43% of C++ online submissions for Zigzag Conversion.<br>
+Memory Usage: 8 MB, less than 94.80% of C++ online submissions for Zigzag Conversion.</p>
+</blockquote>
+<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#easy-problems">Easy Problems</a></li>
-<li><a href="#medium-problems">Medium Problems</a></li>
-<li><a href="#hard-problems">Hard Problems</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://yuzh0507.github.io/post/udp-summary/">
-              <h3 class="post-title">
-                UDP Summary
-              </h3>
-            </a>
-          </div>
         
 
         
