@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>5. Longest Palindromic Substring | Station of Alvin</title>
+<title>8. String to Integer (atoi) | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652106036853">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,89 +79,93 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              5. Longest Palindromic Substring
+              8. String to Integer (atoi)
             </h2>
             <div class="post-info">
               <span>
-                2022-05-06
+                2022-05-09
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
+                <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given a string s, return the longest palindromic substring in s.</p>
+<p>Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).<br>
+The algorithm for myAtoi(string s) is as follows:</p>
+<ol>
+<li>Read in and ignore any leading whitespace.</li>
+<li>Check if the next character (if not already at the end of the string) is '-' or '+'. Read this character in if it is either. This determines if the final result is negative or positive respectively. Assume the result is positive if neither is present.</li>
+<li>Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.</li>
+<li>Convert these digits into an integer (i.e. &quot;123&quot; -&gt; 123, &quot;0032&quot; -&gt; 32). If no digits were read, then the integer is 0. Change the sign as necessary (from step 2).</li>
+<li>If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -231 should be clamped to -231, and integers greater than 231 - 1 should be clamped to 231 - 1.</li>
+<li>Return the integer as the final result.</li>
+</ol>
 </blockquote>
-<p>Constraints</p>
 <blockquote>
-<p>1 &lt;= s.length &lt;= 1000<br>
-s consist of only digits and English letters.</p>
+<p><strong>Note:</strong><br>
+Only the space character ' ' is considered a whitespace character.<br>
+Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/longest-palindromic-substring/">https://leetcode.com/problems/longest-palindromic-substring/</a></p>
+<p><strong>Constraints</strong></p>
+<blockquote>
+<p>0 &lt;= s.length &lt;= 200<br>
+s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.</p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/string-to-integer-atoi/">https://leetcode.com/problems/string-to-integer-atoi/</a></p>
+<p><strong>Description</strong></p>
+<p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    string longestPalindrome(string s) {
-        int n = s.size();
-        if(n&lt;2)
-            return s;
+    int myAtoi(string s)
+    {
+        int outInt = 0;
+        int minus = 1;
+        string::iterator pos = s.begin();
+        // Step 1
+        while (*pos == ' ')
+            pos++;
         
-        int begin = 0;
-        int maxLen = 1;
-
-        // Build a matrix PalindromicMatrix to record whether s[i]~s[j] is a palindromic substring
-        vector&lt;vector&lt;bool&gt;&gt; PM(n,vector&lt;bool&gt;(n));     
-        
-        // PM Initialization
-        for (int i = 0; i &lt; n; i++)
+        // Step2
+        if (*pos == '-')
         {
-            for (int j = 0; j &lt; n; j++)
-            {
-                if (i == j)
-                    PM[i][j] == true;
-                else
-                    PM[i][j] == false;
-            }
-            
+            minus = -1;
+            pos++;
         }
-        
-        // Enumerate substring length
-        for (int L = 1; L &lt; n; L++)
+        else if (*pos == '+')
         {
-            // Start from the left side
-            for(int left = 0; left+L &lt; n; left++)
-            {
-                if (s[left] != s[left+L])
-                    PM[left][left+L] = false;
-                    
-
-                else if (L&lt;=2)
-                    PM[left][left+L] = true;
-                    
-                else
-                    // if (s[i] == s[j]) &amp;&amp; (s[i+1] == s[j-1]), the bigger substring is palindromic  
-                    PM[left][left+L] = PM[left+1][left+L-1];
-                
-                // Record the position of longest palindromic substring 
-                if(PM[left][left+L] &amp;&amp; maxLen &lt; L+1)
-                {
-                    begin = left;
-                    maxLen = L+1;
-                }
-            }
+            minus = 1;
+            pos++;
         }
-        return s.substr(begin, maxLen);
+
+        //Step 3, 4, 5
+        for (; pos != s.end(); pos++)
+        {
+            if(48 &lt;= *pos &amp;&amp; *pos &lt;= 57)
+            {
+                if(outInt*minus &gt; INT_MAX/10 || ((outInt*minus == INT_MAX/10) &amp;&amp; ((*pos - 48)&gt;7)))
+                    return INT_MAX;
+                if(outInt*minus &lt; INT_MIN/10 || ((outInt*minus == INT_MIN/10) &amp;&amp; ((*pos - 48)&gt;=8)))
+                    return INT_MIN;
+                outInt = outInt*10 + (*pos - 48);
+            }
+            else
+                break;
+        }
+
+        //Step 6
+        return outInt*minus;
     }
 };
 </code></pre>
-<p>Result</p>
+<p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 1724 ms, faster than 5.02% of C++ online submissions for Longest Palindromic Substring.<br>
-Memory Usage: 30.1 MB, less than 33.45% of C++ online submissions for Longest Palindromic Substring.</p>
+<p>Runtime: 4 ms, faster than 64.52% of C++ online submissions for String to Integer (atoi).<br>
+Memory Usage: 7 MB, less than 89.70% of C++ online submissions for String to Integer (atoi).</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 

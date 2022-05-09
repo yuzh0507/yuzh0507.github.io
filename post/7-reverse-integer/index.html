@@ -1,8 +1,8 @@
 <html>
   <head>
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gridea | Station of Alvin</title>
+<title>7. Reverse Integer | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652106036853">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -76,47 +76,100 @@
   </div>
 </div>
 
-        <div class="current-tag-container">
-            <h2 class="title">
-                标签：# Gridea
-            </h2> 
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              7. Reverse Integer
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-05-09
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><strong>Problem</strong></p>
+<blockquote>
+<p>Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-2<sup>31</sup>, 2<sup>31</sup> - 1], then return 0.</p>
+</blockquote>
+<p><strong>Constraints</strong></p>
+<blockquote>
+<p>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/reverse-integer/">https://leetcode.com/problems/reverse-integer/</a></p>
+<p><strong>Description</strong><br>
+use % to calculate the remainder, *10 to get the reverse number step by step.</p>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    int reverse(int x)
+    {
+        int r = 0;
+        while(x != x%10)
+        {
+            r = r*10 + x%10;
+            x = x/10;
+        }
+
+        //check if r will exceed the boundary of int, i.e. [-2^31, 2^31-1] 
+        if(r &gt; (pow(2,31)-1)/10 || r &lt; -pow(2,31)/10)
+            return false;
+        else
+            r = r*10 + x%10;
+
+        return r;
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<blockquote>
+<p>Runtime: 8 ms, faster than 10.28% of C++ online submissions for Reverse Integer.<br>
+Memory Usage: 6 MB, less than 34.26% of C++ online submissions for Reverse Integer.</p>
+</blockquote>
+<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="post-container">
-  
-    <article class="post">
-      <a href="https://yuzh0507.github.io/post/hello-gridea/">
-        <h2 class="post-title">Hello Gridea</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2018-12-12
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://yuzh0507.github.io/tag/veNNFjOy2/" class="post-tag">
-            # Gridea
-          </a>
-        
-      </div>
-      
-        <a href="https://yuzh0507.github.io/post/hello-gridea/" class="post-feature-image" style="background-image: url('https://yuzh0507.github.io/post-images/hello-gridea.png')">
-        </a>
-      
-      <div class="post-abstract">
-        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
 
-      </div>
-    </article>
-  
-</div>
+        
 
-        <div class="pagination-container">
-  
-  
-</div>
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
