@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>2. Add Two Numbers | Station of Alvin</title>
+<title>10. Regular Expression Matching | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652193046901">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,89 +79,66 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              2. Add Two Numbers
+              10. Regular Expression Matching
             </h2>
             <div class="post-info">
               <span>
-                2022-05-04
+                2022-05-10
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
+                <p><strong>Problem</strong></p>
 <blockquote>
-<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.<br>
-You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p>Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:</p>
+<ul>
+<li>'.' Matches any single character.​​​​</li>
+<li>'*' Matches zero or more of the preceding element.</li>
+</ul>
+<p>The matching should cover the entire input string (not partial).</p>
 </blockquote>
-<p>Constraints:</p>
+<p><strong>Constraints</strong></p>
 <blockquote>
-<p>The number of nodes in each linked list is in the range [1, 100].<br>
-0 &lt;= Node.val &lt;= 9<br>
-It is guaranteed that the list represents a number that does not have leading zeros.</p>
+<p>1 &lt;= s.length &lt;= 20<br>
+1 &lt;= p.length &lt;= 30<br>
+s contains only lowercase English letters.<br>
+p contains only lowercase English letters, '.', and '<em>'.<br>
+It is guaranteed for each appearance of the character '</em>', there will be a previous valid character to match.</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/add-two-numbers/">https://leetcode.com/problems/add-two-numbers/</a></p>
-<pre><code class="language-C++">/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-class Solution {
+<p>Link: <a href="https://leetcode.com/problems/regular-expression-matching/">https://leetcode.com/problems/regular-expression-matching/</a></p>
+<p><strong>Description</strong><br>
+Failed to solve this problem.<br>
+Refer to <a href="https://leetcode.com/problems/regular-expression-matching/discuss/5684/C%2B%2B-O(n)-space-DP">https://leetcode.com/problems/regular-expression-matching/discuss/5684/C%2B%2B-O(n)-space-DP</a></p>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *sum = nullptr, *sudosum = nullptr;
-        int v = 0, carry = 0;
-        while (l1 || l2)
-        {
-            if(l1 &amp;&amp; l2)
-            {
-                v = carry + l1-&gt;val +l2-&gt;val;
-                l1 = l1-&gt;next;
-                l2 = l2-&gt;next;
+    bool isMatch(string s, string p) {
+       int m = s.size(), n = p.size();
+        vector&lt;vector&lt;bool&gt;&gt; dp(m + 1, vector&lt;bool&gt;(n + 1, false));
+        dp[0][0] = true;
+        for (int i = 0; i &lt;= m; i++) {
+            for (int j = 1; j &lt;= n; j++) {
+                if (p[j - 1] == '*') {
+                    dp[i][j] = dp[i][j - 2] || (i &amp;&amp; dp[i - 1][j] &amp;&amp; (s[i - 1] == p[j - 2] || p[j - 2] == '.'));
+                } else {
+                    dp[i][j] = i &amp;&amp; dp[i - 1][j - 1] &amp;&amp; (s[i - 1] == p[j - 1] || p[j - 1] == '.');
+                }
             }
-            else if (!l1)
-            {
-                v = carry +l2-&gt;val;
-                l2 = l2-&gt;next;
-            }
-            else{
-                v = carry + l1-&gt;val;
-                l1 = l1-&gt;next;
-            }
-            carry = v/10;
-        
-            if(!sudosum)
-                sum = sudosum = new ListNode(v%10);
-            else{
-                sum-&gt;next = new ListNode(v%10);
-                sum = sum-&gt;next;
-            }
-
         }
-
-        if(carry)
-            sum-&gt;next = new ListNode(1);
-    
-    
-        return sudosum;
+        return dp[m][n];
     }
 };
 </code></pre>
+<p><strong>Result</strong></p>
+<blockquote>
+<p>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Regular Expression Matching.<br>
+Memory Usage: 7 MB, less than 47.39% of C++ online submissions for Regular Expression Matching.</p>
+</blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
