@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | Station of Alvin</title>
+<title>11. Container with Most Water | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652279370378">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,58 +79,77 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              11. Container with Most Water
             </h2>
             <div class="post-info">
               <span>
-                2018-12-12
+                2022-05-11
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://yuzh0507.github.io/tag/veNNFjOy2/" class="post-tag">
-                  # Gridea
-                </a>
-              
             </div>
-            
-              <img class="post-feature-image" src="https://yuzh0507.github.io/post-images/hello-gridea.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <p><strong>Problem</strong></p>
+<blockquote>
+<p>You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).<br>
+Find two lines that together with the x-axis form a container, such that the container contains the most water.<br>
+Return the maximum amount of water a container can store.<br>
+Notice that you may not slant the container..</p>
+</blockquote>
+<p><strong>Constraints</strong></p>
+<blockquote>
+<p>n == height.length<br>
+2 &lt;= n &lt;= 10<sup>5</sup><br>
+0 &lt;= height[i] &lt;= 10<sup>4</sup></p>
+</blockquote>
+<p>Link: <a href="https://leetcode.com/problems/container-with-most-water/">https://leetcode.com/problems/container-with-most-water/</a></p>
+<p><strong>Description</strong><br>
+Use two iterator &quot;left&quot; and &quot;right&quot;, calculate the area. If *left &lt; *right, left++; If *left &gt; *right, right--. record the maximum of area.</p>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    int maxArea(vector&lt;int&gt;&amp; height)
+    {
+        int curArea = 0;
+        int maxValue = 0;
+
+        vector&lt;int&gt;::iterator left = height.begin();
+        vector&lt;int&gt;::iterator right = height.end() - 1;
+        
+        for (; left != right; )
+        {
+            if (*left == min(*left, *right))
+            {
+                curArea = *left * distance(left, right);
+                left++;
+            }
+            else
+            {
+                curArea = *right * distance(left, right);
+                right--;
+            }
+
+            maxValue = max(maxValue, curArea);
+            continue;
+        }
+        return maxValue;
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<blockquote>
+<p>Runtime: 95 ms, faster than 82.61% of C++ online submissions for Container With Most Water.<br>
+Memory Usage: 59 MB, less than 82.11% of C++ online submissions for Container With Most Water.</p>
+</blockquote>
+<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
