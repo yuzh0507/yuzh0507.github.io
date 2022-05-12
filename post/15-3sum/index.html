@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1. Two Sum | Station of Alvin</title>
+<title>15. 3Sum | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652364020708">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,57 +79,86 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1. Two Sum
+              15. 3Sum
             </h2>
             <div class="post-info">
               <span>
-                2022-05-04
+                2022-05-12
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
+                <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>
-You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>
-You can return the answer in any order.</p>
+<p>Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.<br>
+Notice that the solution set must not contain duplicate triplets.</p>
 </blockquote>
-<p>Constraints</p>
+<p><strong>Constraints</strong></p>
 <blockquote>
-<p>2 &lt;= nums.length &lt;= 10<sup>4</sup><br>
--10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup><br>
--10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup><br>
-Only one valid answer exists</p>
+<p>0 &lt;= nums.length &lt;= 3000<br>
+-10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
+<p>Link: <a href="https://leetcode.com/problems/3sum/">https://leetcode.com/problems/3sum/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>sort the vector.</li>
+<li>Use sortedNums[i] as the anchor, j start from i+1 to right, k start from the end of sortedNums to left.<br>
+2.1. If sortedNums[i]+sortedNums[j]+sortedNums[k] &lt; 0, j++<br>
+2.2. If sortedNums[i]+sortedNums[j]+sortedNums[k] &gt; 0, k--<br>
+2.3. If sortedNums[i]+sortedNums[j]+sortedNums[k] = 0, record these number, and both j++ and k--;</li>
+<li>for i, j, k, after increse or decrease, once sortedNums[i] = sortedNums[i-1], keep i++.</li>
+</ol>
+<p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
-        for (int i = 0; i &lt; nums.size(); i++){              // Use i to traverse the nums
-            for (int j = i+1; j &lt; nums.size(); j++){        // Use j to traverse the rest elements from i to the end of nums
-                if(nums[i] + nums[j] == target){        
-                    return {i,j};                   // If the sum of two elements equals the target, return their position.
+    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums)
+    {
+        if (nums.size() &lt; 3)
+            return {};
+
+        vector&lt;int&gt; sortedNums = nums;
+        sort(sortedNums.begin(),sortedNums.end());
+
+        vector&lt;vector&lt;int&gt;&gt; sum3;
+        for (int i = 0; i &lt; sortedNums.size()-2; i++)
+        {
+            if (i&gt;0 &amp;&amp; sortedNums[i-1] == sortedNums[i])
+                continue;
+
+            int j = i+1;
+            int k = sortedNums.size()-1;
+            while(j &lt; k)
+            {
+                if(sortedNums[i] + sortedNums[j] + sortedNums[k] &lt; 0)
+                    j++;
+                else if(sortedNums[i] + sortedNums[j] + sortedNums[k] &gt; 0)
+                    k--;
+                else
+                {
+                    sum3.push_back({sortedNums[i], sortedNums[j], sortedNums[k]});
+                    j++;
+                    while(j &lt; k &amp;&amp; sortedNums[j-1] == sortedNums[j])
+                        j++;
+                    k--;
+                    while(j &lt; k &amp;&amp; sortedNums[k+1] == sortedNums[k])
+                        k--;
                 }
             }
         }
-        
-        return {0};     // If there are no two elements whose sum equals the target, return 0
+        return sum3;
     }
 };
 </code></pre>
+<p><strong>Result</strong></p>
+<blockquote>
+<p>Runtime: 156 ms, faster than 37.43% of C++ online submissions for 3Sum.<br>
+Memory Usage: 20 MB, less than 87.27% of C++ online submissions for 3Sum.</p>
+</blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
