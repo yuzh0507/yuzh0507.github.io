@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>11. Container with Most Water | Station of Alvin</title>
+<title>16. 3Sum Closest | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652428458566">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              11. Container with Most Water
+              16. 3Sum Closest
             </h2>
             <div class="post-info">
               <span>
-                2022-05-11
+                2022-05-13
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -103,55 +103,69 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).<br>
-Find two lines that together with the x-axis form a container, such that the container contains the most water.<br>
-Return the maximum amount of water a container can store.<br>
-Notice that you may not slant the container..</p>
+<p>Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.<br>
+Return the sum of the three integers.<br>
+You may assume that each input would have exactly one solution.</p>
 </blockquote>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>n == height.length<br>
-2 &lt;= n &lt;= 10<sup>5</sup><br>
-0 &lt;= height[i] &lt;= 10<sup>4</sup></p>
+<p>3 &lt;= nums.length &lt;= 1000<br>
+-1000 &lt;= nums[i] &lt;= 1000<br>
+-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/container-with-most-water/">https://leetcode.com/problems/container-with-most-water/</a></p>
-<p><strong>Description</strong><br>
-Use two iterator &quot;left&quot; and &quot;right&quot;, calculate the area. If *left &lt; *right, left++; If *left &gt; *right, right--. record the maximum of area.</p>
+<p>Link: <a href="https://leetcode.com/problems/3sum-closest/">https://leetcode.com/problems/3sum-closest/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>sort the nums</li>
+<li>Initialize the closest (closest = accumulate(sortedNums.begin(), sortedNums.begin()+3,0); ) and difference (difference = abs(target - closest); )</li>
+<li>Use sortedNums[i] as the anchor, j start from i+1 to right, k start from the end of sortedNums to left.<br>
+3.1. Calculate (difference = abs(target - (sortedNums[i] + sortedNums[j] + sortedNums[k])); ), refresh the closest.<br>
+3.2. If closest = 0, return closest<br>
+3.3. If sortedNums[i]+sortedNums[j]+sortedNums[k] &lt; target, j++<br>
+3.4. If sortedNums[i]+sortedNums[j]+sortedNums[k] &gt; target, k--<br>
+If sortedNums[i]+sortedNums[j]+sortedNums[k] = 0, record these number, and both j++ and k--;</li>
+<li>After a FOR cycling, return closest.</li>
+</ol>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    int maxArea(vector&lt;int&gt;&amp; height)
+    int threeSumClosest(vector&lt;int&gt;&amp; nums, int target)
     {
-        int curArea = 0;
-        int maxValue = 0;
+        if (nums.size() == 3)
+            return nums[0]+nums[1]+nums[2];
 
-        vector&lt;int&gt;::iterator left = height.begin();
-        vector&lt;int&gt;::iterator right = height.end() - 1;
-        
-        for (; left != right; )
+        vector&lt;int&gt; sortedNums = nums;
+        sort(sortedNums.begin(),sortedNums.end());
+
+        int closest = sortedNums[0]+sortedNums[1]+sortedNums[2];
+        int difference = abs(target - closest);
+        for (int i = 0; i &lt; sortedNums.size()-2; i++)
         {
-            if (*left == min(*left, *right))
+            int j = i+1;
+            int k = sortedNums.size()-1;
+            while(j &lt; k)
             {
-                curArea = *left * distance(left, right);
-                left++;
-            }
-            else
-            {
-                curArea = *right * distance(left, right);
-                right--;
-            }
+                difference = abs(target - (sortedNums[i] + sortedNums[j] + sortedNums[k]));
+                if (difference &lt; abs(target - closest))
+                    closest = sortedNums[i] + sortedNums[j] + sortedNums[k];
 
-            maxValue = max(maxValue, curArea);
-            continue;
+                if (closest == target)
+                    return closest;            
+
+                if(sortedNums[i] + sortedNums[j] + sortedNums[k] &lt; target)
+                    j++;
+                else if(sortedNums[i] + sortedNums[j] + sortedNums[k] &gt; target)
+                    k--;
+            }
         }
-        return maxValue;
+        return closest;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 95 ms, faster than 82.61% of C++ online submissions for Container With Most Water.<br>
-Memory Usage: 59 MB, less than 82.11% of C++ online submissions for Container With Most Water.</p>
+<p>Runtime: 19 ms, faster than 67.94% of C++ online submissions for 3Sum Closest.<br>
+Memory Usage: 10.4 MB, less than 5.62% of C++ online submissions for 3Sum Closest.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
