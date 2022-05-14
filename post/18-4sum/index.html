@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>5. Longest Palindromic Substring | Station of Alvin</title>
+<title>18. 4Sum | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652515102997">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              5. Longest Palindromic Substring
+              18. 4Sum
             </h2>
             <div class="post-info">
               <span>
-                2022-05-06
+                2022-05-14
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,75 +101,87 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
+                <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given a string s, return the longest palindromic substring in s.</p>
+<p>Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:</p>
+<ul>
+<li>0 &lt;= a, b, c, d &lt; n</li>
+<li>a, b, c, and d are distinct.</li>
+<li>nums[a] + nums[b] + nums[c] + nums[d] == target</li>
+</ul>
+<p>You may return the answer in any order.</p>
 </blockquote>
-<p>Constraints</p>
+<p><strong>Constraints</strong></p>
 <blockquote>
-<p>1 &lt;= s.length &lt;= 1000<br>
-s consist of only digits and English letters.</p>
+<p>1 &lt;= nums.length &lt;= 200<br>
+-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup><br>
+-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/longest-palindromic-substring/">https://leetcode.com/problems/longest-palindromic-substring/</a></p>
+<p>Link: <a href="https://leetcode.com/problems/4sum/">https://leetcode.com/problems/4sum/</a></p>
+<p><strong>Description</strong><br>
+The principle is identical to the <a href="https://yuzh0507.github.io/post/15-3sum">15. 3Sum</a>, just need another layer for traversing b.</p>
+<p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    string longestPalindrome(string s) {
-        int n = s.size();
-        if(n&lt;2)
-            return s;
+    vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;&amp; nums, int target)
+    {
+        if (nums.size() &lt; 4)
+            return {};
         
-        int begin = 0;
-        int maxLen = 1;
+        vector&lt;int&gt; sortedNums = nums;
+        sort(sortedNums.begin(), sortedNums.end());
 
-        // Build a matrix PalindromicMatrix to record whether s[i]~s[j] is a palindromic substring
-        vector&lt;vector&lt;bool&gt;&gt; PM(n,vector&lt;bool&gt;(n));     
-        
-        // PM Initialization
-        for (int i = 0; i &lt; n; i++)
+        vector&lt;vector&lt;int&gt;&gt; fsum;
+        for(int a = 0; a &lt; sortedNums.size()-3; a++)
         {
-            for (int j = 0; j &lt; n; j++)
-            {
-                if (i == j)
-                    PM[i][j] == true;
-                else
-                    PM[i][j] == false;
-            }
+            if (a&gt;0 &amp;&amp; sortedNums[a] == sortedNums[a-1])
+                continue;
             
-        }
-        
-        // Enumerate substring length
-        for (int L = 1; L &lt; n; L++)
-        {
-            // Start from the left side
-            for(int left = 0; left+L &lt; n; left++)
+            for (int b = a+1; b &lt; sortedNums.size()-2; b++)
             {
-                if (s[left] != s[left+L])
-                    PM[left][left+L] = false;
-                    
+                if (b&gt;a+1 &amp;&amp; sortedNums[b] == sortedNums[b-1])
+                    continue;
 
-                else if (L&lt;=2)
-                    PM[left][left+L] = true;
-                    
-                else
-                    // if (s[i] == s[j]) &amp;&amp; (s[i+1] == s[j-1]), the bigger substring is palindromic  
-                    PM[left][left+L] = PM[left+1][left+L-1];
-                
-                // Record the position of longest palindromic substring 
-                if(PM[left][left+L] &amp;&amp; maxLen &lt; L+1)
+                int c = b+1;
+                int d = sortedNums.size()-1;
+
+                while(c &lt; d)
                 {
-                    begin = left;
-                    maxLen = L+1;
+                    //&quot;sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d]&quot; will cause signed integer overflow
+                    if (sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d] == target)
+                    {
+                        fsum.push_back({sortedNums[a], sortedNums[b], sortedNums[c], sortedNums[d]});
+                        c++;
+                        while(sortedNums[c] == sortedNums[c-1] &amp;&amp; c &lt; d)
+                            c++;
+                        d--;
+                        while(sortedNums[d] == sortedNums[d+1] &amp;&amp; c &lt; d)
+                            d--;
+                    }
+                    //&quot;sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d]&quot; will cause signed integer overflow
+                    else if (sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d] &lt; target)
+                    {
+                        c++;
+                        while(sortedNums[c] == sortedNums[c-1] &amp;&amp; c &lt; d)
+                            c++;
+                    }
+                    else
+                    {
+                        d--;
+                        while(sortedNums[d] == sortedNums[d+1] &amp;&amp; c &lt; d)
+                            d--;
+                    }            
                 }
             }
         }
-        return s.substr(begin, maxLen);
+        return fsum;
     }
 };
 </code></pre>
-<p>Result</p>
+<p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 1724 ms, faster than 5.02% of C++ online submissions for Longest Palindromic Substring.<br>
-Memory Usage: 30.1 MB, less than 33.45% of C++ online submissions for Longest Palindromic Substring.</p>
+<p>Runtime: 248 ms, faster than 21.85% of C++ online submissions for 4Sum.<br>
+Memory Usage: 13.2 MB, less than 77.12% of C++ online submissions for 4Sum.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
