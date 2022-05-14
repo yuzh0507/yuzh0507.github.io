@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1. Two Sum | Station of Alvin</title>
+<title>23. Merge k Sorted Lists | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652540883800">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1. Two Sum
+              23. Merge k Sorted Lists
             </h2>
             <div class="post-info">
               <span>
-                2022-05-04
+                2022-05-14
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,35 +101,95 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
+                <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>
-You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>
-You can return the answer in any order.</p>
+<p>You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.<br>
+Merge all the linked-lists into one sorted linked-list and return it.</p>
 </blockquote>
-<p>Constraints</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are:
+[
+  1-&gt;4-&gt;5,
+  1-&gt;3-&gt;4,
+  2-&gt;6
+]
+merging them into one sorted list:
+1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
+</code></pre>
+<p><strong>Constraints</strong></p>
 <blockquote>
-<p>2 &lt;= nums.length &lt;= 10<sup>4</sup><br>
--10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup><br>
--10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup><br>
-Only one valid answer exists</p>
+<p>k == lists.length<br>
+0 &lt;= k &lt;= 10<sup>4</sup><br>
+0 &lt;= lists[i].length &lt;= 500<br>
+-10<sup>4</sup> &lt;= lists[i][j] &lt;= 10<sup>4</sup><br>
+lists[i] is sorted in ascending order.<br>
+The sum of lists[i].length will not exceed 10<sup>4</sup>.</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
-<pre><code class="language-C++">class Solution {
-public:
-    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
-        for (int i = 0; i &lt; nums.size(); i++){              // Use i to traverse the nums
-            for (int j = i+1; j &lt; nums.size(); j++){        // Use j to traverse the rest elements from i to the end of nums
-                if(nums[i] + nums[j] == target){        
-                    return {i,j};                   // If the sum of two elements equals the target, return their position.
+<p>Link: <a href="https://leetcode.com/problems/merge-k-sorted-lists/">https://leetcode.com/problems/merge-k-sorted-lists/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>Put every value into a vector</li>
+<li>sort(vector)</li>
+<li>build a new list</li>
+</ol>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:    
+    ListNode* mergeKLists(vector&lt;ListNode*&gt;&amp; lists)
+    {
+        if(lists.size() == 0 || lists[0] == nullptr)
+            return NULL;    
+
+        vector&lt;int&gt; tmpVec;
+        for (vector&lt;ListNode*&gt;::iterator it = lists.begin(); it != lists.end(); it++)
+        {
+            ListNode* tmp = *it;
+            if(tmp-&gt;val != 0 || tmp-&gt;next != nullptr)
+            {
+                while(tmp-&gt;next != nullptr)
+                {
+                    tmpVec.push_back(tmp-&gt;val);
+                    tmp = tmp-&gt;next;
                 }
-            }
+                tmpVec.push_back(tmp-&gt;val);
+            }        
         }
-        
-        return {0};     // If there are no two elements whose sum equals the target, return 0
+
+        sort(tmpVec.begin(),tmpVec.end());
+
+        ListNode * mln = new ListNode();
+        ListNode * mlh = mln;
+        for(int i = 0; i &lt; tmpVec.size(); i++)
+        {
+            ListNode * mlt = mln;
+            mln = new ListNode();
+            mln-&gt;val = tmpVec[i];
+            mlt-&gt;next = mln;
+            mlt = mlt-&gt;next;
+        }
+
+        return mlh-&gt;next;
     }
 };
 </code></pre>
+<p><strong>Result</strong><br>
+The code successfully run on my local environment, but fail in the LeetCode(input: [[],[1]]). I cannot identify the reason.</p>
+<blockquote>
+<p>Runtime:<br>
+Memory Usage:</p>
+</blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
