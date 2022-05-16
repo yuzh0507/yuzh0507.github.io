@@ -1,8 +1,8 @@
 <html>
   <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>9. Palindrome Number | Station of Alvin</title>
+<title>C++ | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652680687712">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -76,110 +76,48 @@
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              9. Palindrome Number
-            </h2>
-            <div class="post-info">
-              <span>
-                2022-05-04
-              </span>
-              <span>
-                1 min read
-              </span>
-              
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
-            </div>
-            
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>Problem</p>
-<blockquote>
-<p>Given an integer x, return true if x is palindrome integer.<br>
-An integer is a palindrome when it reads the same backward as forward.<br>
-For example, 121 is a palindrome while 123 is not.</p>
-</blockquote>
-<p>Constraints</p>
-<blockquote>
-<p>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/palindrome-number/">https://leetcode.com/problems/palindrome-number/</a></p>
-<pre><code class="language-C++">class Solution {
-public:
-    bool isPalindrome(int x) {
-        vector&lt;int&gt; nums;
-        if (x &lt; 0)
-            return false;
-        if (x == 0)
-            return true;
-   
-        for (int tmp = x; tmp &gt; 0; tmp /= 10){
-            nums.push_back(tmp%10);     // Push back every number into the vector
-        }
-
-        for (int i = 0, j = nums.size()-1; i &lt;= j;){
-            // Compare numbers from both sides to the middle.
-            // If any pair is not equal, return false. If every pair is equal, return true
-            if (nums[i] == nums[j])
-            {
-                i++, j--;
-                if (i &gt;= j)
-                    return true;
-                continue;
-            }       
-            return false;
-        }
-        return false;
-    }
-};
-</code></pre>
-<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
-
-              </div>
-              <div class="toc-container">
-                
-              </div>
-            </div>
-          </article>
+        <div class="current-tag-container">
+            <h2 class="title">
+                标签：# C++
+            </h2> 
         </div>
-
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://yuzh0507.github.io/post/leetcode-record/">
+        <h2 class="post-title">LeetCode Record</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2022-05-04
+        </span>
+        <span>
+          1 min read
+        </span>
         
-
+          <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
+            # C++
+          </a>
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '',
-    clientSecret: '',
-    repo: '',
-    owner: '',
-    admin: [''],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
+          <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+            # LeetCode
+          </a>
         
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
+
+        <div class="pagination-container">
+  
+    <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/page/2/" class="prev-page">上一页</a>
+  
+  
+</div>
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 

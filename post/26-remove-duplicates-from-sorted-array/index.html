@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>11. Container with Most Water | Station of Alvin</title>
+<title>26. Remove Duplicates from Sorted Array | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652680687712">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              11. Container with Most Water
+              26. Remove Duplicates from Sorted Array
             </h2>
             <div class="post-info">
               <span>
-                2022-05-11
+                2022-05-16
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -103,55 +103,50 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).<br>
-Find two lines that together with the x-axis form a container, such that the container contains the most water.<br>
-Return the maximum amount of water a container can store.<br>
-Notice that you may not slant the container..</p>
+<p>Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.<br>
+Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.<br>
+Return k after placing the final result in the first k slots of nums.<br>
+Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.</p>
 </blockquote>
+<p><strong>Example</strong></p>
+<pre><code>Input: nums = [1,1,2]
+Output: 2, nums = [1,2,_]
+Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
+It does not matter what you leave beyond the returned k (hence they are underscores).
+</code></pre>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>n == height.length<br>
-2 &lt;= n &lt;= 10<sup>5</sup><br>
-0 &lt;= height[i] &lt;= 10<sup>4</sup></p>
+<p>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup><br>
+-100 &lt;= nums[i] &lt;= 100<br>
+nums is sorted in non-decreasing order.</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/container-with-most-water/">https://leetcode.com/problems/container-with-most-water/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/submissions/">https://leetcode.com/problems/remove-duplicates-from-sorted-array/submissions/</a></p>
 <p><strong>Description</strong><br>
-Use two iterator &quot;left&quot; and &quot;right&quot;, calculate the area. If *left &lt; *right, left++; If *left &gt; *right, right--. record the maximum of area.</p>
+Use iterator to compare two near elements, if they are equal, erase the latter; Otherwise move to next two elements;</p>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    int maxArea(vector&lt;int&gt;&amp; height)
+public:    
+    int removeDuplicates(vector&lt;int&gt;&amp; nums)
     {
-        int curArea = 0;
-        int maxValue = 0;
-
-        vector&lt;int&gt;::iterator left = height.begin();
-        vector&lt;int&gt;::iterator right = height.end() - 1;
+        if(nums.size() &lt; 2)
+            return nums.size();
         
-        for (; left != right; )
+        for(vector&lt;int&gt;::iterator it = nums.begin() + 1; it != nums.end();)
         {
-            if (*left == min(*left, *right))
-            {
-                curArea = *left * distance(left, right);
-                left++;
-            }
-            else
-            {
-                curArea = *right * distance(left, right);
-                right--;
-            }
+            if (*it == *(it-1))
+                it = nums.erase(it);
 
-            maxValue = max(maxValue, curArea);
-            continue;
+            else
+                it++;
         }
-        return maxValue;
+        return nums.size();
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 95 ms, faster than 82.61% of C++ online submissions for Container With Most Water.<br>
-Memory Usage: 59 MB, less than 82.11% of C++ online submissions for Container With Most Water.</p>
+<p>Runtime: 568 ms, faster than 5.86% of C++ online submissions for Remove Duplicates from Sorted Array.<br>
+Memory Usage: 18.4 MB, less than 75.04% of C++ online submissions for Remove Duplicates from Sorted Array.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
