@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>17. Letter Combinations of a Phone Number | Station of Alvin</title>
+<title>30. Substring with Concatenation of All Words | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1652795853193">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              17. Letter Combinations of a Phone Number
+              30. Substring with Concatenation of All Words
             </h2>
             <div class="post-info">
               <span>
-                2022-05-13
+                2022-05-17
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -103,51 +103,76 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.<br>
-A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.<br>
-<img src="https://yuzh0507.github.io/post-images/1652431215016.png" alt="" loading="lazy"></p>
+<p>You are given a string s and an array of strings words of the same length. Return all starting indices of substring(s) in s that is a concatenation of each word in words exactly once, in any order, and without any intervening characters.<br>
+You can return the answer in any order.</p>
 </blockquote>
+<p><strong>Example</strong></p>
+<pre><code>Input: s = &quot;barfoothefoobarman&quot;, words = [&quot;foo&quot;,&quot;bar&quot;]
+Output: [0,9]
+Explanation: Substrings starting at index 0 and 9 are &quot;barfoo&quot; and &quot;foobar&quot; respectively.
+The output order does not matter, returning [9,0] is fine too.
+
+Input: s = &quot;wordgoodgoodgoodbestword&quot;, words = [&quot;word&quot;,&quot;good&quot;,&quot;best&quot;,&quot;word&quot;]
+Output: []
+
+Input: s = &quot;barfoofoobarthefoobarman&quot;, words = [&quot;bar&quot;,&quot;foo&quot;,&quot;the&quot;]
+Output: [6,9,12]
+</code></pre>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>0 &lt;= digits.length &lt;= 4<br>
-digits[i] is a digit in the range ['2', '9'].</p>
+<p>1 &lt;= s.length &lt;= 10<sup>4</sup><br>
+s consists of lower-case English letters.<br>
+1 &lt;= words.length &lt;= 5000<br>
+1 &lt;= words[i].length &lt;= 30<br>
+words[i] consists of lower-case English letters.</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/substring-with-concatenation-of-all-words/">https://leetcode.com/problems/substring-with-concatenation-of-all-words/</a></p>
 <p><strong>Description</strong></p>
+<ol>
+<li>Take a substring from the s, length = words.size()*words[0].size(). Slide the substring to the end of s.</li>
+<li>Divide the substring into words.size() groups, check if every group can be found in words for just once. If yes, record the position.</li>
+</ol>
+<p>This solution can be locally ran but failed to pass the LeetCode  test, because it gave a large input. Still cannot understand other solution</p>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    vector&lt;string&gt; letterCombinations(string digits)
-    {
-        if (digits.empty())
+private:
+    vector&lt;int&gt; findSubstring(string s, vector&lt;string&gt;&amp; words) {
+        if(s.size() &lt; words.size()*words[0].size())
             return {};
-        
-        vector&lt;string&gt; map = {&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;};
-        vector&lt;string&gt; letComb = {&quot;&quot;};
-        // Traverse every digit from the digits
-        for (int i = 0; i &lt; digits.size(); i++)
+
+        vector&lt;int&gt; pos;
+        for(string::iterator sit = s.begin(); sit + words.size()*words[0].size() - 1 != s.end(); sit++)
         {
-            vector&lt;string&gt; tmp;
+            char head = *sit;
+            string tmp(sit,sit+words.size()*words[0].size());
+            vector&lt;string&gt; compWords(words.begin(),words.end());
             
-            // Traverse every character from the corresponding element of the map
-            for (int j = 0; j &lt; map[digits[i]-'0'].size(); j++)
+            int found = 0;
+            // Traverse
+            for(int group = 0; group &lt; words.size(); group++)
             {
-                // Traverse every existent string of the letComb
-                for(int k = 0; k &lt; letComb.size(); k++)
+                string comp = tmp.substr(group*words[0].size(),words[0].size());
+                
+                if (find(compWords.begin(), compWords.end(), comp) != compWords.end())
                 {
-                    tmp.push_back(letComb[k] + map[digits[i]-'0'][j]);
+                    found++;
+                    compWords.erase(find(compWords.begin(), compWords.end(), comp));
                 }
+                else
+                    break;
             }
-            letComb = tmp;        
+            if (found == words.size())
+                pos.push_back(sit-s.begin());
         }
-        return letComb;
+
+        return pos;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Letter Combinations of a Phone Number.<br>
-Memory Usage: 6.6 MB, less than 35.15% of C++ online submissions for Letter Combinations of a Phone Number.</p>
+<p>Runtime:<br>
+Memory Usage:</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
