@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-05-17T13:57:39.316Z</updated>
+    <updated>2022-05-18T15:18:06.746Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -36,7 +36,8 @@
 <a href="https://yuzh0507.github.io/post/17-letter-combinations-of-a-phone-number">17. Letter Combinations of a Phone Number</a><br>
 <a href="https://yuzh0507.github.io/post/18-4sum">18. 4Sum</a><br>
 <a href="https://yuzh0507.github.io/post/19-remove-nth-node-from-end-of-list">19. Remove Nth Node From End of List</a><br>
-<a href="https://yuzh0507.github.io/post/24-swap-nodes-in-pairs">24. Swap Nodes in Pairs</a></p>
+<a href="https://yuzh0507.github.io/post/24-swap-nodes-in-pairs">24. Swap Nodes in Pairs</a><br>
+<a href="https://yuzh0507.github.io/post/31-next-permutation">31. Next Permutation</a></p>
 <h1 id="hard-problems">Hard Problems</h1>
 <p><a href="https://yuzh0507.github.io/post/10-regular-expression-matching">10. Regular Expression Matching</a><br>
 <a href="https://yuzh0507.github.io/post/23-merge-k-sorted-lists">23. Merge k Sorted Lists</a><br>
