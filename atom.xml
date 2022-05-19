@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-05-18T15:18:06.746Z</updated>
+    <updated>2022-05-19T13:50:24.961Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -10,6 +10,89 @@
     <logo>https://yuzh0507.github.io/images/avatar.png</logo>
     <icon>https://yuzh0507.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, Station of Alvin</rights>
+    <entry>
+        <title type="html"><![CDATA[Data Structure and Algorithm in C++]]></title>
+        <id>https://yuzh0507.github.io/post/data-structure-and-algorithm-in-c/</id>
+        <link href="https://yuzh0507.github.io/post/data-structure-and-algorithm-in-c/">
+        </link>
+        <updated>2022-05-19T02:26:45.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="data-structure">Data Structure</h1>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Main memory is divided into 3 sections: Code Section, Stack, Heap</p>
+<ul>
+<li>
+<p><strong>Static Memory Allocation</strong></p>
+<p>How many bytes of memory are required by a certain function was decided at compile time.</p>
+</li>
+<li>
+<p><strong>Stack</strong></p>
+<p>After the function is completely executed, the memory will be deleted. The sequence of allocating memory depends on the sequence of executing functions, and the sequence of deleting memory is contrary. So this area is a <strong>stack</strong> (First In Last Out).</p>
+</li>
+<li>
+<p><strong>Heap</strong></p>
+<p><strong>Heap</strong> is used for unorganized memory. It shall be treated as a resource. Programs cannot directly access the heap memory, which can only be accessed by a pointer.</p>
+</li>
+<li>
+<p><strong>Physical Data Structure</strong></p>
+<p>Structures define how the memory shall be organized for storing the elements or data. (e.g. array, linked list)</p>
+</li>
+<li>
+<p><strong>Logical Data Structure</strong></p>
+<p>Structures are implemented using any Physical Data Structure.<br>
+Linear: stack(FILO), queue(FIFO)<br>
+Non-linear: tree, graph<br>
+Tablet: Hashtable</p>
+</li>
+<li>
+<p><strong>Abstract DataType</strong></p>
+<p>ADT defines data and operations on data together, and lets it be used as a DataType by hiding all the internal details.</p>
+</li>
+<li>
+<p><strong>Time Complexity</strong></p>
+<ul>
+<li>
+<p>O(n) (pronounciate as “order n”)</p>
+<p>For input that has n elements, the program needs n steps to complete the execution.</p>
+</li>
+<li>
+<p>Ignore coefficient</p>
+<p>When calculating the time complexity, all the coefficients shall be ignored. E.g., for 2n and n are both seen as O(n)</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Complexity Expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>constant</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Linear</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Logarithmic</td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>Quadratic</td>
+<td>O(n<sup>2</sup>)</td>
+</tr>
+<tr>
+<td>Exponential</td>
+<td>O(2<sup>n</sup>)</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[LeetCode Record]]></title>
         <id>https://yuzh0507.github.io/post/leetcode-record/</id>
@@ -42,7 +125,8 @@
 <p><a href="https://yuzh0507.github.io/post/10-regular-expression-matching">10. Regular Expression Matching</a><br>
 <a href="https://yuzh0507.github.io/post/23-merge-k-sorted-lists">23. Merge k Sorted Lists</a><br>
 <a href="https://yuzh0507.github.io/post/25-reverse-nodes-in-k-group">25. Reverse Nodes in k-Group</a><br>
-<a href="https://yuzh0507.github.io/post/30-substring-with-concatenation-of-all-words">30. Substring with Concatenation of All Words</a></p>
+<a href="https://yuzh0507.github.io/post/30-substring-with-concatenation-of-all-words">30. Substring with Concatenation of All Words</a><br>
+<a href="https://yuzh0507.github.io/32-longest-valid-parentheses">32. Longest Valid Parentheses</a></p>
 ]]></content>
     </entry>
     <entry>
