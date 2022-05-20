@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>15. 3Sum | Station of Alvin</title>
+<title>33. Search in Rotated Sorted Array | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653057248503">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              15. 3Sum
+              33. Search in Rotated Sorted Array
             </h2>
             <div class="post-info">
               <span>
-                2022-05-12
+                2022-05-20
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -103,69 +103,102 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.<br>
-Notice that the solution set must not contain duplicate triplets.</p>
+<p>There is an integer array nums sorted in ascending order (with distinct values).<br>
+Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 &lt;= k &lt; nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].<br>
+Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.<br>
+You must write an algorithm with O(log n) runtime complexity.</p>
 </blockquote>
+<p><strong>Example</strong></p>
+<pre><code>Input: nums = [4,5,6,7,0,1,2], target = 0
+Output: 4
+
+Input: nums = [4,5,6,7,0,1,2], target = 3
+Output: -1
+
+Input: nums = [1], target = 0
+Output: -1
+</code></pre>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>0 &lt;= nums.length &lt;= 3000<br>
--10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></p>
+<p>1 &lt;= nums.length &lt;= 5000<br>
+-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup><br>
+All values of nums are unique.<br>
+nums is an ascending array that is possibly rotated.<br>
+-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/3sum/">https://leetcode.com/problems/3sum/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">https://leetcode.com/problems/search-in-rotated-sorted-array/</a></p>
 <p><strong>Description</strong></p>
 <ol>
-<li>sort the vector.</li>
-<li>Use sortedNums[i] as the anchor, j start from i+1 to right, k start from the end of sortedNums to left.<br>
-2.1. If sortedNums[i]+sortedNums[j]+sortedNums[k] &lt; 0, j++<br>
-2.2. If sortedNums[i]+sortedNums[j]+sortedNums[k] &gt; 0, k--<br>
-2.3. If sortedNums[i]+sortedNums[j]+sortedNums[k] = 0, record these number, and both j++ and k--;</li>
-<li>for i, j, k, after increse or decrease, once sortedNums[i] = sortedNums[i-1], keep i++.</li>
+<li>Find the rotate position, if the array is not rotated, execute a normal binary search.</li>
+<li>seperate the array into two parts: [0, rotate], [rotate+1, end]. execute a binary search in one of two according to the target value.</li>
 </ol>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums)
-    {
-        if (nums.size() &lt; 3)
-            return {};
+    int search(vector&lt;int&gt;&amp; nums, int target) {
+        if (nums.empty())
+            return -1;
+        if (nums.size() == 1)
+            return (nums[0] == target ? 0 : -1);
 
-        vector&lt;int&gt; sortedNums = nums;
-        sort(sortedNums.begin(),sortedNums.end());
-
-        vector&lt;vector&lt;int&gt;&gt; sum3;
-        for (int i = 0; i &lt; sortedNums.size()-2; i++)
+        int rotate = max_element(nums.begin(), nums.end()) - nums.begin();
+        if (rotate != nums.size()-1)
         {
-            if (i&gt;0 &amp;&amp; sortedNums[i-1] == sortedNums[i])
-                continue;
-
-            int j = i+1;
-            int k = sortedNums.size()-1;
-            while(j &lt; k)
+            if(target &gt;= nums[0] &amp;&amp; target &lt;= nums[rotate])
             {
-                if(sortedNums[i] + sortedNums[j] + sortedNums[k] &lt; 0)
-                    j++;
-                else if(sortedNums[i] + sortedNums[j] + sortedNums[k] &gt; 0)
-                    k--;
-                else
+                for(int low = 0, high = rotate, mid = (low + high)/2; low &lt;= high; mid = (low+high)/2)
                 {
-                    sum3.push_back({sortedNums[i], sortedNums[j], sortedNums[k]});
-                    j++;
-                    while(j &lt; k &amp;&amp; sortedNums[j-1] == sortedNums[j])
-                        j++;
-                    k--;
-                    while(j &lt; k &amp;&amp; sortedNums[k+1] == sortedNums[k])
-                        k--;
+                    if (target &lt; nums[mid])
+                        high = mid-1;
+
+                    else if (target &gt; nums[mid])
+                        low = mid+1;
+
+                    else
+                        return mid;
                 }
+                return -1;
             }
+            else if(target &lt;= nums.back() &amp;&amp; target &gt;= nums[rotate+1])
+            {
+                for(int low = rotate + 1, high = nums.size()-1, mid = (low + high)/2; low &lt;= high; mid = (low+high)/2)
+                {
+                    if (target &lt; nums[mid])
+                        high = mid-1;
+
+                    else if (target &gt; nums[mid])
+                        low = mid+1;
+
+                    else
+                        return mid;
+                }
+                return -1;
+            }
+            else
+                return -1;
         }
-        return sum3;
+        else
+        {
+            for(int low = 0, high = nums.size()-1, mid = (low + high)/2; low &lt;= high; mid = (low+high)/2)
+                {
+                    if (target &lt; nums[mid])
+                        high = mid-1;
+
+                    else if (target &gt; nums[mid])
+                        low = mid+1;
+
+                    else
+                        return mid;
+                }
+                return -1;
+        }
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 156 ms, faster than 37.43% of C++ online submissions for 3Sum.<br>
-Memory Usage: 20 MB, less than 87.27% of C++ online submissions for 3Sum.</p>
+<p>Runtime:  3 ms, faster than 85.34% of C++ online submissions for Search in Rotated Sorted Array.<br>
+Memory Usage: 11 MB, less than 95.87% of C++ online submissions for Search in Rotated Sorted Array.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 

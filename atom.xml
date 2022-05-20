@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-05-19T13:55:15.139Z</updated>
+    <updated>2022-05-20T14:34:10.265Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -91,6 +91,179 @@ Tablet: Hashtable</p>
 </ul>
 </li>
 </ul>
+<h2 id="2-recursion">2. Recursion</h2>
+<p>A function is calling itself is called recursion. Inside the function, there must be some condition which will make the recursion stop.</p>
+<pre><code class="language-c++">void fun1(int n)
+{
+	if(n&gt;0)
+	{
+		cout &lt;&lt; n &lt;&lt; ' '; // Calling time
+		fun1(n-1);
+	}
+}
+// Input: 3
+// Output: 3 2 1
+
+void fun2(int n)
+{
+	if(n&gt;0)
+	{		
+		fun2(n-1);
+		cout &lt;&lt; n &lt;&lt; ' '; // Returning time
+	}
+}
+// Input: 3
+// Output: 1 2 3
+</code></pre>
+<ul>
+<li>
+<p><strong>Static Variables</strong></p>
+<p>Static variables will be treated as a global variable.</p>
+<pre><code class="language-c++">// int x = 0; //The same as define a static variable within the function
+void fun(int n)
+{
+	static int x = 0;
+	if(n&gt;0)
+	{
+		x++;
+		return fun(n-1) + x;
+	}
+	return 0;
+}
+// Input: 5
+// Output: 25
+</code></pre>
+</li>
+<li>
+<p><strong>Type of Recursion</strong></p>
+<ul>
+<li>
+<p>Tail Recursion</p>
+<p>The recursive call is the last statement in a function</p>
+<pre><code class="language-c++">// Tail Recursion
+void fun1(int n)
+{
+	if(n&gt;0)
+	{
+		cout &lt;&lt; n &lt;&lt; ' ';
+		fun1(n-1);
+
+}
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+// Everytime the fun1 is called, a new area of memory needs to be built. 
+
+// For loop
+void fun2(int n)
+{
+	while (n &gt; 0)
+	{
+		cout &lt;&lt; n &lt;&lt; ' ';
+		n--;
+	}
+}
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+</code></pre>
+<p>For tail recursion, loop is more efficient in terms of space.</p>
+</li>
+<li>
+<p>Head Recursion</p>
+<p>The recursive call is the first statement in a function</p>
+<pre><code class="language-c++">// Head Recursion
+void fun1(int n)
+{
+	if(n&gt;0)
+	{		
+		fun1(n-1);
+		cout &lt;&lt; n &lt;&lt; ' ';
+	}
+}
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+// Everytime the fun1 is called, a new area of memory needs to be built. 
+
+// For loop
+void fun2(int n)
+{
+	int i = 1;
+	while (i &lt;= n)
+	{
+		cout &lt;&lt; i &lt;&lt; ' ';
+		i++;
+	}
+}
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+</code></pre>
+<p>For head recursion, loop is more efficient in terms of space.</p>
+</li>
+<li>
+<p>Tree Recursion</p>
+<p>If the function is calling itself just once, it’s a Linear Recursion. (Head &amp; Trail Recursion are special ones)</p>
+<p>If the function is calling itself more than once, it’s a Tree Recursion.</p>
+<pre><code class="language-c++">// Head Recursion
+void fun1(int n)
+{
+	if(n&gt;0)
+	{
+		cout &lt;&lt; n &lt;&lt; ' ';
+		fun1(n-1);
+		fun1(n-1);
+	}
+	return 0;
+}
+// Time Complexity: O(2^n)
+// Space Complexity: O(n)
+// Everytime the fun1 is called, a new area of memory needs to be built. 
+</code></pre>
+</li>
+<li>
+<p>Indirect Recursion</p>
+<p>There are more than one functions, one of them is calling one another.</p>
+<pre><code class="language-c++">void fun1(int n)
+{
+	if(n&gt;0)
+	{
+		cout &lt;&lt; n &lt;&lt; ' ';
+		fun2(n-1);
+	}
+}
+
+void fun2(int n)
+{
+	if(n&gt;1)
+	{
+		cout &lt;&lt; n &lt;&lt; ' ';
+		fun1(n/2);
+	}
+}
+// Input for fun1: 20
+// Output: 20 19 9 8 4 3 1
+</code></pre>
+</li>
+<li>
+<p>Nested Recursion</p>
+<p>Recursion inside recursion.</p>
+<pre><code class="language-c++">void fun(int n)
+{
+	if(n&gt;100)
+	{
+		return n-10;
+	}
+	else
+	{
+		return fun(fun(n+11));
+	}
+}
+// Input: 95
+// Output: 91
+// fun(95) = fun(fun(106)) = fun(96) = fun(97) = ... = fun(fun111)) = fun(101) = 91
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
@@ -120,7 +293,8 @@ Tablet: Hashtable</p>
 <a href="https://yuzh0507.github.io/post/18-4sum">18. 4Sum</a><br>
 <a href="https://yuzh0507.github.io/post/19-remove-nth-node-from-end-of-list">19. Remove Nth Node From End of List</a><br>
 <a href="https://yuzh0507.github.io/post/24-swap-nodes-in-pairs">24. Swap Nodes in Pairs</a><br>
-<a href="https://yuzh0507.github.io/post/31-next-permutation">31. Next Permutation</a></p>
+<a href="https://yuzh0507.github.io/post/31-next-permutation">31. Next Permutation</a><br>
+<a href="https://yuzh0507.github.io/post/33-search-in-rotated-sorted-array">33. Search in Rotated Sorted Array</a></p>
 <h1 id="hard-problems">Hard Problems</h1>
 <p><a href="https://yuzh0507.github.io/post/10-regular-expression-matching">10. Regular Expression Matching</a><br>
 <a href="https://yuzh0507.github.io/post/23-merge-k-sorted-lists">23. Merge k Sorted Lists</a><br>
