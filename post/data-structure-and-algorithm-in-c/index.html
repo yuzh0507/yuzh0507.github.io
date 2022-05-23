@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Structure and Algorithm in C++ | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653225141705">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653315382068">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1653225141705" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1653315382068" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -86,7 +86,7 @@
                 2022-05-19
               </span>
               <span>
-                5 min read
+                6 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -345,6 +345,48 @@ void fun2(int n)
 </ul>
 </li>
 </ul>
+<h2 id="3-array">3. Array</h2>
+<ul>
+<li>
+<p><strong>Initialization</strong></p>
+<pre><code class="language-c++">// Static: arrange a piece of memory in stack
+					                   //	 -0-1-2-3-4-	
+int A[5];                    // A|?|?|?|?|?|
+int A[5] = {2, 4, 6, 8, 10}; // A|2|4|6|8|10|
+int A[5] = {2, 4};           // A|2|4|0|0|0|
+int A[5] = {0};              // A|0|0|0|0|0|
+int A[] = {2, 4, 6, 8, 10};  // A|2|4|6|8|10|
+
+// Dynamic: arrange a piece of memory in the heap
+// Must use a pointer points to the address of array in the heap
+int *p = new int[5];
+delete []p;
+</code></pre>
+</li>
+<li>
+<p><strong>Access</strong></p>
+<pre><code class="language-c++">int val = A[2];
+int val = 2[A];
+int val = *(A+2);
+</code></pre>
+</li>
+<li>
+<p><strong>2D Array</strong></p>
+<pre><code class="language-c++">int A[3][4];
+
+(int *)A[3];
+A[0] = new int[4];
+A[1] = new int[4];
+A[2] = new int[4];
+
+(int **)A;
+int A = new int[3];
+A[0] = new int[4];
+A[1] = new int[4];
+A[2] = new int[4];
+</code></pre>
+</li>
+</ul>
 
               </div>
               <div class="toc-container">
@@ -353,6 +395,7 @@ void fun2(int n)
 <ul>
 <li><a href="#1-introduction">1. Introduction</a></li>
 <li><a href="#2-recursion">2. Recursion</a></li>
+<li><a href="#3-array">3. Array</a></li>
 </ul>
 </li>
 </ul>
