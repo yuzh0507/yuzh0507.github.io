@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Structure and Algorithm in C++ | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653401709166">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653488795902">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1653401709166" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1653488795902" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -86,7 +86,7 @@
                 2022-05-19
               </span>
               <span>
-                6 min read
+                7 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -387,6 +387,60 @@ A[2] = new int[4];
 </code></pre>
 </li>
 </ul>
+<h2 id="4-matrix">4. Matrix</h2>
+<ul>
+<li>
+<p>Diagonal Matrix</p>
+<pre><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; M = {{3, 0, 0, 0, 0},
+						  {0, 7, 0, 0, 0},
+						  {0, 0, 4, 0, 0},
+						  {0, 0, 0, 9, 0},
+						  {0, 0, 0, 0, 6}};
+// If i != j, M[i][j] = 0
+</code></pre>
+</li>
+<li>
+<p>Lower Triangular Matrix</p>
+<pre><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; M = {{a11,  0 ,  0 ,  0 ,  0 },
+						  {a21, a22,  0 ,  0 ,  0 },
+						  {a31, a32, a33,  0 ,  0 },
+						  {a41, a42, a43, a44,  0 },
+						  {a51, a52, a53, a54, a55}};
+// If i &lt; j, M[i][j] = 0
+</code></pre>
+</li>
+<li>
+<p>Upper Triangular Matrix</p>
+<pre><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; M = {{a11, a12, a13, a14, a15},
+						  { 0 , a22, a23, a24, a25},
+						  { 0 ,  0 , a33, a34, a35},
+						  { 0 ,  0 ,  0 , a44, a45},
+						  { 0 ,  0 ,  0 ,  0 , a55}};
+// If i &gt; j, M[i][j] = 0
+</code></pre>
+</li>
+<li>
+<p>Symmetric Matrix</p>
+<pre><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; M = {{ 2 ,  2 ,  2 ,  2 , 2 },
+						  { 2 ,  3 ,  3 ,  3 , 3 },
+						  { 2 ,  3 ,  4 ,  4 , 4 },
+						  { 2 ,  3 ,  4 ,  5 , 5 },
+						  { 2 ,  3 ,  4 ,  5 , 6 }};
+// M[i][j] = M[j][i]
+</code></pre>
+</li>
+<li>
+<p>Tridiagonal Matrix</p>
+<pre><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; M = {{a11, a21,  0 ,  0 ,  0 },
+						  {a21, a22, a23,  0 ,  0 },
+						  { 0 , a32, a33, a34,  0 },
+						  { 0 ,  0 , a43, a44, a45},
+						  { 0 ,  0 ,  0 , a54, a55}};
+// If |i - j| &lt;= 1, M[i][j] = non-zero
+// If |i - j| &gt; 1, M[i][j] = 0
+</code></pre>
+</li>
+</ul>
 
               </div>
               <div class="toc-container">
@@ -396,6 +450,7 @@ A[2] = new int[4];
 <li><a href="#1-introduction">1. Introduction</a></li>
 <li><a href="#2-recursion">2. Recursion</a></li>
 <li><a href="#3-array">3. Array</a></li>
+<li><a href="#4-matrix">4. Matrix</a></li>
 </ul>
 </li>
 </ul>
