@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>6. Zigzag Conversion | Station of Alvin</title>
+<title>39. Combination Sum | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653568816608">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              6. Zigzag Conversion
+              39. Combination Sum
             </h2>
             <div class="post-info">
               <span>
-                2022-05-08
+                2022-05-26
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -103,68 +103,77 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>The string &quot;PAYPALISHIRING&quot; is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
-<pre><code>P   A   H   N
-A P L S I I G
-Y   I   R
-</code></pre>
+<p>Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.<br>
+The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.<br>
+It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.</p>
 </blockquote>
-<blockquote>
-<p>And then read line by line: &quot;PAHNAPLSIIGYIR&quot;<br>
-Write the code that will take a string and make this conversion given a number of rows:</p>
-<pre><code>string convert(string s, int numRows);
+<p><strong>Example</strong></p>
+<pre><code>Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Explanation:
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+
+Input: candidates = [2,3,5], target = 8
+Output: [[2,2,2,2],[2,3,3],[3,5]]
+
+Input: candidates = [2], target = 1
+Output: []
 </code></pre>
-</blockquote>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>1 &lt;= s.length &lt;= 1000<br>
-s consists of English letters (lower-case and upper-case), ',' and '.'.<br>
-1 &lt;= numRows &lt;= 1000</p>
+<p>1 &lt;= candidates.length &lt;= 30<br>
+1 &lt;= candidates[i] &lt;= 200<br>
+All elements of candidates are distinct.<br>
+1 &lt;= target &lt;= 500</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/zigzag-conversion/">https://leetcode.com/problems/zigzag-conversion/</a></p>
-<p><strong>Description</strong><br>
-Split the 'N' into '|' '' '|'.</p>
-<p>For the first row an the last row, they only need to put characters on the '|'. The next charcter is (2*numRows - 2) offset from the last.</p>
-<p>For other rows, they need to put characters on the '' in addition to '|'. the middle character is (2*(numRows-curRow)-2) offset from the last '|' character.</p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/combination-sum/submissions/">https://leetcode.com/problems/combination-sum/submissions/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>Sort the candidates</li>
+<li>Recursively call thesum(candidates, target - candidates[i], i, elem, ans)</li>
+</ol>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    string convert(string s, int numRows)
+private:
+    void sum (vector&lt;int&gt;&amp; candidates, int target, int i, vector&lt;int&gt;&amp; elem, vector&lt;vector&lt;int&gt;&gt;&amp; ans)
     {
-        if (numRows == 1)
-            return s;
-
-        string outstring ;
-        
-        //Start from the first row
-        for(int curRow = 0; curRow &lt; numRows; curRow++)
+        // If target = 0, the current elem is valid, push back into ans
+        if(target == 0)
         {
-            //Every row will add one or two character from the s
-            for(int index = curRow; index &lt; s.size();)
-            {
-                outstring.push_back(s[index]);
-                //If this row is not the first or the last, it will additionally add a character from the s 
-                if(curRow%(numRows-1) != 0)
-                {
-                    // Calculate the offset of the additional character from the above added character
-                    int plus = 2*(numRows-curRow)-2;
-                    if (index + plus &lt; s.size())
-                        outstring.push_back(s[index + plus]);
-
-                }
-                index += 2*numRows-2;
-            }
+            ans.push_back(elem);
+            return;
         }
-        
 
-        return outstring;
+        // 
+        while(i &lt; candidates.size() &amp;&amp; target - candidates[i] &gt;= 0)
+        {
+            // Recursively candidates[i] into elem, until target - candidates[i] &lt; 0
+            elem.push_back(candidates[i]);        
+            sum(candidates, target - candidates[i], i, elem, ans);
+
+            // Once return from the recursion, pop_back the last number of elem
+            elem.pop_back();
+            i++;
+        }
+    }
+public:
+    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;&amp; candidates, int target)
+    {
+        sort(candidates.begin(), candidates.end());
+
+        vector&lt;int&gt; elem;
+        vector&lt;vector&lt;int&gt;&gt; ans;
+        sum(candidates, target, 0, elem, ans);
+        return ans;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 9 ms, faster than 76.43% of C++ online submissions for Zigzag Conversion.<br>
-Memory Usage: 8 MB, less than 94.80% of C++ online submissions for Zigzag Conversion.</p>
+<p>Runtime:  7 ms, faster than 82.38% of C++ online submissions for Combination Sum.<br>
+Memory Usage: 10.8 MB, less than 72.43% of C++ online submissions for Combination Sum.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
