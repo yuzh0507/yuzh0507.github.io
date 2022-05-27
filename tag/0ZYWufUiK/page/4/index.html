@@ -1,8 +1,8 @@
 <html>
   <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1. Two Sum | Station of Alvin</title>
+<title>LeetCode | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653658903696">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -76,99 +76,48 @@
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              1. Two Sum
-            </h2>
-            <div class="post-info">
-              <span>
-                2022-05-04
-              </span>
-              <span>
-                2 min read
-              </span>
-              
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
-            </div>
-            
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>Problem</p>
-<blockquote>
-<p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>
-You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>
-You can return the answer in any order.</p>
-</blockquote>
-<p>Constraints</p>
-<blockquote>
-<p>2 &lt;= nums.length &lt;= 10<sup>4</sup><br>
--10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup><br>
--10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup><br>
-Only one valid answer exists</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></p>
-<pre><code class="language-C++">class Solution {
-public:
-    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
-        for (int i = 0; i &lt; nums.size(); i++){              // Use i to traverse the nums
-            for (int j = i+1; j &lt; nums.size(); j++){        // Use j to traverse the rest elements from i to the end of nums
-                if(nums[i] + nums[j] == target){        
-                    return {i,j};                   // If the sum of two elements equals the target, return their position.
-                }
-            }
-        }
-        
-        return {0};     // If there are no two elements whose sum equals the target, return 0
-    }
-};
-</code></pre>
-<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
-
-              </div>
-              <div class="toc-container">
-                
-              </div>
-            </div>
-          </article>
+        <div class="current-tag-container">
+            <h2 class="title">
+                标签：# LeetCode
+            </h2> 
         </div>
-
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://yuzh0507.github.io/post/leetcode-record/">
+        <h2 class="post-title">LeetCode Record</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2022-05-04
+        </span>
+        <span>
+          1 min read
+        </span>
         
-
+          <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
+            # C++
+          </a>
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '',
-    clientSecret: '',
-    repo: '',
-    owner: '',
-    admin: [''],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
+          <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+            # LeetCode
+          </a>
         
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
+
+        <div class="pagination-container">
+  
+    <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/page/3/" class="prev-page">上一页</a>
+  
+  
+</div>
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
