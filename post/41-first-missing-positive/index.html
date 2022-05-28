@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>17. Letter Combinations of a Phone Number | Station of Alvin</title>
+<title>41. First Missing Positive | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653710938500">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              17. Letter Combinations of a Phone Number
+              41. First Missing Positive
             </h2>
             <div class="post-info">
               <span>
-                2022-05-13
+                2022-05-28
               </span>
               <span>
                 2 min read
@@ -103,51 +103,64 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.<br>
-A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.<br>
-<img src="https://yuzh0507.github.io/post-images/1652431215016.png" alt="" loading="lazy"></p>
+<p>Given an unsorted integer array nums, return the smallest missing positive integer.<br>
+You must implement an algorithm that runs in O(n) time and uses constant extra space.</p>
 </blockquote>
+<p><strong>Example</strong></p>
+<pre><code>Input: nums = [1,2,0]
+Output: 3
+
+Input: nums = [3,4,-1,1]
+Output: 2
+
+Input: nums = [7,8,9,11,12]
+Output: 1
+</code></pre>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>0 &lt;= digits.length &lt;= 4<br>
-digits[i] is a digit in the range ['2', '9'].</p>
+<p>1 &lt;= nums.length &lt;= 5 * 10<sup>5</sup><br>
+-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</p>
 </blockquote>
-<p>Link: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/first-missing-positive/">https://leetcode.com/problems/first-missing-positive/</a></p>
 <p><strong>Description</strong></p>
+<ol>
+<li>Sort the nums</li>
+<li>Compare all elements of the nums with pint(postive integer)<br>
+2.1. if pint &gt; nums[i], continue<br>
+2.2. if pint = nums[i], pint++<br>
+2.3. if pint &lt; nums[i], return pint</li>
+</ol>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    vector&lt;string&gt; letterCombinations(string digits)
+    int firstMissingPositive(vector&lt;int&gt;&amp; nums)
     {
-        if (digits.empty())
-            return {};
-        
-        vector&lt;string&gt; map = {&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;};
-        vector&lt;string&gt; letComb = {&quot;&quot;};
-        // Traverse every digit from the digits
-        for (int i = 0; i &lt; digits.size(); i++)
+        int pint = 1;
+        sort(nums.begin(), nums.end());
+
+        for(int i = 0; i &lt; nums.size(); i++)
         {
-            vector&lt;string&gt; tmp;
-            
-            // Traverse every character from the corresponding element of the map
-            for (int j = 0; j &lt; map[digits[i]-'0'].size(); j++)
+            if (nums[i] &gt; pint)
             {
-                // Traverse every existent string of the letComb
-                for(int k = 0; k &lt; letComb.size(); k++)
-                {
-                    tmp.push_back(letComb[k] + map[digits[i]-'0'][j]);
-                }
+                break;
             }
-            letComb = tmp;        
+            else if ( nums [i] == pint)
+            {
+                pint++;
+            }
+            else
+            {
+                continue;
+            }
         }
-        return letComb;
+
+        return pint;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Letter Combinations of a Phone Number.<br>
-Memory Usage: 6.6 MB, less than 35.15% of C++ online submissions for Letter Combinations of a Phone Number.</p>
+<p>Runtime:  261 ms, faster than 34.68% of C++ online submissions for First Missing Positive.<br>
+Memory Usage: 83 MB, less than 41.25% of C++ online submissions for First Missing Positive.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
