@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>32. Longest Valid Parentheses | Station of Alvin</title>
+<title>42. Trapping Rain Water | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1653816050306">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              32. Longest Valid Parentheses
+              42. Trapping Rain Water
             </h2>
             <div class="post-info">
               <span>
-                2022-05-19
+                2022-05-29
               </span>
               <span>
                 2 min read
@@ -103,76 +103,52 @@
               <div class="post-content">
                 <p><strong>Problem</strong></p>
 <blockquote>
-<p>Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.</p>
+<p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
 </blockquote>
-<p><strong>Example</strong></p>
-<pre><code>Input: s = &quot;(()&quot;
-Output: 2
-Explanation: The longest valid parentheses substring is &quot;()&quot;.
+<p><strong>Example</strong><br>
+<img src="https://yuzh0507.github.io/post-images/1653815799826.png" alt="" loading="lazy"></p>
+<pre><code>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
 
-Input: s = &quot;)()())&quot;
-Output: 4
-Explanation: The longest valid parentheses substring is &quot;()()&quot;.
-
-Input: s = &quot;&quot;
-Output: 0
+Input: height = [4,2,0,3,2,5]
+Output: 9
 </code></pre>
 <p><strong>Constraints</strong></p>
 <blockquote>
-<p>0 &lt;= s.length &lt;= 3 * 10<sup>4</sup><br>
-s[i] is '(', or ')'.</p>
+<p>n == height.length<br>
+1 &lt;= n &lt;= 2 * 10<sup>4</sup><br>
+0 &lt;= height[i] &lt;= 10<sup>5</sup></p>
 </blockquote>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/longest-valid-parentheses/submissions/">https://leetcode.com/problems/longest-valid-parentheses/submissions/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/trapping-rain-water/">https://leetcode.com/problems/trapping-rain-water/</a></p>
 <p><strong>Description</strong></p>
-<ol>
-<li>Use a C++ stack to store the index of s.</li>
-<li>if (s[i] == '('), st.push(i)</li>
-<li>if (s[i] == ')'),<br>
-3.1. if(st.empty() || st.top() == ')'), st.push(i), num = 0;<br>
-3.2. else, st.pop(), num = i - (st.empty() ? -1 : st.top()); longest = max(num, longest)</li>
-</ol>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-private:
-    int longestValidParentheses(string s)
+    int trap(vector&lt;int&gt;&amp; height)
     {
-        if(s.size() &lt; 2)
-            return 0;
-        
-        int num = 0;
-        int longest = 0;
-        stack&lt;int&gt; st;
-        for(int i = 0; i &lt; s.size(); i++)
-        {
-            if(s[i] == '(')
-            {
-                st.push(i);
-            }
-
-            else
-            {
-                if(st.empty() || s[st.top()] == ')')
-                {
-                    num = 0;
-                    st.push(i);
-                }
-                else
-                {
-                    st.pop();
-                    num = i - (st.empty() ? -1 : st.top());
-                    longest = max(longest, num);
-                }
-            }
-        }
+        vector&lt;int&gt;::iterator left = height.begin();
+        vector&lt;int&gt;::iterator right = height.end() - 1;
+        int level = 0, water = 0;
+        while (left != right + 1) {
+            // Get the lower value of two.
+            int lower = *left &lt; *right ? *left++ : *right--;
+            // Then, move the iterator with lower value to the middle for 1 element
             
-        return longest;
+            // Calculate the water level
+            level = max(level, lower);
+
+            // calculate water
+            water += level - lower;
+        }
+        return water;
+        
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime:  9 ms, faster than 27.95% of C++ online submissions for Longest Valid Parentheses.<br>
-Memory Usage: 7.2 MB, less than 67.26% of C++ online submissions for Longest Valid Parentheses.</p>
+<p>Runtime:  33 ms, faster than 9.36% of C++ online submissions for Trapping Rain Water.<br>
+Memory Usage: 19.7 MB, less than 19.28% of C++ online submissions for Trapping Rain Water.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
