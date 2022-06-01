@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Structure and Algorithm in C++ | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654011095028">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654095344061">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1654011095028" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1654095344061" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -86,7 +86,7 @@
                 2022-05-19
               </span>
               <span>
-                7 min read
+                8 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -441,6 +441,51 @@ A[2] = new int[4];
 </code></pre>
 </li>
 </ul>
+<h1 id="algorithm">Algorithm</h1>
+<h2 id="1-introduction-2">1. Introduction</h2>
+<p>Differences between algorithm and program</p>
+<ul>
+<li>
+<p>Characteristics of algorithm</p>
+<ol>
+<li>Input: 0 or more</li>
+<li>Output: at least 1</li>
+<li>Definiteness</li>
+<li>Finiteness</li>
+<li>Effectiveness</li>
+</ol>
+</li>
+<li>
+<p>Criteria</p>
+<ol>
+<li>Time</li>
+<li>Space</li>
+<li>Network consumption</li>
+<li>Power consumption</li>
+<li>CPU registers</li>
+</ol>
+</li>
+<li>
+<p>Asymptotic Notations</p>
+<p><strong>O</strong>: big-oh, upper bound</p>
+<p><strong>Ω</strong>: big-omega, lower bound</p>
+<p><strong>θ</strong>: theta, average bound</p>
+</li>
+</ul>
+<h2 id="2-divide-and-conquer">2. Divide and Conquer</h2>
+<p>Devide the whole problem into several small questions, design solutions for small questions, integrate the small solutions into the whole solution</p>
+<h3 id="21-recurrence-relation-decreasing">2.1 Recurrence Relation Decreasing</h3>
+<h3 id="22-masters-theorem-decreasing-function">2.2 Masters Theorem Decreasing Function</h3>
+<p>T(n) = aT(n-b) + f(n) (a&gt;0, b&gt;0, f(n) = O(n<sup>k</sup>) while k ≥ 0)<br>
+if a &lt; 1, O(n<sup>k</sup>)<br>
+if a = 1, O(n<sup>k+1</sup>)<br>
+if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
+<h3 id="23-recurrence-relation-dividing-function">2.3 Recurrence Relation Dividing Function</h3>
+<h3 id="24-masters-theorem-dividing-function">2.4 Masters Theorem Dividing Function</h3>
+<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1654071299318.png" alt="" loading="lazy"></figure>
+<h3 id="25-recurrence-root-function">2.5 Recurrence Root Function</h3>
+<figure data-type="image" tabindex="2"><img src="https://yuzh0507.github.io/post-images/1654071304531.png" alt="" loading="lazy"></figure>
+<h3 id="26-binary-search">2.6 BInary Search</h3>
 
               </div>
               <div class="toc-container">
@@ -451,6 +496,21 @@ A[2] = new int[4];
 <li><a href="#2-recursion">2. Recursion</a></li>
 <li><a href="#3-array">3. Array</a></li>
 <li><a href="#4-matrix">4. Matrix</a></li>
+</ul>
+</li>
+<li><a href="#algorithm">Algorithm</a>
+<ul>
+<li><a href="#1-introduction-2">1. Introduction</a></li>
+<li><a href="#2-divide-and-conquer">2. Divide and Conquer</a>
+<ul>
+<li><a href="#21-recurrence-relation-decreasing">2.1 Recurrence Relation Decreasing</a></li>
+<li><a href="#22-masters-theorem-decreasing-function">2.2 Masters Theorem Decreasing Function</a></li>
+<li><a href="#23-recurrence-relation-dividing-function">2.3 Recurrence Relation Dividing Function</a></li>
+<li><a href="#24-masters-theorem-dividing-function">2.4 Masters Theorem Dividing Function</a></li>
+<li><a href="#25-recurrence-root-function">2.5 Recurrence Root Function</a></li>
+<li><a href="#26-binary-search">2.6 BInary Search</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
