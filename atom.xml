@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-06-01T14:55:59.384Z</updated>
+    <updated>2022-06-02T07:29:28.392Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -443,7 +443,8 @@ if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
 <a href="https://yuzh0507.github.io/post/40-combination-sum-ii">40. Combination Sum II</a><br>
 <a href="https://yuzh0507.github.io/post/43-multiply-strings">43. Multiply Strings</a><br>
 <a href="https://yuzh0507.github.io/post/45-jump-game-ii">45. Jump Game II</a><br>
-<a href="https://yuzh0507.github.io/post/46-permutations">46. Permutations</a></p>
+<a href="https://yuzh0507.github.io/post/46-permutations">46. Permutations</a><br>
+<a href="https://yuzh0507.github.io/post/47-permutations-ii">47. Permutations II</a></p>
 <h1 id="hard-problems">Hard Problems</h1>
 <p><a href="https://yuzh0507.github.io/post/10-regular-expression-matching">10. Regular Expression Matching</a><br>
 <a href="https://yuzh0507.github.io/post/23-merge-k-sorted-lists">23. Merge k Sorted Lists</a><br>
