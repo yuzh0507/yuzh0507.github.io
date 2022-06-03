@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>8. String to Integer (atoi) | Station of Alvin</title>
+<title>37. Sudoku Solver | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654270945011">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              8. String to Integer (atoi)
+              37. Sudoku Solver
             </h2>
             <div class="post-info">
               <span>
-                2022-05-09
+                2022-06-02
               </span>
               <span>
-                3 min read
+                5 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,79 +101,92 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).<br>
-The algorithm for myAtoi(string s) is as follows:</p>
+                <p><strong>Problem</strong><br>
+Write a program to solve a Sudoku puzzle by filling the empty cells.</p>
+<p>A sudoku solution must satisfy all of the following rules:</p>
 <ol>
-<li>Read in and ignore any leading whitespace.</li>
-<li>Check if the next character (if not already at the end of the string) is '-' or '+'. Read this character in if it is either. This determines if the final result is negative or positive respectively. Assume the result is positive if neither is present.</li>
-<li>Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.</li>
-<li>Convert these digits into an integer (i.e. &quot;123&quot; -&gt; 123, &quot;0032&quot; -&gt; 32). If no digits were read, then the integer is 0. Change the sign as necessary (from step 2).</li>
-<li>If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -231 should be clamped to -231, and integers greater than 231 - 1 should be clamped to 231 - 1.</li>
-<li>Return the integer as the final result.</li>
+<li>Each of the digits 1-9 must occur exactly once in each row.</li>
+<li>Each of the digits 1-9 must occur exactly once in each column.</li>
+<li>Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.</li>
 </ol>
-</blockquote>
-<blockquote>
-<p><strong>Note:</strong><br>
-Only the space character ' ' is considered a whitespace character.<br>
-Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.</p>
-</blockquote>
+<p>The '.' character indicates empty cells.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: board = [[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]]
+Output: [[&quot;5&quot;,&quot;3&quot;,&quot;4&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;,&quot;1&quot;,&quot;2&quot;],[&quot;6&quot;,&quot;7&quot;,&quot;2&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;3&quot;,&quot;4&quot;,&quot;8&quot;],[&quot;1&quot;,&quot;9&quot;,&quot;8&quot;,&quot;3&quot;,&quot;4&quot;,&quot;2&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;],[&quot;8&quot;,&quot;5&quot;,&quot;9&quot;,&quot;7&quot;,&quot;6&quot;,&quot;1&quot;,&quot;4&quot;,&quot;2&quot;,&quot;3&quot;],[&quot;4&quot;,&quot;2&quot;,&quot;6&quot;,&quot;8&quot;,&quot;5&quot;,&quot;3&quot;,&quot;7&quot;,&quot;9&quot;,&quot;1&quot;],[&quot;7&quot;,&quot;1&quot;,&quot;3&quot;,&quot;9&quot;,&quot;2&quot;,&quot;4&quot;,&quot;8&quot;,&quot;5&quot;,&quot;6&quot;],[&quot;9&quot;,&quot;6&quot;,&quot;1&quot;,&quot;5&quot;,&quot;3&quot;,&quot;7&quot;,&quot;2&quot;,&quot;8&quot;,&quot;4&quot;],[&quot;2&quot;,&quot;8&quot;,&quot;7&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;6&quot;,&quot;3&quot;,&quot;5&quot;],[&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;2&quot;,&quot;8&quot;,&quot;6&quot;,&quot;1&quot;,&quot;7&quot;,&quot;9&quot;]]
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1654161354536.png" alt="" loading="lazy"></figure>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>0 &lt;= s.length &lt;= 200<br>
-s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/string-to-integer-atoi/">https://leetcode.com/problems/string-to-integer-atoi/</a></p>
-<p><strong>Description</strong></p>
+<ul>
+<li>board.length == 9</li>
+<li>board[i].length == 9</li>
+<li>board[i][j] is a digit or '.'.</li>
+<li>It is guaranteed that the input board has only one solution.</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/sudoku-solver/">https://leetcode.com/problems/sudoku-solver/</a></p>
+<p><strong>Description</strong><br>
+Bracktracking</p>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    int myAtoi(string s)
+private:
+    bool checkDup(vector&lt;vector&lt;char&gt;&gt;&amp; board, int row, int col, char val)
     {
-        int outInt = 0;
-        int minus = 1;
-        string::iterator pos = s.begin();
-        // Step 1
-        while (*pos == ' ')
-            pos++;
-        
-        // Step2
-        if (*pos == '-')
-        {
-            minus = -1;
-            pos++;
-        }
-        else if (*pos == '+')
-        {
-            minus = 1;
-            pos++;
-        }
+        // Check the row
+        for(int i = 0; i &lt; 9; i++)
+            if (board[row][i] == val)
+                return false;
 
-        //Step 3, 4, 5
-        for (; pos != s.end(); pos++)
+        // Check the column
+        for(int i = 0; i &lt; 9; i++)
+            if(board[i][col] == val)
+                return false;
+
+        // Check the 3*3 box
+        for(int i = 3 * (row/3); i &lt; 3 * (row/3 + 1); i++)
+            for(int j = 3 * (col/3); j &lt; 3 * (col/3 + 1); j++)
+                if(board[i][j] == val)
+                    return false;
+
+        return true;
+    }
+
+    bool tryElem(vector&lt;vector&lt;char&gt;&gt;&amp; board, int row, int col)
+    {
+        // End
+        if (row == 9)
+            return true;
+
+        // Change row
+        if(col == 9)
+            return tryElem(board, row+1, 0);
+
+        // Jump non-empty position
+        if (board[row][col] != '.' )
+            return tryElem(board, row, col + 1);
+
+
+        for (char ch : {'1', '2', '3', '4', '5', '6', '7', '8', '9'})
         {
-            if(48 &lt;= *pos &amp;&amp; *pos &lt;= 57)
+            if (checkDup(board, row, col, ch))
             {
-                if(outInt*minus &gt; INT_MAX/10 || ((outInt*minus == INT_MAX/10) &amp;&amp; ((*pos - 48)&gt;7)))
-                    return INT_MAX;
-                if(outInt*minus &lt; INT_MIN/10 || ((outInt*minus == INT_MIN/10) &amp;&amp; ((*pos - 48)&gt;=8)))
-                    return INT_MIN;
-                outInt = outInt*10 + (*pos - 48);
+                board[row][col] = ch;
+                if(tryElem(board, row, col+1))
+                    return true;
+                board[row][col] = '.';
             }
-            else
-                break;
         }
 
-        //Step 6
-        return outInt*minus;
+        return false;   
+    }
+public:
+    void solveSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) {
+        tryElem(board, 0, 0);
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <blockquote>
-<p>Runtime: 4 ms, faster than 64.52% of C++ online submissions for String to Integer (atoi).<br>
-Memory Usage: 7 MB, less than 89.70% of C++ online submissions for String to Integer (atoi).</p>
+<p>Runtime: 40 ms, faster than 49.23% of C++ online submissions for Sudoku Solver.<br>
+Memory Usage: 6.5 MB, less than 54.55% of C++ online submissions for Sudoku Solver.</p>
 </blockquote>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
