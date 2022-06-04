@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>11. Container with Most Water | Station of Alvin</title>
+<title>49. Group Anagrams | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654358042622">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              11. Container with Most Water
+              49. Group Anagrams
             </h2>
             <div class="post-info">
               <span>
-                2022-05-11
+                2022-06-04
               </span>
               <span>
                 2 min read
@@ -101,58 +101,61 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).<br>
-Find two lines that together with the x-axis form a container, such that the container contains the most water.<br>
-Return the maximum amount of water a container can store.<br>
-Notice that you may not slant the container..</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.</p>
+<p>An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: strs = [&quot;eat&quot;,&quot;tea&quot;,&quot;tan&quot;,&quot;ate&quot;,&quot;nat&quot;,&quot;bat&quot;]
+Output: [[&quot;bat&quot;],[&quot;nat&quot;,&quot;tan&quot;],[&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;]]
+
+Input: strs = [&quot;&quot;]
+Output: [[&quot;&quot;]]
+
+Input: strs = [&quot;a&quot;]
+Output: [[&quot;a&quot;]]
+</code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>n == height.length<br>
-2 &lt;= n &lt;= 10<sup>5</sup><br>
-0 &lt;= height[i] &lt;= 10<sup>4</sup></p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/container-with-most-water/">https://leetcode.com/problems/container-with-most-water/</a></p>
-<p><strong>Description</strong><br>
-Use two iterator &quot;left&quot; and &quot;right&quot;, calculate the area. If *left &lt; *right, left++; If *left &gt; *right, right--. record the maximum of area.</p>
+<ul>
+<li>1 &lt;= strs.length &lt;= 10<sup>4</sup></li>
+<li>0 &lt;= strs[i].length &lt;= 100</li>
+<li>strs[i] consists of lowercase English letters.</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/group-anagrams/">https://leetcode.com/problems/group-anagrams/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>Traverse every element of strs, sort it as the key of unordered mep</li>
+<li>Push str back to the value of unordered map with same key</li>
+<li>Push the values of unordered map back to the output</li>
+</ol>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    int maxArea(vector&lt;int&gt;&amp; height)
+    vector&lt;vector&lt;string&gt;&gt; groupAnagrams(vector&lt;string&gt;&amp; strs)
     {
-        int curArea = 0;
-        int maxValue = 0;
+        vector&lt;vector&lt;string&gt;&gt; op;
+        unordered_map&lt;string, vector&lt;string&gt;&gt; anagram;
 
-        vector&lt;int&gt;::iterator left = height.begin();
-        vector&lt;int&gt;::iterator right = height.end() - 1;
-        
-        for (; left != right; )
+        for(auto str : strs)
         {
-            if (*left == min(*left, *right))
-            {
-                curArea = *left * distance(left, right);
-                left++;
-            }
-            else
-            {
-                curArea = *right * distance(left, right);
-                right--;
-            }
-
-            maxValue = max(maxValue, curArea);
-            continue;
+            string tmp = str;
+            sort(tmp.begin(),tmp.end());
+            anagram[tmp].push_back(str);
         }
-        return maxValue;
+
+        for(auto it = anagram.begin(); it != anagram.end(); it++)
+        {
+            op.push_back(it -&gt; second);
+        }
+
+        return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime: 95 ms, faster than 82.61% of C++ online submissions for Container With Most Water.<br>
-Memory Usage: 59 MB, less than 82.11% of C++ online submissions for Container With Most Water.</p>
-</blockquote>
+<ul>
+<li>Runtime: 41 ms, faster than 75.61% of C++ online submissions for Group Anagrams.</li>
+<li>Memory Usage: 19.7 MB, less than 71.11% of C++ online submissions for Group Anagrams.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
