@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>9. Palindrome Number | Station of Alvin</title>
+<title>50. Pow(x, n) | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654439421594">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              9. Palindrome Number
+              50. Pow(x, n)
             </h2>
             <div class="post-info">
               <span>
-                2022-05-04
+                2022-06-05
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,46 +101,78 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
-<blockquote>
-<p>Given an integer x, return true if x is palindrome integer.<br>
-An integer is a palindrome when it reads the same backward as forward.<br>
-For example, 121 is a palindrome while 123 is not.</p>
-</blockquote>
-<p>Constraints</p>
-<blockquote>
-<p>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/palindrome-number/">https://leetcode.com/problems/palindrome-number/</a></p>
+                <p><strong>Problem</strong><br>
+Implement pow(x, n), which calculates x raised to the power n (i.e., xn).</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: x = 2.00000, n = 10
+Output: 1024.00000
+
+Input: x = 2.10000, n = 3
+Output: 9.26100
+
+Input: x = 2.00000, n = -2
+Output: 0.25000
+Explanation: 2-2 = 1/22 = 1/4 = 0.25
+</code></pre>
+<p><strong>Constraints</strong></p>
+<ul>
+<li>-100.0 &lt; x &lt; 100.0</li>
+<li>-2<sup>31</sup> &lt;= n &lt;= 2<sup>31</sup>-1</li>
+<li>-10<sup>4</sup> &lt;= x<sup>n</sup> &lt;= 10<sup>4</sup></li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/powx-n//">https://leetcode.com/problems/powx-n//</a></p>
+<p><strong>Description</strong><br>
+while (n%2 != 1), x = x<sup>2</sup>, n = n/2</p>
+<ul>
+<li>Time Complexity: O(log n)</li>
+<li>Space Complexity: O(1)</li>
+</ul>
+<p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    bool isPalindrome(int x) {
-        vector&lt;int&gt; nums;
-        if (x &lt; 0)
-            return false;
-        if (x == 0)
-            return true;
-   
-        for (int tmp = x; tmp &gt; 0; tmp /= 10){
-            nums.push_back(tmp%10);     // Push back every number into the vector
+    double myPow(double x, int n)
+    {
+        if(x == 1 || n == 0)
+            return 1;
+
+        double op = 1;
+
+        // Transfer the value of n from negative to positive
+        if (n &lt; 0)
+        {
+            x = 1/x;
+            // avoid -INT_MIN causes overflow
+            if (n == INT_MIN)
+            {
+                x *= x;
+                n = n/2;
+            }
+            n *= -1;
         }
 
-        for (int i = 0, j = nums.size()-1; i &lt;= j;){
-            // Compare numbers from both sides to the middle.
-            // If any pair is not equal, return false. If every pair is equal, return true
-            if (nums[i] == nums[j])
+        while (n&gt;0)
+        {
+            while (!(n%2))
             {
-                i++, j--;
-                if (i &gt;= j)
-                    return true;
-                continue;
-            }       
-            return false;
+                x *= x;
+                n /= 2; 
+            }
+            if (n%2)
+            {
+                op *= x;
+                n--;
+            }
         }
-        return false;
+
+        return op;
     }
 };
 </code></pre>
+<p><strong>Result</strong></p>
+<ul>
+<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Pow(x, n).</li>
+<li>Memory Usage: 6 MB, less than 44.74% of C++ online submissions for Pow(x, n).</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
