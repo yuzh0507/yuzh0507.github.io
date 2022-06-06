@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>12. Integer to Roman | Station of Alvin</title>
+<title>54. Spiral Matrix | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654528391307">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              12. Integer to Roman
+              54. Spiral Matrix
             </h2>
             <div class="post-info">
               <span>
-                2022-05-11
+                2022-06-06
               </span>
               <span>
                 3 min read
@@ -101,151 +101,97 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.</p>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>1</td>
-</tr>
-<tr>
-<td>V</td>
-<td>5</td>
-</tr>
-<tr>
-<td>X</td>
-<td>10</td>
-</tr>
-<tr>
-<td>L</td>
-<td>50</td>
-</tr>
-<tr>
-<td>C</td>
-<td>100</td>
-</tr>
-<tr>
-<td>D</td>
-<td>500</td>
-</tr>
-<tr>
-<td>M</td>
-<td>1000</td>
-</tr>
-</tbody>
-</table>
-<p>For example, 2 is written as II in Roman numeral, just two one's added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.<br>
-Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:<br>
-· I can be placed before V (5) and X (10) to make 4 and 9. <br>
-· X can be placed before L (50) and C (100) to make 40 and 90. <br>
-· C can be placed before D (500) and M (1000) to make 400 and 900.<br>
-Given an integer, convert it to a roman numeral.</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+Given an m x n matrix, return all elements of the matrix in spiral order.</p>
+<p><strong>Example</strong><br>
+<img src="https://yuzh0507.github.io/post-images/1654528030457.jpg" alt="" loading="lazy"></p>
+<pre><code>Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1654528054432.jpg" alt="" loading="lazy"></figure>
+<pre><code>Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+</code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>1 &lt;= num &lt;= 3999</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/integer-to-roman/">https://leetcode.com/problems/integer-to-roman/</a></p>
-<p><strong>Description</strong></p>
+<ul>
+<li>m == matrix.length</li>
+<li>n == matrix[i].length</li>
+<li>1 &lt;= m, n &lt;= 10</li>
+<li>-100 &lt;= matrix[i][j] &lt;= 100</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/spiral-matrix/">https://leetcode.com/problems/spiral-matrix/</a></p>
+<p><strong>Description</strong><br>
+Recursion: right -&gt; down -&gt; left -&gt; up -&gt; right...</p>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    string intToRoman(int num)
+private:
+    void rightOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, vector&lt;int&gt; &amp; op, int row, int col, int rightBound)
     {
-        string Roman;
+        if(col &gt; rightBound)
+            return;
 
-        while (num &gt;= 1000)
+        for(int i = col; i &lt;= rightBound; i++)
         {
-            num = num - 1000;
-            Roman.push_back('M');
-        }
-
-        if(num &gt;= 900)
-        {
-            num = num - 900;
-            Roman.push_back('C');
-            Roman.push_back('M');
-        }
-        else if (num &gt;= 500)
-        {
-            num = num - 500;
-            Roman.push_back('D');
-        }
-        else if (num &gt;= 400)
-        {
-            num = num - 400;
-            Roman.push_back('C');
-            Roman.push_back('D');
-        }
-        while (num &gt;= 100)
-        {
-            num = num - 100;
-            Roman.push_back('C');
+            op.push_back(matrix[row][i]);
         }
 
-        if(num &gt;= 90)
-        {
-            num = num - 90;
-            Roman.push_back('X');
-            Roman.push_back('C');
-        }
-        else if (num &gt;= 50)
-        {
-            num = num - 50;
-            Roman.push_back('L');
-        }
-        else if (num &gt;= 40)
-        {
-            num = num - 40;
-            Roman.push_back('X');
-            Roman.push_back('L');
-        }
-        while (num &gt;= 10)
-        {
-            num = num - 10;
-            Roman.push_back('X');
-        }
-        if(num &gt;= 9)
-        {
-            num = num - 9;
-            Roman.push_back('I');
-            Roman.push_back('X');
-        }
-        else if (num &gt;= 5)
-        {
-            num = num - 5;
-            Roman.push_back('V');
-        }
-        else if (num &gt;= 4)
-        {
-            num = num - 4;
-            Roman.push_back('I');
-            Roman.push_back('V');
-        }
-        while (num &gt;= 1)
-        {
-            num = num - 1;
-            Roman.push_back('I');
-        }
-        
+        downOrder(matrix, op, row+1, rightBound, matrix.size()-row-1);
+    }
+    void downOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, vector&lt;int&gt; &amp; op, int row, int col, int downBound)
+    {
+        if(row &gt; downBound)
+            return;
 
-        return Roman;
+        for(int i = row; i &lt;= downBound; i++)
+        {
+            op.push_back(matrix[i][col]);
+        }
+
+        leftOrder(matrix, op, downBound, col-1, matrix[0].size()-col-1);
+    }
+    void leftOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, vector&lt;int&gt; &amp; op, int row, int col, int leftBound)
+    {
+        if(col &lt; leftBound)
+            return;
+
+        for(int i = col; i &gt;= leftBound; i--)
+        {
+            op.push_back(matrix[row][i]);
+        }
+
+        upOrder(matrix, op, row-1, leftBound, matrix.size()-row);
+    }
+    void upOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, vector&lt;int&gt; &amp; op, int row, int col, int upBound)
+    {
+        if(row &lt; upBound)
+            return;
+
+        for(int i = row; i &gt;= upBound; i--)
+        {
+            op.push_back(matrix[i][col]);
+        }
+
+        rightOrder(matrix, op, upBound, col+1, matrix[0].size()-col-2);
+    }
+
+public:
+    vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+        vector&lt;int&gt; op;
+        rightOrder(matrix, op, 0, 0, matrix[0].size()-1);
+
+        return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime: 10 ms, faster than 58.16% of C++ online submissions for Integer to Roman.<br>
-Memory Usage: 5.9 MB, less than 92.45% of C++ online submissions for Integer to Roman.</p>
-</blockquote>
+<ul>
+<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix.</li>
+<li>Memory Usage: 6.9 MB, less than 72.72% of C++ online submissions for Spiral Matrix..</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
