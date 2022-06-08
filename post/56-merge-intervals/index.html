@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>10. Regular Expression Matching | Station of Alvin</title>
+<title>56. Merge Intervals | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654704575401">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              10. Regular Expression Matching
+              56. Merge Intervals
             </h2>
             <div class="post-info">
               <span>
-                2022-05-10
+                2022-06-08
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,53 +101,99 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:</p>
-<ul>
-<li>'.' Matches any single character.​​​​</li>
-<li>'*' Matches zero or more of the preceding element.</li>
-</ul>
-<p>The matching should cover the entire input string (not partial).</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+
+Input: nums = [3,2,1,0,4]
+Input: intervals = [[1,4],[4,5]]
+Output: [[1,5]]
+Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+</code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>1 &lt;= s.length &lt;= 20<br>
-1 &lt;= p.length &lt;= 30<br>
-s contains only lowercase English letters.<br>
-p contains only lowercase English letters, '.', and '<em>'.<br>
-It is guaranteed for each appearance of the character '</em>', there will be a previous valid character to match.</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/regular-expression-matching/">https://leetcode.com/problems/regular-expression-matching/</a></p>
+<ul>
+<li>1 &lt;= intervals.length &lt;= 10<sup>4</sup></li>
+<li>intervals[i].length == 2</li>
+<li>0 &lt;= starti &lt;= endi &lt;= 10<sup>4</sup></li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/merge-intervals/">https://leetcode.com/problems/merge-intervals/</a></p>
 <p><strong>Description</strong><br>
-Failed to solve this problem.<br>
-Refer to <a href="https://leetcode.com/problems/regular-expression-matching/discuss/5684/C%2B%2B-O(n)-space-DP">https://leetcode.com/problems/regular-expression-matching/discuss/5684/C%2B%2B-O(n)-space-DP</a></p>
+Compare intervals[i] and intervals[i+1]<br>
+(1) If they are overlapping, merge them<br>
+(2) If intervals[i+1] is a sub-interval of intervals[i], delete intervals[i+1]<br>
+(3) If they are not overlapping, continue</p>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    bool isMatch(string s, string p) {
-       int m = s.size(), n = p.size();
-        vector&lt;vector&lt;bool&gt;&gt; dp(m + 1, vector&lt;bool&gt;(n + 1, false));
-        dp[0][0] = true;
-        for (int i = 0; i &lt;= m; i++) {
-            for (int j = 1; j &lt;= n; j++) {
-                if (p[j - 1] == '*') {
-                    dp[i][j] = dp[i][j - 2] || (i &amp;&amp; dp[i - 1][j] &amp;&amp; (s[i - 1] == p[j - 2] || p[j - 2] == '.'));
-                } else {
-                    dp[i][j] = i &amp;&amp; dp[i - 1][j - 1] &amp;&amp; (s[i - 1] == p[j - 1] || p[j - 1] == '.');
-                }
+    vector&lt;vector&lt;int&gt;&gt; merge(vector&lt;vector&lt;int&gt;&gt;&amp; intervals)
+    {
+        sort(intervals.begin(), intervals.end());
+        for(int i = 0; i &lt; intervals.size()-1;)
+        {
+            // intervals[i] and intervals[i+1] are overlapping, merge them
+            if (intervals[i][1] &gt;= intervals[i+1][0] &amp;&amp; intervals[i][1] &lt;= intervals[i+1][1])
+            {
+                
+                intervals[i+1][0] = intervals[i][0];
+                intervals.erase(intervals.begin()+i);
             }
+            // intervals[i+1] is a sub-interval of intervals[i], delete intervals[i+1]
+            else if (intervals[i][1] &gt;= intervals[i+1][0] &amp;&amp; intervals[i][1] &gt; intervals[i+1][1])
+            {
+                intervals.erase(intervals.begin()+i+1);
+            }
+            // intervals[i] and intervals[i+1] are not overlapping, continue
+            else
+                i++;
         }
-        return dp[m][n];
+
+        return intervals;
+    }
+};
+</code></pre>
+<p><strong>Result</strong><br>
+Time exceeded in a test case with very long input</p>
+<hr>
+<p><strong>Description</strong><br>
+Use a vector to store the output</p>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n), it actually costs double of the last method since it needs another vector to store the output</li>
+</ul>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; merge(vector&lt;vector&lt;int&gt;&gt;&amp; intervals)
+    {
+        sort(intervals.begin(), intervals.end());
+
+        vector&lt;vector&lt;int&gt;&gt; op;
+        op.push_back(intervals[0]);
+        for(int i = 0; i &lt; intervals.size(); i++)
+        {
+            if (op.back()[1] &gt;= intervals[i][0])
+                op.back()[1] = max(op.back()[1], intervals[i][1]);
+            else
+                op.push_back(intervals[i]);
+        }
+
+        return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Regular Expression Matching.<br>
-Memory Usage: 7 MB, less than 47.39% of C++ online submissions for Regular Expression Matching.</p>
-</blockquote>
-<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
+<ul>
+<li>Runtime: 79 ms, faster than 19.52% of C++ online submissions for Merge Intervals.</li>
+<li>Memory Usage: 19 MB, less than 67.44% of C++ online submissions for Merge Intervals.<br>
+<a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></li>
+</ul>
 
               </div>
               <div class="toc-container">
