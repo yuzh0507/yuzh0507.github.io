@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>18. 4Sum | Station of Alvin</title>
+<title>57. Insert Interval | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654859309451">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              18. 4Sum
+              57. Insert Interval
             </h2>
             <div class="post-info">
               <span>
-                2022-05-14
+                2022-06-10
               </span>
               <span>
-                3 min read
+                2 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,89 +101,62 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:</p>
-<ul>
-<li>0 &lt;= a, b, c, d &lt; n</li>
-<li>a, b, c, and d are distinct.</li>
-<li>nums[a] + nums[b] + nums[c] + nums[d] == target</li>
-</ul>
-<p>You may return the answer in any order.</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+ou are given an array of non-overlapping intervals intervals where intervals[i] = [start<sub>i</sub>, end<sub>i</sub>] represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval.</p>
+<p>Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).</p>
+<p>Return intervals after the insertion.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+Output: [[1,5],[6,9]]
+
+Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+Output: [[1,2],[3,10],[12,16]]
+Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+</code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>1 &lt;= nums.length &lt;= 200<br>
--10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup><br>
--10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/4sum/">https://leetcode.com/problems/4sum/</a></p>
+<ul>
+<li>0 &lt;= intervals.length &lt;= 10<sup>4</sup></li>
+<li>intervals[i].length == 2</li>
+<li>0 &lt;= starti &lt;= endi &lt;= 10<sup>5</sup></li>
+<li>intervals is sorted by start<sub>i</sub> in ascending order.</li>
+<li>newInterval.length == 2</li>
+<li>0 &lt;= start &lt;= end &lt;= 10<sup>5</sup></li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/insert-interval/">https://leetcode.com/problems/insert-interval/</a></p>
 <p><strong>Description</strong><br>
-The principle is identical to the <a href="https://yuzh0507.github.io/post/15-3sum">15. 3Sum</a>, just need another layer for traversing b.</p>
+Based on <a href="https://yuzh0507.github.io/post/56-merge-intervals">[56. Merge Intervals]</a>, add the new interval before sorting</p>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;&amp; nums, int target)
+    vector&lt;vector&lt;int&gt;&gt; insert(vector&lt;vector&lt;int&gt;&gt;&amp; intervals, vector&lt;int&gt;&amp; newInterval)
     {
-        if (nums.size() &lt; 4)
-            return {};
-        
-        vector&lt;int&gt; sortedNums = nums;
-        sort(sortedNums.begin(), sortedNums.end());
+        intervals.push_back(newInterval);
+        sort(intervals.begin(), intervals.end());
 
-        vector&lt;vector&lt;int&gt;&gt; fsum;
-        for(int a = 0; a &lt; sortedNums.size()-3; a++)
+        vector&lt;vector&lt;int&gt;&gt; op;
+        op.push_back(intervals[0]);
+        for(int i = 0; i &lt; intervals.size(); i++)
         {
-            if (a&gt;0 &amp;&amp; sortedNums[a] == sortedNums[a-1])
-                continue;
-            
-            for (int b = a+1; b &lt; sortedNums.size()-2; b++)
-            {
-                if (b&gt;a+1 &amp;&amp; sortedNums[b] == sortedNums[b-1])
-                    continue;
-
-                int c = b+1;
-                int d = sortedNums.size()-1;
-
-                while(c &lt; d)
-                {
-                    //&quot;sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d]&quot; will cause signed integer overflow
-                    if (sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d] == target)
-                    {
-                        fsum.push_back({sortedNums[a], sortedNums[b], sortedNums[c], sortedNums[d]});
-                        c++;
-                        while(sortedNums[c] == sortedNums[c-1] &amp;&amp; c &lt; d)
-                            c++;
-                        d--;
-                        while(sortedNums[d] == sortedNums[d+1] &amp;&amp; c &lt; d)
-                            d--;
-                    }
-                    //&quot;sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d]&quot; will cause signed integer overflow
-                    else if (sortedNums[a] + sortedNums[b] + sortedNums[c] + sortedNums[d] &lt; target)
-                    {
-                        c++;
-                        while(sortedNums[c] == sortedNums[c-1] &amp;&amp; c &lt; d)
-                            c++;
-                    }
-                    else
-                    {
-                        d--;
-                        while(sortedNums[d] == sortedNums[d+1] &amp;&amp; c &lt; d)
-                            d--;
-                    }            
-                }
-            }
+            if (op.back()[1] &gt;= intervals[i][0])
+                op.back()[1] = max(op.back()[1], intervals[i][1]);
+            else
+                op.push_back(intervals[i]);
         }
-        return fsum;
+
+        return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime: 248 ms, faster than 21.85% of C++ online submissions for 4Sum.<br>
-Memory Usage: 13.2 MB, less than 77.12% of C++ online submissions for 4Sum.</p>
-</blockquote>
-<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
+<ul>
+<li>Runtime: 67 ms, faster than 5.32% of C++ online submissions for Insert Interval.</li>
+<li>Memory Usage: 17 MB, less than 92.58% of C++ online submissions for Insert Interval.<br>
+<a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></li>
+</ul>
 
               </div>
               <div class="toc-container">
