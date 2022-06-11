@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>50. Pow(x, n) | Station of Alvin</title>
+<title>59. Spiral Matrix II | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1654960921832">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              50. Pow(x, n)
+              59. Spiral Matrix II
             </h2>
             <div class="post-info">
               <span>
-                2022-06-05
+                2022-06-11
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -102,67 +102,81 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p><strong>Problem</strong><br>
-Implement pow(x, n), which calculates x raised to the power n (i.e., xn).</p>
-<p><strong>Example</strong></p>
-<pre><code>Input: x = 2.00000, n = 10
-Output: 1024.00000
-
-Input: x = 2.10000, n = 3
-Output: 9.26100
-
-Input: x = 2.00000, n = -2
-Output: 0.25000
-Explanation: 2-2 = 1/22 = 1/4 = 0.25
+Given a positive integer n, generate an n x n matrix filled with elements from 1 to n<sup>2</sup> in spiral order.</p>
+<p><strong>Example</strong><br>
+<img src="https://yuzh0507.github.io/post-images/1654960685749.jpg" alt="" loading="lazy"></p>
+<pre><code>Input: n = 3
+Output: [[1,2,3],[8,9,4],[7,6,5]]
 </code></pre>
 <p><strong>Constraints</strong></p>
 <ul>
-<li>-100.0 &lt; x &lt; 100.0</li>
-<li>-2<sup>31</sup> &lt;= n &lt;= 2<sup>31</sup>-1</li>
-<li>-10<sup>4</sup> &lt;= x<sup>n</sup> &lt;= 10<sup>4</sup></li>
+<li>1 &lt;= n &lt;= 20</li>
 </ul>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/powx-n/">https://leetcode.com/problems/powx-n/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/spiral-matrix-ii/">https://leetcode.com/problems/spiral-matrix-ii/</a></p>
 <p><strong>Description</strong><br>
-while (n%2 != 1), x = x<sup>2</sup>, n = n/2</p>
+Recursively fill numbers: right -&gt; down -&gt; left -&gt; up -&gt; right ...</p>
 <ul>
-<li>Time Complexity: O(log n)</li>
-<li>Space Complexity: O(1)</li>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(n)</li>
 </ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    double myPow(double x, int n)
+private:
+    void fillRight(vector&lt;vector&lt;int&gt;&gt; &amp; op, int row, int col, int rightBound, int value)
     {
-        if(x == 1 || n == 0)
-            return 1;
+        if(col &gt; rightBound)
+            return;
 
-        double op = 1;
-
-        // Transfer the value of n from negative to positive
-        if (n &lt; 0)
+        for(int i = col; i &lt;= rightBound; i++)
         {
-            x = 1/x;
-            // avoid -INT_MIN causes overflow
-            if (n == INT_MIN)
-            {
-                x *= x;
-                n = n/2;
-            }
-            n *= -1;
+            op[row][i] = value++;
+        }
+        fillDown(op, row+1, rightBound, op[row].size()-row-1, value);
+    }
+
+    void fillDown(vector&lt;vector&lt;int&gt;&gt; &amp; op, int row, int col, int downBound, int value)
+    {
+        if(row &gt; downBound)
+            return;
+
+        for(int i = row; i &lt;= downBound; i++)
+        {
+            op[i][col] = value++;
         }
 
-        while (n&gt;0)
+        fillLeft(op, downBound, col-1, op[0].size()-col-1, value);
+
+    }
+
+    void fillLeft(vector&lt;vector&lt;int&gt;&gt; &amp; op, int row, int col, int leftBound, int value)
+    {
+        if(col &lt; leftBound)
+            return;
+
+        for(int i = col; i &gt;= leftBound; i--)
         {
-            while (!(n%2))
-            {
-                x *= x;
-                n /= 2; 
-            }
-            if (n%2)
-            {
-                op *= x;
-                n--;
-            }
+            op[row][i] = value++;
         }
+
+        fillUp(op, row-1, leftBound, op.size()-row, value);
+    }
+
+    void fillUp(vector&lt;vector&lt;int&gt;&gt; &amp; op, int row, int col, int upBound, int value)
+    {
+        if(row &lt; upBound)
+            return;
+
+        for(int i = row; i &gt;= upBound; i--)
+        {
+            op[i][col] = value++;
+        }
+
+        fillRight(op, upBound, col+1, op[0].size()-col-2, value);
+    }
+public:
+    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) {
+        vector&lt;vector&lt;int&gt;&gt; op(n,vector&lt;int&gt;(n, 0));
+        fillRight(op, 0, 0, n-1, 1);
 
         return op;
     }
@@ -170,8 +184,8 @@ public:
 </code></pre>
 <p><strong>Result</strong></p>
 <ul>
-<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Pow(x, n).</li>
-<li>Memory Usage: 6 MB, less than 44.74% of C++ online submissions for Pow(x, n).</li>
+<li>Runtime: 2 ms, faster than 40.10% of C++ online submissions for Spiral Matrix II.</li>
+<li>Memory Usage: 6.4 MB, less than 99.53% of C++ online submissions for Spiral Matrix II.</li>
 </ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
