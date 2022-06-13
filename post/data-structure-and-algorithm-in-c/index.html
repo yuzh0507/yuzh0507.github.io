@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Structure and Algorithm in C++ | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1655045084606">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1655135371419">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1655045084606" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1655135371419" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -86,7 +86,7 @@
                 2022-05-19
               </span>
               <span>
-                8 min read
+                9 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -485,7 +485,46 @@ if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
 <figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1654071299318.png" alt="" loading="lazy"></figure>
 <h3 id="25-recurrence-root-function">2.5 Recurrence Root Function</h3>
 <figure data-type="image" tabindex="2"><img src="https://yuzh0507.github.io/post-images/1654071304531.png" alt="" loading="lazy"></figure>
-<h3 id="26-binary-search">2.6 BInary Search</h3>
+<h3 id="26-binary-search">2.6 Binary Search</h3>
+<p>Iteration</p>
+<pre><code class="language-c++">BinSearch(vector&lt;int&gt; A, int n, int key) // n = A.size()
+{
+	int low = 0, high = n-1;
+	while (low &lt;= high)
+	{
+		mid = (low+high) / 2;
+		if(key == A[mid])
+			return mid;
+		else if(key &lt; A[mid])
+			high = mid-1;
+		else
+			low = mid+1;
+	}
+	return -1;
+}
+</code></pre>
+<p>Recursion</p>
+<pre><code class="language-c++">RecBinSearch(vector&lt;int&gt; &amp; A, int low, int high, int key) // n = A.size()
+{
+	if(low == high)
+	{
+		if(A[low] == key)
+			return low;
+		else
+			return -1;
+	}
+	else
+	{
+		mid = (low+high) / 2;
+		if(key == A[mid])
+			return mid;
+		else if(key &lt; A[mid])
+			return RecBinSearch(A, low, mid-1, key);
+		else
+			return RecBinSearch(A, mid+1, high, key);
+	}
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -508,7 +547,7 @@ if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
 <li><a href="#23-recurrence-relation-dividing-function">2.3 Recurrence Relation Dividing Function</a></li>
 <li><a href="#24-masters-theorem-dividing-function">2.4 Masters Theorem Dividing Function</a></li>
 <li><a href="#25-recurrence-root-function">2.5 Recurrence Root Function</a></li>
-<li><a href="#26-binary-search">2.6 BInary Search</a></li>
+<li><a href="#26-binary-search">2.6 Binary Search</a></li>
 </ul>
 </li>
 </ul>
