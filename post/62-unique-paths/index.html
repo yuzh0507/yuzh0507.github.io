@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | Station of Alvin</title>
+<title>62. Unique Paths | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1655175549405">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,58 +79,128 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              62. Unique Paths
             </h2>
             <div class="post-info">
               <span>
-                2018-12-12
+                2022-06-14
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
-                <a href="https://yuzh0507.github.io/tag/veNNFjOy2/" class="post-tag">
-                  # Gridea
+                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
+                  # C++
+                </a>
+              
+                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+                  # LeetCode
                 </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://yuzh0507.github.io/post-images/hello-gridea.png" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <p><strong>Problem</strong><br>
+There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.</p>
+<p>Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.</p>
+<p>The test cases are generated so that the answer will be less than or equal to 2 * 10<sup>9</sup>.</p>
+<p><strong>Example</strong><br>
+<img src="https://yuzh0507.github.io/post-images/1655173994295.png" alt="" loading="lazy"></p>
+<pre><code>Input: m = 3, n = 7
+Output: 28
+
+Input: m = 3, n = 2
+Output: 3
+Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -&gt; Down -&gt; Down
+2. Down -&gt; Down -&gt; Right
+3. Down -&gt; Right -&gt; Down
+</code></pre>
+<p><strong>Constraints</strong></p>
+<ul>
+<li>1 &lt;= m, n &lt;= 100</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/unique-paths/">https://leetcode.com/problems/unique-paths/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>assume m &lt; n (if not, swap them), [1, n] can be seperated into [1, m-1] sub-intervals</li>
+<li>for i belongs to [1, m-1], possible moves = C<sub>m-2</sub><sup>i-1</sup> * C<sub>n</sub><sup>i</sup></li>
+</ol>
+<p>This mathematical solution will cause datatype overflow when m or n is very big.</p>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+private:    
+    int comb(int a, int b)
+    {
+        int op = 1;
+        int big = max(a, b-a);
+        int small = min(a, b-a);
+        while(b &gt; big)
+        {
+            op *= b--;
+        }
+        while(small &gt; 1)
+        {
+            op /= small--;
+        }
+        return op;
+    }
+public:
+    int uniquePaths(int m, int n) {
+        if(min(m,n) == 1)
+            return 1;
+        
+        if (m &gt; n)
+        {
+            int tmp = m;
+            m = n;
+            n = tmp;
+        }
+
+        int op = 0;
+        for(int i = m; i - 1 &gt; 0; i--)
+        {
+            op += comb(i-2,m-2) * comb(i-1,n);
+        }
+        return op;
+    }
+};
+</code></pre>
+<p><strong>Result</strong><br>
+Failed to pass the test case 37/63, the input is (23,12)</p>
+<hr>
+<p><strong>Description</strong><br>
+Dynamic Programming<br>
+Refer to <a href="https://leetcode.com/problems/unique-paths/discuss/22954/C%2B%2B-DP">https://leetcode.com/problems/unique-paths/discuss/22954/C%2B%2B-DP</a></p>
+<ul>
+<li>Time Complexity: O(m*n)</li>
+<li>Space Complexity: O(n)</li>
+</ul>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector&lt;int&gt; cur(n, 1);
+        for (int i = 1; i &lt; m; i++) {
+            for (int j = 1; j &lt; n; j++) {
+                cur[j] += cur[j - 1];
+            }
+        }
+        return cur[n - 1];
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<ul>
+<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Unique Paths.</li>
+<li>Memory Usage: 6.1 MB, less than 60.52% of C++ online submissions for Unique Paths.</li>
+</ul>
+<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
