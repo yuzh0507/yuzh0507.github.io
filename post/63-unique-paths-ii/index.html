@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>17. Letter Combinations of a Phone Number | Station of Alvin</title>
+<title>63. Unique Paths II | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1655292175725">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              17. Letter Combinations of a Phone Number
+              63. Unique Paths II
             </h2>
             <div class="post-info">
               <span>
-                2022-05-13
+                2022-06-15
               </span>
               <span>
-                2 min read
+                4 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,54 +101,128 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.<br>
-A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.<br>
-<img src="https://yuzh0507.github.io/post-images/1652431215016.png" alt="" loading="lazy"></p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+You are given an m x n integer array grid. There is a robot initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m-1][n-1]). The robot can only move either down or right at any point in time.</p>
+<p>An obstacle and space are marked as 1 or 0 respectively in grid. A path that the robot takes cannot include any square that is an obstacle.</p>
+<p>Return the number of possible unique paths that the robot can take to reach the bottom-right corner.</p>
+<p>The testcases are generated so that the answer will be less than or equal to 2 * 10<sup>9</sup>.<br>
+<strong>Example</strong><br>
+<img src="https://yuzh0507.github.io/post-images/1655291529713.jpg" alt="" loading="lazy"></p>
+<pre><code>Input: obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
+Output: 2
+Explanation: There is one obstacle in the middle of the 3x3 grid above.
+There are two ways to reach the bottom-right corner:
+1. Right -&gt; Right -&gt; Down -&gt; Down
+2. Down -&gt; Down -&gt; Right -&gt; Right
+
+Input: obstacleGrid = [[0,1],[0,0]]
+Output: 1
+</code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>0 &lt;= digits.length &lt;= 4<br>
-digits[i] is a digit in the range ['2', '9'].</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<ul>
+<li>m == obstacleGrid.length</li>
+<li>n == obstacleGrid[i].length</li>
+<li>1 &lt;= m, n &lt;= 100</li>
+<li>obstacleGrid[i][j] is 0 or 1.</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/unique-paths-ii/">https://leetcode.com/problems/unique-paths-ii/</a></p>
 <p><strong>Description</strong></p>
+<ol>
+<li>Creat a two-demension vector op, the value of op[i][j] is the possible paths of moving from (0,0) to (i,j)</li>
+<li>If grid[i][j] = 1, then op[i][j] = 0</li>
+<li>op[i][j] = op[i-1][j] + op[i][j-1]</li>
+</ol>
+<ul>
+<li>Time Complexity: O(m*n)</li>
+<li>Space Complexity: O(m*n)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    vector&lt;string&gt; letterCombinations(string digits)
-    {
-        if (digits.empty())
-            return {};
-        
-        vector&lt;string&gt; map = {&quot;&quot;, &quot;&quot;, &quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;, &quot;jkl&quot;, &quot;mno&quot;, &quot;pqrs&quot;, &quot;tuv&quot;, &quot;wxyz&quot;};
-        vector&lt;string&gt; letComb = {&quot;&quot;};
-        // Traverse every digit from the digits
-        for (int i = 0; i &lt; digits.size(); i++)
+    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; obstacleGrid) {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        vector&lt;vector&lt;int&gt;&gt; op(obstacleGrid.size(), vector(obstacleGrid[0].size(), 1));
+        for(int i = 0; i &lt; m; i++)
         {
-            vector&lt;string&gt; tmp;
-            
-            // Traverse every character from the corresponding element of the map
-            for (int j = 0; j &lt; map[digits[i]-'0'].size(); j++)
+            if(obstacleGrid[i][0] == 1)
             {
-                // Traverse every existent string of the letComb
-                for(int k = 0; k &lt; letComb.size(); k++)
+                for(int j = i; j &lt; m; j++)
+                    op[j][0] = 0;
+                break;
+            }
+        }
+
+        for(int i = 0; i &lt; n; i++)
+        {
+            if(obstacleGrid[0][i] == 1)
+            {
+                for(int j = i; j &lt; n; j++)
+                    op[0][j] = 0;
+                break;
+            }
+        }
+        for(int i = 1; i &lt; m; i++)
+        {
+            for(int j = 1; j &lt; n; j++)
+            {
+                if(obstacleGrid[i][j] == 1)
                 {
-                    tmp.push_back(letComb[k] + map[digits[i]-'0'][j]);
+                    op[i][j] = 0;
+                }
+                else
+                {
+                    op[i][j] = op[i-1][j] + op [i][j-1];
                 }
             }
-            letComb = tmp;        
         }
-        return letComb;
+        return op[m-1][n-1];
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Letter Combinations of a Phone Number.<br>
-Memory Usage: 6.6 MB, less than 35.15% of C++ online submissions for Letter Combinations of a Phone Number.</p>
-</blockquote>
+<ul>
+<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Unique Paths II.</li>
+<li>Memory Usage: 7.9 MB, less than 12.52% of C++ online submissions for Unique Paths II.</li>
+</ul>
+<hr>
+<p><strong>Description</strong><br>
+refer to <a href="https://leetcode.com/problems/unique-paths-ii/discuss/23252/4ms-O(n)-DP-Solution-in-C%2B%2B-with-Explanations">https://leetcode.com/problems/unique-paths-ii/discuss/23252/4ms-O(n)-DP-Solution-in-C%2B%2B-with-Explanations</a>, space complexity can be reduce to O(m)</p>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; obstacleGrid) {
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        vector&lt;int&gt; cur(m, 0);
+        for (int i = 0; i &lt; m; i++) {
+            if (!obstacleGrid[i][0])
+                cur[i] = 1;
+            else break;
+        }
+        for (int j = 1; j &lt; n; j++) {
+            bool flag = false;
+            if (obstacleGrid[0][j])
+                cur[0] = 0;
+            else flag = true;
+            for (int i = 1; i &lt; m; i++) {
+                if (!obstacleGrid[i][j]) {
+                    cur[i] += cur[i - 1]; 
+                    if (cur[i]) flag = true;
+                }
+                else cur[i] = 0; 
+            }
+            if (!flag) return 0;
+        }
+        return cur[m - 1];
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<ul>
+<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Unique Paths II.</li>
+<li>Memory Usage: 7.6 MB, less than 75.25% of C++ online submissions for Unique Paths II.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
