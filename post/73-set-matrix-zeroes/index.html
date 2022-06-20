@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>39. Combination Sum | Station of Alvin</title>
+<title>73. Set Matrix Zeroes | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1655735384785">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              39. Combination Sum
+              73. Set Matrix Zeroes
             </h2>
             <div class="post-info">
               <span>
-                2022-05-26
+                2022-06-20
               </span>
               <span>
-                3 min read
+                4 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -101,80 +101,136 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.<br>
-The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.<br>
-It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.</p>
-</blockquote>
-<p><strong>Example</strong></p>
-<pre><code>Input: candidates = [2,3,6,7], target = 7
-Output: [[2,2,3],[7]]
-Explanation:
-2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
-7 is a candidate, and 7 = 7.
-These are the only two combinations.
+                <p><strong>Problem</strong><br>
+Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.</p>
+<p>You must do it in place.</p>
+<p><strong>Example</strong><br>
+<img src="https://yuzh0507.github.io/post-images/1655734280105.jpg" alt="" loading="lazy"></p>
+<pre><code>Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
+Output: [[1,0,1],[0,0,0],[1,0,1]]
 
-Input: candidates = [2,3,5], target = 8
-Output: [[2,2,2,2],[2,3,3],[3,5]]
-
-Input: candidates = [2], target = 1
-Output: []
+Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
 </code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>1 &lt;= candidates.length &lt;= 30<br>
-1 &lt;= candidates[i] &lt;= 200<br>
-All elements of candidates are distinct.<br>
-1 &lt;= target &lt;= 500</p>
-</blockquote>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/combination-sum/">https://leetcode.com/problems/combination-sum/</a></p>
+<ul>
+<li>m == matrix.length</li>
+<li>n == matrix[0].length</li>
+<li>1 &lt;= m, n &lt;= 200</li>
+<li>-2<sup>31</sup> &lt;= matrix[i][j] &lt;= 2<sup>31</sup> - 1</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/set-matrix-zeroes/">https://leetcode.com/problems/set-matrix-zeroes/</a></p>
 <p><strong>Description</strong></p>
 <ol>
-<li>Sort the candidates</li>
-<li>Recursively call thesum(candidates, target - candidates[i], i, elem, ans)</li>
+<li>Record the position of 0</li>
+<li>Modify origin matrix according to recorded position</li>
 </ol>
+<ul>
+<li>Time Complexity: O(m*n)</li>
+<li>Space Complexity: O(m*n)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-private:
-    void sum (vector&lt;int&gt;&amp; candidates, int target, int i, vector&lt;int&gt;&amp; elem, vector&lt;vector&lt;int&gt;&gt;&amp; ans)
-    {
-        // If target = 0, the current elem is valid, push back into ans
-        if(target == 0)
-        {
-            ans.push_back(elem);
-            return;
-        }
-
-        // 
-        while(i &lt; candidates.size() &amp;&amp; target - candidates[i] &gt;= 0)
-        {
-            // Recursively candidates[i] into elem, until target - candidates[i] &lt; 0
-            elem.push_back(candidates[i]);        
-            sum(candidates, target - candidates[i], i, elem, ans);
-
-            // Once return from the recursion, pop_back the last number of elem
-            elem.pop_back();
-            i++;
-        }
-    }
 public:
-    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;&amp; candidates, int target)
+    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)
     {
-        sort(candidates.begin(), candidates.end());
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector&lt;vector&lt;int&gt;&gt; pos;
+        
+        // Record the position of 0
+        for(int i = 0; i &lt; m; i++)
+        {
+            for(int j = 0; j &lt; n; j++)
+            {
+                if(matrix[i][j] == 0)
+                {
+                    pos.push_back({i,j});
+                }
+            }
+        }
 
-        vector&lt;int&gt; elem;
-        vector&lt;vector&lt;int&gt;&gt; ans;
-        sum(candidates, target, 0, elem, ans);
-        return ans;
+        // Modify origin matrix according to recorded position
+        for(int i = 0; i &lt; pos.size(); i++)
+        {
+            // Vertically
+            for(int j = 0; j &lt; n; j++)
+            {
+                matrix[pos[i][0]][j] = 0;
+            }
+
+            // Horizontally
+            for(int j = 0; j &lt; m; j++)
+            {
+                matrix[j][pos[i][1]] = 0;
+            }
+        }
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime:  7 ms, faster than 82.38% of C++ online submissions for Combination Sum.<br>
-Memory Usage: 10.8 MB, less than 72.43% of C++ online submissions for Combination Sum.</p>
-</blockquote>
+<ul>
+<li>Runtime: 34 ms, faster than 10.83% of C++ online submissions for Set Matrix Zeroes.</li>
+<li>Memory Usage: 13.3 MB, less than 18.79% of C++ online submissions for Set Matrix Zeroes.</li>
+</ul>
+<hr>
+<p><strong>Description</strong><br>
+Refer to <a href="https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution">https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution</a></p>
+<ol>
+<li>Store states of each row in the first of that row, and store states of each column in the first of that column</li>
+<li>Modify origin matrix according to the first row and first column</li>
+</ol>
+<ul>
+<li>Time Complexity: O(m*n)</li>
+<li>Space Complexity: O(1)</li>
+</ul>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">class Solution {
+public:
+    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)
+    {
+        bool isZeroCol = false;
+        bool isZeroRow = false;
+        for (int i = 0; i &lt; matrix.size(); i++) { //check the first column
+            if (matrix[i][0] == 0) {
+                isZeroCol = true;
+                break;
+            } 
+        }
+        for (int i = 0; i &lt; matrix[0].size(); i++) { //check the first row
+            if (matrix[0][i] == 0) {
+                isZeroRow = true;
+                break;
+            } 
+        }
+        for (int i = 1; i &lt; matrix.size(); i++) { //check except the first row and column
+            for (int j = 1; j &lt; matrix[0].size(); j++) 
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+        }
+        for (int i = 1; i &lt; matrix.size(); i++) { //process except the first row and column
+        for (int j = 1; j &lt; matrix[0].size(); j++) 
+            if (matrix[i][0] == 0 || matrix[0][j] == 0)
+                matrix[i][j] = 0;
+        }
+        if (isZeroCol) { //handle the first column
+            for (int i = 0; i &lt; matrix.size(); i++) 
+                matrix[i][0] = 0;
+        }
+        if (isZeroRow) { //handle the first row
+            for (int i = 0; i &lt; matrix[0].size(); i++) 
+                matrix[0][i] = 0;
+        }    
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<ul>
+<li>Runtime: 23 ms, faster than 43.59% of C++ online submissions for Set Matrix Zeroes.</li>
+<li>Memory Usage: 13.1 MB, less than 81.72% of C++ online submissions for Set Matrix Zeroes.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
