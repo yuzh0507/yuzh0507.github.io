@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>42. Trapping Rain Water | Station of Alvin</title>
+<title>74. Search a 2D Matrix | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1655909276075">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              42. Trapping Rain Water
+              74. Search a 2D Matrix
             </h2>
             <div class="post-info">
               <span>
-                2022-05-29
+                2022-06-22
               </span>
               <span>
                 2 min read
@@ -101,55 +101,70 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:</p>
+<ul>
+<li>Integers in each row are sorted from left to right.</li>
+<li>The first integer of each row is greater than the last integer of the previous row.</li>
+</ul>
 <p><strong>Example</strong><br>
-<img src="https://yuzh0507.github.io/post-images/1653815799826.png" alt="" loading="lazy"></p>
-<pre><code>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
-Output: 6
-Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+<img src="https://yuzh0507.github.io/post-images/1655909003618.jpg" alt="" loading="lazy"></p>
+<pre><code>Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
 
-Input: height = [4,2,0,3,2,5]
-Output: 9
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+Output: false
 </code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>n == height.length<br>
-1 &lt;= n &lt;= 2 * 10<sup>4</sup><br>
-0 &lt;= height[i] &lt;= 10<sup>5</sup></p>
-</blockquote>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/trapping-rain-water/">https://leetcode.com/problems/trapping-rain-water/</a></p>
+<ul>
+<li>m == matrix.length</li>
+<li>n == matrix[i].length</li>
+<li>1 &lt;= m, n &lt;= 100</li>
+<li>-10<sup>4</sup> &lt;= matrix[i][j], target &lt;= 10<sup>4</sup></li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/search-a-2d-matrix/">https://leetcode.com/problems/search-a-2d-matrix/</a></p>
 <p><strong>Description</strong></p>
+<ol>
+<li>Treat the 2D vector as an 1D vector</li>
+<li>traverse from 0 to m*n-1, run a binary search</li>
+<li>compare target with matrix[mid/n][mid%n]</li>
+</ol>
+<ul>
+<li>Time Complexity: O(log<sub>2</sub>(m+n))</li>
+<li>Space Complexity: O(1)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-    int trap(vector&lt;int&gt;&amp; height)
+public:
+    bool searchMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target)
     {
-        vector&lt;int&gt;::iterator left = height.begin();
-        vector&lt;int&gt;::iterator right = height.end() - 1;
-        int level = 0, water = 0;
-        while (left != right + 1) {
-            // Get the lower value of two.
-            int lower = *left &lt; *right ? *left++ : *right--;
-            // Then, move the iterator with lower value to the middle for 1 element
-            
-            // Calculate the water level
-            level = max(level, lower);
+        int m = matrix.size();
+        int n = matrix[0].size();
 
-            // calculate water
-            water += level - lower;
+        if(m == 0 || n ==0)
+            return false;
+
+        int start = 0, end = m*n-1;
+        while(start &lt;= end)
+        {
+            int mid = (start + end)/2;
+            if (target &gt; matrix[mid/n][mid%n])
+                start = mid + 1;
+            else if(target &lt; matrix[mid/n][mid%n])
+                end = mid - 1;
+            else
+                return true;
         }
-        return water;
         
+        return false;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime:  33 ms, faster than 9.36% of C++ online submissions for Trapping Rain Water.<br>
-Memory Usage: 19.7 MB, less than 19.28% of C++ online submissions for Trapping Rain Water.</p>
-</blockquote>
+<ul>
+<li>Runtime: 4 ms, faster than 76.44% of C++ online submissions for Search a 2D Matrix.</li>
+<li>Memory Usage: 9.5 MB, less than 78.67% of C++ online submissions for Search a 2D Matrix.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
