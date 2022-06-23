@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-06-22T14:48:01.668Z</updated>
+    <updated>2022-06-23T15:14:41.541Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -498,7 +498,8 @@ if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
 <a href="https://yuzh0507.github.io/post/64-minimum-path-sum">64. Minimum Path Sum</a><br>
 <a href="https://yuzh0507.github.io/post/71-simplify-path">71. Simplify Path</a><br>
 <a href="https://yuzh0507.github.io/post/73-set-matrix-zeroes">73. Set Matrix Zeroes</a><br>
-<a href="https://yuzh0507.github.io/post/74-search-a-2d-matrix">74. Search a 2D Matrix</a></p>
+<a href="https://yuzh0507.github.io/post/74-search-a-2d-matrix">74. Search a 2D Matrix</a><br>
+<a href="https://yuzh0507.github.io/post/77-combinations">77. Combinations</a></p>
 <h1 id="hard-problems">Hard Problems</h1>
 <p><a href="https://yuzh0507.github.io/post/10-regular-expression-matching">10. Regular Expression Matching</a><br>
 <a href="https://yuzh0507.github.io/post/23-merge-k-sorted-lists">23. Merge k Sorted Lists</a><br>
