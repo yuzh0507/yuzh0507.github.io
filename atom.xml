@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-06-23T15:14:41.541Z</updated>
+    <updated>2022-06-25T04:20:28.159Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://yuzh0507.github.io/images/avatar.png</logo>
     <icon>https://yuzh0507.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, Station of Alvin</rights>
+    <entry>
+        <title type="html"><![CDATA[<C++ Premier> Notes]]></title>
+        <id>https://yuzh0507.github.io/post/lessc-premiergreater-notes/</id>
+        <link href="https://yuzh0507.github.io/post/lessc-premiergreater-notes/">
+        </link>
+        <updated>2022-06-25T04:10:50.000Z</updated>
+        <content type="html"><![CDATA[<p>To be added</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Data Structure and Algorithm in C++]]></title>
         <id>https://yuzh0507.github.io/post/data-structure-and-algorithm-in-c/</id>

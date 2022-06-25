@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>32. Longest Valid Parentheses | Station of Alvin</title>
+<title>&lt;C++ Premier&gt; Notes | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1656130820122">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,102 +79,25 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              32. Longest Valid Parentheses
+              &lt;C++ Premier&gt; Notes
             </h2>
             <div class="post-info">
               <span>
-                2022-05-19
+                2022-06-25
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
                   # C++
                 </a>
               
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.</p>
-</blockquote>
-<p><strong>Example</strong></p>
-<pre><code>Input: s = &quot;(()&quot;
-Output: 2
-Explanation: The longest valid parentheses substring is &quot;()&quot;.
-
-Input: s = &quot;)()())&quot;
-Output: 4
-Explanation: The longest valid parentheses substring is &quot;()()&quot;.
-
-Input: s = &quot;&quot;
-Output: 0
-</code></pre>
-<p><strong>Constraints</strong></p>
-<blockquote>
-<p>0 &lt;= s.length &lt;= 3 * 10<sup>4</sup><br>
-s[i] is '(', or ')'.</p>
-</blockquote>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/longest-valid-parentheses/submissions/">https://leetcode.com/problems/longest-valid-parentheses/submissions/</a></p>
-<p><strong>Description</strong></p>
-<ol>
-<li>Use a C++ stack to store the index of s.</li>
-<li>if (s[i] == '('), st.push(i)</li>
-<li>if (s[i] == ')'),<br>
-3.1. if(st.empty() || st.top() == ')'), st.push(i), num = 0;<br>
-3.2. else, st.pop(), num = i - (st.empty() ? -1 : st.top()); longest = max(num, longest)</li>
-</ol>
-<p><strong>Code</strong></p>
-<pre><code class="language-C++">class Solution {
-private:
-    int longestValidParentheses(string s)
-    {
-        if(s.size() &lt; 2)
-            return 0;
-        
-        int num = 0;
-        int longest = 0;
-        stack&lt;int&gt; st;
-        for(int i = 0; i &lt; s.size(); i++)
-        {
-            if(s[i] == '(')
-            {
-                st.push(i);
-            }
-
-            else
-            {
-                if(st.empty() || s[st.top()] == ')')
-                {
-                    num = 0;
-                    st.push(i);
-                }
-                else
-                {
-                    st.pop();
-                    num = i - (st.empty() ? -1 : st.top());
-                    longest = max(longest, num);
-                }
-            }
-        }
-            
-        return longest;
-    }
-};
-</code></pre>
-<p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime:  9 ms, faster than 27.95% of C++ online submissions for Longest Valid Parentheses.<br>
-Memory Usage: 7.2 MB, less than 67.26% of C++ online submissions for Longest Valid Parentheses.</p>
-</blockquote>
-<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
+                <p>To be added</p>
 
               </div>
               <div class="toc-container">
@@ -184,6 +107,15 @@ Memory Usage: 7.2 MB, less than 67.26% of C++ online submissions for Longest Val
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://yuzh0507.github.io/post/data-structure-and-algorithm-in-c/">
+              <h3 class="post-title">
+                Data Structure and Algorithm in C++
+              </h3>
+            </a>
+          </div>
         
 
         
