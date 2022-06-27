@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>49. Group Anagrams | Station of Alvin</title>
+<title>78. Subsets | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1656342185346">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              49. Group Anagrams
+              78. Subsets
             </h2>
             <div class="post-info">
               <span>
-                2022-06-04
+                2022-06-27
               </span>
               <span>
                 2 min read
@@ -102,59 +102,55 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p><strong>Problem</strong><br>
-Given an array of strings strs, group the anagrams together. You can return the answer in any order.</p>
-<p>An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
+Given an integer array nums of unique elements, return all possible subsets (the power set).</p>
+<p>The solution set must not contain duplicate subsets. Return the solution in any order.</p>
 <p><strong>Example</strong></p>
-<pre><code>Input: strs = [&quot;eat&quot;,&quot;tea&quot;,&quot;tan&quot;,&quot;ate&quot;,&quot;nat&quot;,&quot;bat&quot;]
-Output: [[&quot;bat&quot;],[&quot;nat&quot;,&quot;tan&quot;],[&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;]]
+<pre><code>Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 
-Input: strs = [&quot;&quot;]
-Output: [[&quot;&quot;]]
-
-Input: strs = [&quot;a&quot;]
-Output: [[&quot;a&quot;]]
+Input: nums = [0]
+Output: [[],[0]]
 </code></pre>
 <p><strong>Constraints</strong></p>
 <ul>
-<li>1 &lt;= strs.length &lt;= 10<sup>4</sup></li>
-<li>0 &lt;= strs[i].length &lt;= 100</li>
-<li>strs[i] consists of lowercase English letters.</li>
+<li>1 &lt;= nums.length &lt;= 10</li>
+<li>-10 &lt;= nums[i] &lt;= 10</li>
+<li>All the numbers of nums are unique.</li>
 </ul>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/group-anagrams/">https://leetcode.com/problems/group-anagrams/</a></p>
-<p><strong>Description</strong></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/subsets/">https://leetcode.com/problems/subsets/</a></p>
+<p><strong>Description</strong><br>
+Take {1,2,3} as an example,</p>
 <ol>
-<li>Traverse every element of strs, sort it as the key of unordered mep</li>
-<li>Push str back to the value of unordered map with same key</li>
-<li>Push the values of unordered map back to the output</li>
+<li>subsets({1}) = {{}, {1}};</li>
+<li>subsets({1,2}) = subsets({1}) + subsets({1}).pushback(2);</li>
+<li>subsets({1,2,3}) = subsets({1,2}) + subsets({1,2}).pushback(3)</li>
 </ol>
+<ul>
+<li>Time Complexity: O(n<sup>2</sup>)</li>
+<li>Space Complexity: O(n<sup>2</sup>)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    vector&lt;vector&lt;string&gt;&gt; groupAnagrams(vector&lt;string&gt;&amp; strs)
-    {
-        vector&lt;vector&lt;string&gt;&gt; op;
-        unordered_map&lt;string, vector&lt;string&gt;&gt; anagram;
-
-        for(auto str : strs)
+    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) {
+        vector&lt;vector&lt;int&gt;&gt; op = {{}};
+        for(int num : nums)
         {
-            string tmp = str;
-            sort(tmp.begin(),tmp.end());
-            anagram[tmp].push_back(str);
+            int n = op.size();
+            for(int i = 0; i &lt; n; i++)
+            {
+                op.push_back(op[i]);
+                op.back().push_back(num);
+            }
         }
-
-        for(auto it = anagram.begin(); it != anagram.end(); it++)
-        {
-            op.push_back(it -&gt; second);
-        }
-
         return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <ul>
-<li>Runtime: 41 ms, faster than 75.61% of C++ online submissions for Group Anagrams.</li>
-<li>Memory Usage: 19.7 MB, less than 71.11% of C++ online submissions for Group Anagrams.</li>
+<li>Runtime: 5 ms, faster than 40.83% of C++ online submissions for Subsets.</li>
+<li>Memory Usage: 7.1 MB, less than 86.54% of C++ online submissions for Subsets.</li>
 </ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
