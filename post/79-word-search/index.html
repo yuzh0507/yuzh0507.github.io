@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>73. Set Matrix Zeroes | Station of Alvin</title>
+<title>79. Word Search | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1656423215111">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              73. Set Matrix Zeroes
+              79. Word Search
             </h2>
             <div class="post-info">
               <span>
-                2022-06-20
+                2022-06-28
               </span>
               <span>
-                4 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -102,134 +102,84 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p><strong>Problem</strong><br>
-Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.</p>
-<p>You must do it in place.</p>
+Given an m x n grid of characters board and a string word, return true if word exists in the grid.</p>
+<p>The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.</p>
 <p><strong>Example</strong><br>
-<img src="https://yuzh0507.github.io/post-images/1655734280105.jpg" alt="" loading="lazy"></p>
-<pre><code>Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
-Output: [[1,0,1],[0,0,0],[1,0,1]]
-
-Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
-Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+<img src="https://yuzh0507.github.io/post-images/1656423095728.jpg" alt="" loading="lazy"></p>
+<pre><code>Input: board = [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word = &quot;ABCCED&quot;
+Output: true
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://yuzh0507.github.io/post-images/1656423099270.jpg" alt="" loading="lazy"></figure>
+<pre><code>Input: board = [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word = &quot;SEE&quot;
+Output: true
+</code></pre>
+<pre><code>Input: board = [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word = &quot;ABCB&quot;
+Output: false
 </code></pre>
 <p><strong>Constraints</strong></p>
 <ul>
-<li>m == matrix.length</li>
-<li>n == matrix[0].length</li>
-<li>1 &lt;= m, n &lt;= 200</li>
-<li>-2<sup>31</sup> &lt;= matrix[i][j] &lt;= 2<sup>31</sup> - 1</li>
+<li>m == board.length</li>
+<li>n = board[i].length</li>
+<li>1 &lt;= m, n &lt;= 6</li>
+<li>1 &lt;= word.length &lt;= 15</li>
+<li>board and word consists of only lowercase and uppercase English letters.</li>
 </ul>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/set-matrix-zeroes/">https://leetcode.com/problems/set-matrix-zeroes/</a></p>
-<p><strong>Description</strong></p>
-<ol>
-<li>Record the position of 0</li>
-<li>Modify origin matrix according to recorded position</li>
-</ol>
-<ul>
-<li>Time Complexity: O(m*n)</li>
-<li>Space Complexity: O(m*n)</li>
-</ul>
-<p><strong>Code</strong></p>
-<pre><code class="language-C++">class Solution {
-public:
-    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)
-    {
-        int m = matrix.size();
-        int n = matrix[0].size();
-        vector&lt;vector&lt;int&gt;&gt; pos;
-        
-        // Record the position of 0
-        for(int i = 0; i &lt; m; i++)
-        {
-            for(int j = 0; j &lt; n; j++)
-            {
-                if(matrix[i][j] == 0)
-                {
-                    pos.push_back({i,j});
-                }
-            }
-        }
-
-        // Modify origin matrix according to recorded position
-        for(int i = 0; i &lt; pos.size(); i++)
-        {
-            // Vertically
-            for(int j = 0; j &lt; n; j++)
-            {
-                matrix[pos[i][0]][j] = 0;
-            }
-
-            // Horizontally
-            for(int j = 0; j &lt; m; j++)
-            {
-                matrix[j][pos[i][1]] = 0;
-            }
-        }
-    }
-};
-</code></pre>
-<p><strong>Result</strong></p>
-<ul>
-<li>Runtime: 34 ms, faster than 10.83% of C++ online submissions for Set Matrix Zeroes.</li>
-<li>Memory Usage: 13.3 MB, less than 18.79% of C++ online submissions for Set Matrix Zeroes.</li>
-</ul>
-<hr>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/word-search/">https://leetcode.com/problems/word-search/</a></p>
 <p><strong>Description</strong><br>
-Refer to <a href="https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution">https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution</a></p>
-<ol>
-<li>Store states of each row in the first of that row, and store states of each column in the first of that column</li>
-<li>Modify origin matrix according to the first row and first column</li>
-</ol>
+Backtracking</p>
 <ul>
-<li>Time Complexity: O(m*n)</li>
+<li>Time Complexity: O((m*n)<sup>2</sup>)</li>
 <li>Space Complexity: O(1)</li>
 </ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    void setZeroes(vector&lt;vector&lt;int&gt;&gt;&amp; matrix)
+private:
+    bool btSearch(vector&lt;vector&lt;char&gt;&gt;&amp; board, const string &amp; word,int i, int j, int index)
     {
-        bool isZeroCol = false;
-        bool isZeroRow = false;
-        for (int i = 0; i &lt; matrix.size(); i++) { //check the first column
-            if (matrix[i][0] == 0) {
-                isZeroCol = true;
-                break;
-            } 
-        }
-        for (int i = 0; i &lt; matrix[0].size(); i++) { //check the first row
-            if (matrix[0][i] == 0) {
-                isZeroRow = true;
-                break;
-            } 
-        }
-        for (int i = 1; i &lt; matrix.size(); i++) { //check except the first row and column
-            for (int j = 1; j &lt; matrix[0].size(); j++) 
-                if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+        // Search finished
+        if(index == word.size())
+            return true;
+
+        // Over the boundry of board
+        if(i &lt; 0 || j &lt; 0 || i &gt; board.size()-1 || j &gt; board[0].size()-1)
+            return false;
+
+        // Cannot find
+        if(board[i][j] != word[index])
+            return false;
+
+        board[i][j] = '0'; // Replace the element, prevent duplication
+        bool nextSearch = btSearch(board, word, i+1, j, index+1) || // Upward
+                          btSearch(board, word, i-1, j, index+1) || // Downward
+                          btSearch(board, word, i, j+1, index+1) || // Rightward
+                          btSearch(board, word, i, j-1, index+1);   // Leftward
+        board[i][j] = word[index]; // Recover
+        return nextSearch;
+    }
+public:
+    bool exist(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word) {
+        int m = board.size();
+        int n = board[0].size();
+        char * start = nullptr;
+        for(int i = 0; i &lt; m; i++)
+        {
+            for(int j = 0; j &lt; n; j++)
+            {
+                if(btSearch(board, word, i, j, 0))
+                {
+                    return true;
                 }
+            }
         }
-        for (int i = 1; i &lt; matrix.size(); i++) { //process except the first row and column
-        for (int j = 1; j &lt; matrix[0].size(); j++) 
-            if (matrix[i][0] == 0 || matrix[0][j] == 0)
-                matrix[i][j] = 0;
-        }
-        if (isZeroCol) { //handle the first column
-            for (int i = 0; i &lt; matrix.size(); i++) 
-                matrix[i][0] = 0;
-        }
-        if (isZeroRow) { //handle the first row
-            for (int i = 0; i &lt; matrix[0].size(); i++) 
-                matrix[0][i] = 0;
-        }    
+
+        return false;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <ul>
-<li>Runtime: 23 ms, faster than 43.59% of C++ online submissions for Set Matrix Zeroes.</li>
-<li>Memory Usage: 13.1 MB, less than 81.72% of C++ online submissions for Set Matrix Zeroes.</li>
+<li>Runtime: 513 ms, faster than 53.93% of C++ online submissions for Word Search.</li>
+<li>Memory Usage: 8 MB, less than 73.44% of C++ online submissions for Word Search.</li>
 </ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
