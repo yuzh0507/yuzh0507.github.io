@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>40. Combination Sum II | Station of Alvin</title>
+<title>80. Remove Duplicates from Sorted Array II | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1656513323232">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              40. Combination Sum II
+              80. Remove Duplicates from Sorted Array II
             </h2>
             <div class="post-info">
               <span>
-                2022-05-27
+                2022-06-29
               </span>
               <span>
                 3 min read
@@ -101,87 +101,61 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.<br>
-Each number in candidates may only be used once in the combination.<br>
-Note: The solution set must not contain duplicate combinations.</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. The relative order of the elements should be kept the same.</p>
+<p>Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.</p>
+<p>Return k after placing the final result in the first k slots of nums.</p>
+<p>Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.</p>
 <p><strong>Example</strong></p>
-<pre><code>Input: candidates = [10,1,2,7,6,1,5], target = 8
-Output: 
-[
-[1,1,6],
-[1,2,5],
-[1,7],
-[2,6]
-]
+<pre><code>Input: nums = [1,1,1,2,2,3]
+Output: 5, nums = [1,1,2,2,3,_]
+Explanation: Your function should return k = 5, with the first five elements of nums being 1, 1, 2, 2 and 3 respectively.
+It does not matter what you leave beyond the returned k (hence they are underscores).
 
-Input: candidates = [2,5,2,1,2], target = 5
-Output: 
-[
-[1,2,2],
-[5]
-]
+Input: nums = [0,0,1,1,1,1,2,3,3]
+Output: 7, nums = [0,0,1,1,2,3,3,_,_]
+Explanation: Your function should return k = 7, with the first seven elements of nums being 0, 0, 1, 1, 2, 3 and 3 respectively.
+It does not matter what you leave beyond the returned k (hence they are underscores).
 </code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>1 &lt;= candidates.length &lt;= 100<br>
-1 &lt;= candidates[i] &lt;= 50<br>
-1 &lt;= target &lt;= 30</p>
-</blockquote>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/combination-sum-ii/">https://leetcode.com/problems/combination-sum-ii/</a></p>
-<p><strong>Description</strong></p>
-<ol>
-<li>Sort the candidates</li>
-<li>Recursively call thesum(candidates, target - candidates[i], i+1, elem, ans)</li>
-</ol>
+<ul>
+<li>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></li>
+<li>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></li>
+<li>nums is sorted in non-decreasing order.</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/">https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/</a></p>
+<p><strong>Description</strong><br>
+See notes</p>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(1)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-private:
-    void sum (vector&lt;int&gt;&amp; candidates, int target, int i, vector&lt;int&gt;&amp; elem, vector&lt;vector&lt;int&gt;&gt;&amp; ans)
-    {
-        // If target = 0, the current elem is valid, push back into ans
-        if(target == 0)
-        {
-            ans.push_back(elem);
-            return;
-        }
-
-        // 
-        while(i &lt; candidates.size() &amp;&amp; target - candidates[i] &gt;= 0)
-        {
-            // Recursively candidates[i] into elem, until target - candidates[i] &lt; 0
-            elem.push_back(candidates[i]);        
-            sum(candidates, target - candidates[i], i+1 , elem, ans);
-
-            // Once return from the recursion, pop_back the last number of elem
-            elem.pop_back();
-            
-            // If candidates[i+1] == candidates[i], keep i++
-            while (i+1 &lt; candidates.size() &amp;&amp; candidates[i+1] == candidates[i])
-                i++;
-            i++;
-        }
-    }
-    
 public:
-    vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) {
-        sort(candidates.begin(), candidates.end());
-
-        vector&lt;int&gt; elem;
-        vector&lt;vector&lt;int&gt;&gt; ans;
-        sum(candidates, target, 0, elem, ans);
-
-        return ans;
+    int removeDuplicates(vector&lt;int&gt;&amp; nums)
+    {
+        for(vector&lt;int&gt;::iterator it = nums.begin(); it &lt; nums.end(); it++)
+        {
+            // If the next element is the same, check further elements
+            if(it+1 &lt; nums.end() &amp;&amp; *(it+1) == *it)
+            {
+                // Delete furthur same elements
+                while(it+2 &lt; nums.end() &amp;&amp; *(it+2) == *it)
+                {
+                    nums.erase(it+2);
+                }
+            }
+        }
+        return nums.size();
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime:  8 ms, faster than 61.43% of C++ online submissions for Combination Sum II.<br>
-Memory Usage: 10.6 MB, less than 68.44% of C++ online submissions for Combination Sum II.</p>
-</blockquote>
+<ul>
+<li>Runtime: 16 ms, faster than 11.33% of C++ online submissions for Remove Duplicates from Sorted Array II.</li>
+<li>Memory Usage: 10.9 MB, less than 38.45% of C++ online submissions for Remove Duplicates from Sorted Array II.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
