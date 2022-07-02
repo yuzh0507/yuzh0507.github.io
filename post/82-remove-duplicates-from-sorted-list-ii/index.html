@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lt;C++ Premier&gt; Notes | Station of Alvin</title>
+<title>82. Remove Duplicates from Sorted List II | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1656756269586">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,63 +79,126 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              &lt;C++ Premier&gt; Notes
+              82. Remove Duplicates from Sorted List II
             </h2>
             <div class="post-info">
               <span>
-                2022-06-25
+                2022-07-02
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
                   # C++
                 </a>
               
+                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
+                  # LeetCode
+                </a>
+              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="1-getting-started">1 Getting Started</h1>
-<h1 id="2-variables-and-basic-types">2 Variables and Basic Types</h1>
-<h2 id="23-variables">2.3 Variables</h2>
-<h3 id="231-what-is-a-variable">2.3.1 What is a Variable?</h3>
-<p>Lvalues and Rvalues</p>
-<blockquote>
-<p>lvalue: An expression that is an lvalue may appear as either the left-hand or right-hand side of an assignment.<br>
-rvalue: An expression that is an rvalue may appear on the right- but not left-hand side of an assignment.</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: head = [1,2,3,3,4,4,5]
+Output: [1,2,5]
+
+Input: head = [1,1,1,2,3]
+Output: [2,3]
+</code></pre>
+<p><strong>Constraints</strong></p>
+<ul>
+<li>The number of nodes in the list is in the range [0, 300].</li>
+<li>-100 &lt;= Node.val &lt;= 100</li>
+<li>The list is guaranteed to be sorted in ascending order.</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/">https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/</a></p>
+<p><strong>Description</strong><br>
+Binary search</p>
+<ol>
+<li>If (head-&gt;next-&gt;val = head-&gt;val), move *head to right</li>
+<li>build two pointer &quot;*left&quot; and &quot;*right&quot;, use *right to check duplicates, use left to change pointers</li>
+</ol>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(1)</li>
+</ul>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head == nullptr || head-&gt;next == nullptr)
+            return head;
+
+        while (head-&gt;next-&gt;val == head-&gt;val)
+        {
+            while(head-&gt;next != nullptr &amp;&amp; head-&gt;next-&gt;val == head-&gt;val)
+            {
+                head = head-&gt;next;
+            }
+            head = head-&gt;next;
+
+            if(head == nullptr || head-&gt;next == nullptr)
+                break;
+        }
+
+        ListNode* left = head;
+        if(left == nullptr)
+            return nullptr;
+
+        ListNode* right = head-&gt;next;
+
+        while(right != nullptr &amp;&amp; right-&gt;next != nullptr)
+        {
+            if(right-&gt;next-&gt;val == right-&gt;val)
+            {
+                while(right-&gt;next != nullptr &amp;&amp; right-&gt;next-&gt;val == right-&gt;val)
+                {
+                    right = right-&gt;next;
+                }
+                left-&gt;next = right-&gt;next;
+                right = left-&gt;next;
+            }
+            else
+            {
+                left = right;
+                right = left-&gt;next;
+            }
+        }
+
+        return head;
+    }
+};
+</code></pre>
+<p><strong>Result</strong></p>
+<ul>
+<li>Runtime: 16 ms, faster than 29.18% of C++ online submissions for Remove Duplicates from Sorted List II.</li>
+<li>Memory Usage: 11.2 MB, less than 58.03% of C++ online submissions for Remove Duplicates from Sorted List II.</li>
+</ul>
+<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#1-getting-started">1 Getting Started</a></li>
-<li><a href="#2-variables-and-basic-types">2 Variables and Basic Types</a>
-<ul>
-<li><a href="#23-variables">2.3 Variables</a>
-<ul>
-<li><a href="#231-what-is-a-variable">2.3.1 What is a Variable?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://yuzh0507.github.io/post/data-structure-and-algorithm-in-c/">
-              <h3 class="post-title">
-                Data Structure and Algorithm in C++
-              </h3>
-            </a>
-          </div>
         
 
         
