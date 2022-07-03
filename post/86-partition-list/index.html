@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>3. Longest Substring Without Repeating Characters | Station of Alvin</title>
+<title>86. Partition List | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1656861209172">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              3. Longest Substring Without Repeating Characters
+              86. Partition List
             </h2>
             <div class="post-info">
               <span>
-                2022-05-05
+                2022-07-03
               </span>
               <span>
                 2 min read
@@ -101,55 +101,81 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>Problem</p>
-<blockquote>
-<p>Given a string s, find the length of the longest substring without repeating characters.</p>
-</blockquote>
-<p>Constraints</p>
-<blockquote>
-<p>0 &lt;= s.length &lt;= 5 * 10<sup>4</sup><br>
-s consists of English letters, digits, symbols and spaces.</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">https://leetcode.com/problems/longest-substring-without-repeating-characters/</a></p>
-<pre><code class="language-C++">class Solution {
+                <p><strong>Problem</strong><br>
+Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.</p>
+<p>You should preserve the original relative order of the nodes in each of the two partitions.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: head = [1,4,3,2,5,2], x = 3
+Output: [1,2,2,4,3,5]
+
+Input: head = [2,1], x = 2
+Output: [1,2]
+</code></pre>
+<p><strong>Constraints</strong></p>
+<ul>
+<li>The number of nodes in the list is in the range [0, 200].</li>
+<li>-100 &lt;= Node.val &lt;= 100</li>
+<li>-200 &lt;= x &lt;= 200</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/partition-list/">https://leetcode.com/problems/partition-list/</a></p>
+<p><strong>Description</strong></p>
+<ol>
+<li>Build two new head for two list: smallHead and bigHead</li>
+<li>Traverse the input list, if the element &lt; x, put it back to smallList, otherwise put it back to bigList</li>
+<li>Stitch the bigList to the smallList</li>
+</ol>
+<ul>
+<li>Time Complexity: O(n)</li>
+<li>Space Complexity: O(1)</li>
+</ul>
+<p><strong>Code</strong></p>
+<pre><code class="language-C++">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
 public:
-    int lengthOfLongestSubstring(string s) {
-        if (s.size() == 0)
-            return 0;
-    
-        vector&lt;char&gt; substring;     // Store the substring
-        int n = s.size();
-        int right = 0;              // Right pointer of the s
-        int left = 0;               // Left pointer of the s
-        int ans = 1;
+    ListNode* partition(ListNode* head, int x) {
+        ListNode * smallHead = new ListNode;
+        ListNode * smallCur = smallHead;
+        ListNode * bigHead = new ListNode;
+        ListNode * bigCur = bigHead;
 
+        ListNode* tmp = head;
 
-        for (; left &lt; n; left++)
+        while(tmp != nullptr)
         {
-            //Move one step to the right
-            if(left != 0)
+            if(tmp-&gt;val &gt;= x)
             {
-                // Erase elements from the beginning to the repeting element
-                substring.erase(substring.begin(), find(substring.begin(), substring.end(), s[right]));     
-                if(!substring.empty())
-                    substring.erase(substring.begin());
+                bigCur-&gt;next = tmp;
+                bigCur = bigCur-&gt;next;
             }
-
-            while(right &lt; n &amp;&amp; find(substring.begin(), substring.end(), s[right])==substring.end())
+            else
             {
-                // Push the value pointed by the right into the substring
-                substring.push_back(s[right]);
-                //Move one step to the right
-                right++;
+                smallCur-&gt;next = tmp;
+                smallCur = smallCur-&gt;next;
             }
-
-            if(ans &lt; substring.size())
-                ans = substring.size();
+            tmp = tmp-&gt;next;
         }
-        return ans;
+
+        bigCur-&gt;next = nullptr;
+        smallCur-&gt;next = bigHead-&gt;next;
+
+        return smallHead-&gt;next;
     }
 };
 </code></pre>
+<p><strong>Result</strong></p>
+<ul>
+<li>Runtime: 13 ms, faster than 21.49% of C++ online submissions for Partition List.</li>
+<li>Memory Usage: 10.2 MB, less than 73.42% of C++ online submissions for Partition List.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
