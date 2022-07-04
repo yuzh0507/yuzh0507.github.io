@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-07-03T15:13:32.055Z</updated>
+    <updated>2022-07-04T15:18:07.239Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -522,7 +522,8 @@ if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
 <a href="https://yuzh0507.github.io/post/80-remove-duplicates-from-sorted-array-ii">80. Remove Duplicates from Sorted Array II</a><br>
 <a href="https://yuzh0507.github.io/post/81-search-in-rotated-sorted-array-ii">81. Search in Rotated Sorted Array II</a><br>
 <a href="https://yuzh0507.github.io/post/82-remove-duplicates-from-sorted-list-ii">82. Remove Duplicates from Sorted List II</a><br>
-<a href="https://yuzh0507.github.io/post/86-partition-list">86. Partition List</a></p>
+<a href="https://yuzh0507.github.io/post/86-partition-list">86. Partition List</a><br>
+<a href="https://yuzh0507.github.io/post/89-gray-code">89. Gray Code</a></p>
 <h1 id="hard-problems">Hard Problems</h1>
 <p><a href="https://yuzh0507.github.io/post/10-regular-expression-matching">10. Regular Expression Matching</a><br>
 <a href="https://yuzh0507.github.io/post/23-merge-k-sorted-lists">23. Merge k Sorted Lists</a><br>
