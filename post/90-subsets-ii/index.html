@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>71. Simplify Path | Station of Alvin</title>
+<title>90. Subsets II | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1657033710349">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,14 +79,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              71. Simplify Path
+              90. Subsets II
             </h2>
             <div class="post-info">
               <span>
-                2022-06-19
+                2022-07-05
               </span>
               <span>
-                4 min read
+                2 min read
               </span>
               
                 <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
@@ -102,128 +102,59 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p><strong>Problem</strong><br>
-Given a string path, which is an absolute path (starting with a slash '/') to a file or directory in a Unix-style file system, convert it to the simplified canonical path.</p>
-<p>In a Unix-style file system, a period '.' refers to the current directory, a double period '..' refers to the directory up a level, and any multiple consecutive slashes (i.e. '//') are treated as a single slash '/'. For this problem, any other format of periods such as '...' are treated as file/directory names.</p>
-<p>The canonical path should have the following format:</p>
-<ul>
-<li>The path starts with a single slash '/'.</li>
-<li>Any two directories are separated by a single slash '/'.</li>
-<li>The path does not end with a trailing '/'.</li>
-<li>The path only contains the directories on the path from the root directory to the target file or directory (i.e., no period '.' or double period '..')<br>
-Return the simplified canonical path.</li>
-</ul>
+Given an integer array nums that may contain duplicates, return all possible subsets (the power set).</p>
+<p>The solution set must not contain duplicate subsets. Return the solution in any order.</p>
 <p><strong>Example</strong></p>
-<pre><code>Input: path = &quot;/home/&quot;
-Output: &quot;/home&quot;
-Explanation: Note that there is no trailing slash after the last directory name.
+<pre><code>Input: nums = [1,2,2]
+Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
-Input: path = &quot;/../&quot;
-Output: &quot;/&quot;
-Explanation: Going one level up from the root directory is a no-op, as the root level is the highest level you can go.
-
-Input: path = &quot;/home//foo/&quot;
-Output: &quot;/home/foo&quot;
-Explanation: In the canonical path, multiple consecutive slashes are replaced by a single one.
+Input: nums = [0]
+Output: [[],[0]]
 </code></pre>
 <p><strong>Constraints</strong></p>
 <ul>
-<li>1 &lt;= path.length &lt;= 3000</li>
-<li>path consists of English letters, digits, period '.', slash '/' or '_'.</li>
-<li>path is a valid absolute Unix path.</li>
+<li>1 &lt;= nums.length &lt;= 10</li>
+<li>-10 &lt;= nums[i] &lt;= 10</li>
 </ul>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/simplify-path/">https://leetcode.com/problems/simplify-path/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/subsets-ii/">https://leetcode.com/problems/subsets-ii/</a></p>
 <p><strong>Description</strong><br>
-Use iterater to search '/', process the following characters according to the rules.</p>
+Almost the same as <a href="https://yuzh0507.github.io/post/78-subsets/">[78. Subsets]</a>, just need to check whether the element of nums is duplicated, if yes, only unique subsets will be generated</p>
 <ul>
-<li>Time Complexity: O(n)</li>
-<li>Space Complexity: O(n)</li>
+<li>Time Complexity: O(n * 2<sup>n</sup>)</li>
+<li>Space Complexity: O(2<sup>n</sup>)</li>
 </ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
 public:
-    string simplifyPath(string path) {
-        string op;
-        stack&lt;string&gt; tmp;
-        string::iterator left = path.begin();
-        for(string::iterator it = path.begin(); left &lt;= it &amp;&amp; it &lt; path.end();)
+    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums)
+    {
+        sort(nums.begin(),nums.end());
+        vector&lt;vector&lt;int&gt;&gt; op = {{}};
+        int start = 0;
+
+        for(int i = 0; i &lt; nums.size(); i++)
         {
-            it = find(left, path.end(), '/');
-            if(it != path.end())
+            int n = op.size();
+            // If nums[i] is unique, start from the beginning of op 
+            if(i==0 || nums[i] != nums[i-1])
             {
-                tmp.push(&quot;/&quot;);
-                it++;
-
-                // Encounter second '/', ignore it
-                if (*it == '/')
-                {
-                    left = it;
-                    tmp.pop();
-                    continue;
-                }
-
-                // Encounter &quot;..&quot;, back to upper directory
-                else if(*it == '.' &amp;&amp; *(it+1) == '.' &amp;&amp; (*(it+2) == '/' || it+2 == path.end()))
-                {
-                    tmp.pop();
-                    if(!tmp.empty())
-                    {
-                        tmp.pop();
-                        it = it+2;
-                        left = it;
-                    }
-                    else
-                    {
-                        it = it+2;
-                        left = it;
-                    }
-                }
-
-                // Encounter &quot;.&quot;, ignore it
-                else if(*it == '.' &amp;&amp; (*(it+1) == '/' || it+1 == path.end()))
-                {
-                    tmp.pop();
-                    it = it+1;
-                    left = it;
-                }
-
-                // Encounter end, ignore the last '/'
-                else if(it == path.end())
-                {
-                    tmp.pop();
-                    break;
-                }
-
-                else
-                {
-                    while(*it != '/' &amp;&amp; it &lt; path.end())
-                    {
-                        tmp.top() += *it;
-                        it++;
-                    }
-                    left = it;
-                }
+                start = 0;
             }
-            else
-                break;
-        }
-
-        if(tmp.empty())
-            return &quot;/&quot;;
-
-        while(!tmp.empty())
-        {
-            op = tmp.top() + op;
-            tmp.pop();
+            
+            for(int end = n; start &lt; end; start++)
+            {
+                op.push_back(op[start]);
+                op.back().push_back(nums[i]);
+            }        
         }
         return op;
-
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <ul>
-<li>Runtime: 19 ms, faster than 8.61% of C++ online submissions for Simplify Path.</li>
-<li>Memory Usage: 8.9 MB, less than 71.82% of C++ online submissions for Simplify Path.</li>
+<li>Runtime: 8 ms, faster than 40.97% of C++ online submissions for Subsets II.</li>
+<li>Memory Usage: 7.3 MB, less than 96.72% of C++ online submissions for Subsets II.</li>
 </ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
