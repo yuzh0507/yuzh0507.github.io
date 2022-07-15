@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>8. String to Integer (atoi) | Station of Alvin</title>
+<title>93. Restore IP Addresses | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1657891948329">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,11 +79,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              8. String to Integer (atoi)
+              93. Restore IP Addresses
             </h2>
             <div class="post-info">
               <span>
-                2022-05-09
+                2022-07-15
               </span>
               <span>
                 3 min read
@@ -101,80 +101,65 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong></p>
-<blockquote>
-<p>Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).<br>
-The algorithm for myAtoi(string s) is as follows:</p>
-<ol>
-<li>Read in and ignore any leading whitespace.</li>
-<li>Check if the next character (if not already at the end of the string) is '-' or '+'. Read this character in if it is either. This determines if the final result is negative or positive respectively. Assume the result is positive if neither is present.</li>
-<li>Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.</li>
-<li>Convert these digits into an integer (i.e. &quot;123&quot; -&gt; 123, &quot;0032&quot; -&gt; 32). If no digits were read, then the integer is 0. Change the sign as necessary (from step 2).</li>
-<li>If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -231 should be clamped to -231, and integers greater than 231 - 1 should be clamped to 231 - 1.</li>
-<li>Return the integer as the final result.</li>
-</ol>
-</blockquote>
-<blockquote>
-<p><strong>Note:</strong><br>
-Only the space character ' ' is considered a whitespace character.<br>
-Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.</p>
-</blockquote>
+                <p><strong>Problem</strong><br>
+A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.</p>
+<p>For example, &quot;0.1.2.201&quot; and &quot;192.168.1.1&quot; are valid IP addresses, but &quot;0.011.255.245&quot;, &quot;192.168.1.312&quot; and &quot;192.168@1.1&quot; are invalid IP addresses.</p>
+<p>Given a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.</p>
+<p><strong>Example</strong></p>
+<pre><code>Input: s = &quot;25525511135&quot;
+Output: [&quot;255.255.11.135&quot;,&quot;255.255.111.35&quot;]
+
+Input: s = &quot;0000&quot;
+Output: [&quot;0.0.0.0&quot;]
+
+Input: s = &quot;101023&quot;
+Output: [&quot;1.0.10.23&quot;,&quot;1.0.102.3&quot;,&quot;10.1.0.23&quot;,&quot;10.10.2.3&quot;,&quot;101.0.2.3&quot;]
+</code></pre>
 <p><strong>Constraints</strong></p>
-<blockquote>
-<p>0 &lt;= s.length &lt;= 200<br>
-s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.</p>
-</blockquote>
-<p>Link: <a href="https://leetcode.com/problems/string-to-integer-atoi/">https://leetcode.com/problems/string-to-integer-atoi/</a></p>
+<ul>
+<li>1 &lt;= s.length &lt;= 20</li>
+<li>s consists of digits only.</li>
+</ul>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/restore-ip-addresses/">https://leetcode.com/problems/restore-ip-addresses/</a></p>
 <p><strong>Description</strong></p>
+<ul>
+<li>Time Complexity: O(n^3)</li>
+<li>Space Complexity: O(1)</li>
+</ul>
 <p><strong>Code</strong></p>
 <pre><code class="language-C++">class Solution {
-public:
-    int myAtoi(string s)
+private:
+    void dfs(vector&lt;string&gt;&amp; op, string&amp; s, int index, string path, int count)
     {
-        int outInt = 0;
-        int minus = 1;
-        string::iterator pos = s.begin();
-        // Step 1
-        while (*pos == ' ')
-            pos++;
-        
-        // Step2
-        if (*pos == '-')
+        if (count &gt; 4) return;
+        if (count == 4 &amp;&amp; index &gt;= s.length())
         {
-            minus = -1;
-            pos++;
+            path.pop_back();
+            op.push_back(path);
+            return;
         }
-        else if (*pos == '+')
-        {
-            minus = 1;
-            pos++;
-        }
-
-        //Step 3, 4, 5
-        for (; pos != s.end(); pos++)
-        {
-            if(48 &lt;= *pos &amp;&amp; *pos &lt;= 57)
-            {
-                if(outInt*minus &gt; INT_MAX/10 || ((outInt*minus == INT_MAX/10) &amp;&amp; ((*pos - 48)&gt;7)))
-                    return INT_MAX;
-                if(outInt*minus &lt; INT_MIN/10 || ((outInt*minus == INT_MIN/10) &amp;&amp; ((*pos - 48)&gt;=8)))
-                    return INT_MIN;
-                outInt = outInt*10 + (*pos - 48);
-            }
-            else
+        for (int i = 1; i &lt;= 3 &amp;&amp; index + i &lt;= s.length(); i++) {
+            string num = s.substr(index, i);
+            if (num[0] == '0' &amp;&amp; i != 1)
                 break;
+            else if (stol(num) &lt;= 255) {
+                dfs(op, s, index + i, path + s.substr(index, i) + &quot;.&quot;, count + 1);
+            }
         }
-
-        //Step 6
-        return outInt*minus;
+    }
+public:
+    vector&lt;string&gt; restoreIpAddresses(string s) {
+        vector&lt;string&gt; op;
+        dfs(op, s, 0, &quot;&quot;, 0);
+        return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
-<blockquote>
-<p>Runtime: 4 ms, faster than 64.52% of C++ online submissions for String to Integer (atoi).<br>
-Memory Usage: 7 MB, less than 89.70% of C++ online submissions for String to Integer (atoi).</p>
-</blockquote>
+<ul>
+<li>Runtime: 0 ms, faster than 100.00% of C++ online submissions for Restore IP Addresses.</li>
+<li>Memory Usage: 6.5 MB, less than 88.45% of C++ online submissions for Restore IP Addresses.</li>
+</ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
               </div>
