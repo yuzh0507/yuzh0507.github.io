@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-07-15T13:32:30.371Z</updated>
+    <updated>2022-07-24T14:03:27.604Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -108,6 +108,7 @@ Tablet: Hashtable</p>
 </ul>
 </li>
 </ul>
+<hr>
 <h2 id="2-recursion">2. Recursion</h2>
 <p>A function is calling itself is called recursion. Inside the function, there must be some condition which will make the recursion stop.</p>
 <pre><code class="language-c++">void fun1(int n)
@@ -281,6 +282,7 @@ void fun2(int n)
 </ul>
 </li>
 </ul>
+<hr>
 <h2 id="3-array">3. Array</h2>
 <ul>
 <li>
@@ -323,6 +325,7 @@ A[2] = new int[4];
 </code></pre>
 </li>
 </ul>
+<hr>
 <h2 id="4-matrix">4. Matrix</h2>
 <ul>
 <li>
@@ -377,6 +380,7 @@ A[2] = new int[4];
 </code></pre>
 </li>
 </ul>
+<hr>
 <h1 id="algorithm">Algorithm</h1>
 <h2 id="1-introduction-2">1. Introduction</h2>
 <p>Differences between algorithm and program</p>
@@ -408,6 +412,7 @@ A[2] = new int[4];
 <p><strong>θ</strong>: theta, average bound</p>
 </li>
 </ul>
+<hr>
 <h2 id="2-divide-and-conquer">2. Divide and Conquer</h2>
 <p>Devide the whole problem into several small questions, design solutions for small questions, integrate the small solutions into the whole solution</p>
 <h3 id="21-recurrence-relation-decreasing">2.1 Recurrence Relation Decreasing</h3>
@@ -459,6 +464,22 @@ if a &gt; 1, O(n<sup>k</sup> a<sup>n/b</sup>)</p>
 		else
 			return RecBinSearch(A, mid+1, high, key);
 	}
+}
+</code></pre>
+<hr>
+<h2 id="3-greedy-method">3 Greedy Method</h2>
+<p>For optimization problems(require minimum/maximum result)</p>
+<pre><code>n = 5
+a = [a1, a2, a3, a4, a5]
+
+Algorithm Greedy(a,n)
+{
+    for(i = 1; i &lt;= n; i++)
+    {
+        x = select(a);
+        if Feasible(x)
+            solution = solution + x;
+    }
 }
 </code></pre>
 ]]></content>
