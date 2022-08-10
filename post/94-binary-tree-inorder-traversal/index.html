@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>89. Gray Code | Station of Alvin</title>
+<title>94. Binary Tree Inorder Traversal | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1660137772732">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,22 +79,22 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              89. Gray Code
+              94. Binary Tree Inorder Traversal
             </h2>
             <div class="post-info">
               <span>
-                2022-07-04
+                2022-08-10
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
+                <a href="https://yuzh0507.github.io/tag/h-he3PjX1/" class="post-tag">
+                  # Tree
                 </a>
               
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
+                <a href="https://yuzh0507.github.io/tag/il6Wb1Jr7o/" class="post-tag">
+                  # Recursion
                 </a>
               
             </div>
@@ -102,59 +102,66 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <p><strong>Problem</strong><br>
-An n-bit gray code sequence is a sequence of 2n integers where:</p>
-<ul>
-<li>Every integer is in the inclusive range [0, 2<sup>n</sup> - 1],</li>
-<li>The first integer is 0,</li>
-<li>An integer appears no more than once in the sequence,</li>
-<li>The binary representation of every pair of adjacent integers differs by exactly one bit, and</li>
-<li>The binary representation of the first and last integers differs by exactly one bit.</li>
-</ul>
-<p>Given an integer n, return any valid n-bit gray code sequence.</p>
+Given the root of a binary tree, return the inorder traversal of its nodes' values.</p>
 <p><strong>Example</strong></p>
-<pre><code>Input: n = 2
-Output: [0,1,3,2]
-Explanation:
-The binary representation of [0,1,3,2] is [00,01,11,10].
-- 00 and 01 differ by one bit
-- 01 and 11 differ by one bit
-- 11 and 10 differ by one bit
-- 10 and 00 differ by one bit
-[0,2,3,1] is also a valid gray code sequence, whose binary representation is [00,10,11,01].
-- 00 and 10 differ by one bit
-- 10 and 11 differ by one bit
-- 11 and 01 differ by one bit
-- 01 and 00 differ by one bit
+<pre><code>Input: root = [1,null,2,3]
+Output: [1,3,2]
 
-Input: n = 1
-Output: [0,1]
+Input: root = []
+Output: []
+
+Input: root = [1]
+Output: [1]
 </code></pre>
 <p><strong>Constraints</strong></p>
 <ul>
-<li>1 &lt;= n &lt;= 16</li>
+<li>The number of nodes in the tree is in the range [0, 100].</li>
+<li>-100 &lt;= Node.val &lt;= 100</li>
 </ul>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/gray-code/">https://leetcode.com/problems/gray-code/</a></p>
+<p><strong>Link:</strong> <a href="https://leetcode.com/problems/binary-tree-inorder-traversal/">https://leetcode.com/problems/binary-tree-inorder-traversal/</a></p>
 <p><strong>Description</strong><br>
-Refer to <a href="https://leetcode.com/problems/gray-code/discuss/30028/4-lines-C%2B%2B-code.">https://leetcode.com/problems/gray-code/discuss/30028/4-lines-C%2B%2B-code.</a></p>
+recursion</p>
 <ul>
 <li>Time Complexity: O(n)</li>
-<li>Space Complexity: O(1)</li>
+<li>Space Complexity: O(n)</li>
 </ul>
 <p><strong>Code</strong></p>
-<pre><code class="language-C++">class Solution {
+<pre><code class="language-C++">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class Solution {
+private:
+    void recInorder(TreeNode* root, vector&lt;int&gt; &amp; op)
+    {
+        if(root == nullptr)
+            return;
+
+        recInorder(root-&gt;left, op);
+        op.push_back(root-&gt;val);
+        recInorder(root-&gt;right, op);
+    }
 public:
-    vector&lt;int&gt; grayCode(int n) {
-        vector&lt;int&gt; ans(1&lt;&lt;n);
-        for (int i=0; i&lt;(1&lt;&lt;n); i++) 
-            ans[i] = i^(i&gt;&gt;1);
-        return ans;
+    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
+        vector&lt;int&gt; op;
+        recInorder(root, op);
+
+        return op;
     }
 };
 </code></pre>
 <p><strong>Result</strong></p>
 <ul>
-<li>Runtime: 7 ms, faster than 93.53% of C++ online submissions for Gray Code.</li>
-<li>Memory Usage: 11.2 MB, less than 90.89% of C++ online submissions for Gray Code.</li>
+<li>Runtime: 3 ms, faster than 60.87% of C++ online submissions for Binary Tree Inorder Traversal.</li>
+<li>Memory Usage: 8.4 MB, less than 74.76% of C++ online submissions for Binary Tree Inorder Traversal.</li>
 </ul>
 <p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
 
