@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-08-10T13:40:32.366Z</updated>
+    <updated>2022-08-16T14:00:08.399Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://yuzh0507.github.io/images/avatar.png</logo>
     <icon>https://yuzh0507.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, Station of Alvin</rights>
+    <entry>
+        <title type="html"><![CDATA[Linux IPC]]></title>
+        <id>https://yuzh0507.github.io/post/linux-ipc/</id>
+        <link href="https://yuzh0507.github.io/post/linux-ipc/">
+        </link>
+        <updated>2022-08-16T13:57:03.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-overview">1 Overview</h1>
+<p>Purpose of Inter-Process Communication:</p>
+<ul>
+<li>Data transmission:</li>
+<li>Data sharing:</li>
+<li>Event notification:</li>
+<li>Resource sharing:</li>
+<li>Process Control:</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[<C++ Premier> Notes]]></title>
         <id>https://yuzh0507.github.io/post/lessc-premiergreater-notes/</id>
