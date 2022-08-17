@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux IPC | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
-<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1660658405252">
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1660746992511">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://yuzh0507.github.io">
-  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1660658405252" alt="">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1660746992511" alt="">
   </a>
   <h1 class="site-title">
     Station of Alvin
@@ -100,17 +100,42 @@
                 <h1 id="1-overview">1 Overview</h1>
 <p>Purpose of Inter-Process Communication:</p>
 <ul>
-<li>Data transmission:</li>
-<li>Data sharing:</li>
-<li>Event notification:</li>
-<li>Resource sharing:</li>
-<li>Process Control:</li>
+<li>Data transmission</li>
+<li>Data sharing</li>
+<li>Event notification</li>
+<li>Resource sharing</li>
+<li>Process Control</li>
 </ul>
+<p>Linux IPC consists of:</p>
+<ul>
+<li>UNIX: Pipe, FIFO, and Signal.</li>
+<li>System V: Message Queue, Signal Light, Shared Memory</li>
+<li>POSIX: Message Queue, Signal Light, Shared Memory</li>
+</ul>
+<p>Modern IPC have following IPC:</p>
+<ul>
+<li>Pipe and FIFO</li>
+<li>Signal</li>
+<li>Message Queue</li>
+<li>Shared Memory</li>
+<li>Semaphore</li>
+<li>Socket</li>
+</ul>
+<h1 id="2-pipe">2 Pipe</h1>
+<p>Pipe is a simplex IPC mechanism for local processes.</p>
+<h2 id="21-pipe-type">2.1 Pipe Type</h2>
+<p>Ananomous Pipe:<br>
+Naming Pipe(FIFO):</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li><a href="#1-overview">1 Overview</a></li>
+<li><a href="#2-pipe">2 Pipe</a>
+<ul>
+<li><a href="#21-pipe-type">2.1 Pipe Type</a></li>
+</ul>
+</li>
 </ul>
 
               </div>
