@@ -1,0 +1,327 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Operating System | Station of Alvin</title>
+<meta name="description" content="Record every step of my way" />
+<link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1662303245439">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://yuzh0507.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://yuzh0507.github.io">
+  <img class="avatar" src="https://yuzh0507.github.io/images/avatar.png?v=1662303245439" alt="">
+  </a>
+  <h1 class="site-title">
+    Station of Alvin
+  </h1>
+  <p class="site-description">
+    Record every step of my way
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Main
+        </a>
+      
+    
+      
+        <a href="https://yuzh0507.github.io/post/leetcode-record" class="menu">
+          LeetCode
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          Tags
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          About
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Operating System
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-09-04
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>Video Link: <a href="https://www.youtube.com/watch?v=vBURTt97EkA&amp;list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O">Introduction to Operating System - YouTube</a></p>
+<h1 id="1-introduction">1 Introduction</h1>
+<p>An Operating System is a program that manages the computer hardware.</p>
+<p>It also provides a basis for application programs and acts as an intermediary between computer users and computer hardware.</p>
+<p>e.g., Windows, Linux, Android, iOS…</p>
+<h1 id="2-basics-of-os">2 Basics of OS</h1>
+<h2 id="21-computer-system-operation">2.1 Computer System Operation</h2>
+<p>A modern general-purpose computer system consists of</p>
+<ul>
+<li>one or more CPUs,</li>
+<li>a number of device controllers connected through a common bus that provides access to shared memory</li>
+</ul>
+<p>Each device controller is in charge of a specific type of device</p>
+<p>The CPU and the device controllers can execute concurrently, competing for memory cycles</p>
+<p>To ensure orderly access to the shared memory, a memory controller is provided whose function is to synchronize access to the memory</p>
+<ul>
+<li>Some important terms:
+<ul>
+<li>
+<p><strong>Bootstrap Program</strong></p>
+<p>The initial program that runs when a computer is powered up or rebooted</p>
+<p>It is stored in the ROM</p>
+<p>It must know how to load the OS and start executing that system</p>
+<p>It must locate and load into memory the OS kernel</p>
+</li>
+<li>
+<p><strong>Interrupt</strong></p>
+<p>The occurrence of an event is usually signaled by an Interrupt from Hardware or Software</p>
+<p>Hardware may trigger an interrupt at any time by sending a signal to the CPU, usually by the way of the system bus.</p>
+</li>
+<li>
+<p>System Call (Monitor Call)</p>
+<p>Software may trigger an interrupt by executing a special operation called System Call</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>When the CPU is interrupted, it stops what it is doing and immediately transfers execution to a fixed location. (The fixed location usually contains the starting address where the Service Routine of the interrupt is located)</p>
+<p>The Interrupt Service Routine executes.</p>
+<p>On completion, the CPU resumes the interrupted computation</p>
+<h2 id="22-storage-structure">2.2 Storage Structure</h2>
+<h2 id="23-io-structure">2.3 I/O Structure</h2>
+<p>A large portion of operating system code is dedicated to managing I/O, both because of its importance to the reliability and performance of a system and because of the varying nature of the devices.</p>
+<p>A general-purpose computer system consists of CPUs and multiple device controllers that are connected through a common bus</p>
+<p>Each device controller is in charge of a specific type of device</p>
+<p>A device maintains Local Buffer Storage and  a set of Special Purpose Registers</p>
+<p>Typically, operating systems have a device driver for each device controller</p>
+<p>This device driver understands the device controller and presents a uniform interface to the device to the rest of the operating system</p>
+<h1 id="3-computer-system-architecture">3 Computer System Architecture</h1>
+<ul>
+<li>Types of Computer Systems based on the number of General Purpose Processors:
+<ul>
+<li>
+<p><strong>1. Single Processor System</strong></p>
+<p>One main CPU is capable of executing a general purpose instruction set including instructions from user processes</p>
+<p>Other special purpose processors are also present which perform device-specific tasks</p>
+</li>
+<li>
+<p><strong>2. Multiprocessor System</strong></p>
+<p>Also known as parallel systems or tightly coupled systems.</p>
+<p>Has two or more processors in close communication, sharing the computer bus and sometimes the clock, memory, and peripheral devices</p>
+<p>Advantages:<br>
+Increased throughput<br>
+Economy of scale<br>
+Increased reliability</p>
+</li>
+<li>
+<p><strong>3. Clustered System</strong></p>
+<p>Like multiprocessor systems, clustered systems gather together multiple CPUs to accomplish computational work</p>
+<p>They are composed of two or more individual systems coupled together</p>
+<p>Provides high availability</p>
+<p>Can be structured asymmetrically (one machine in Host-Standby mode, others run applications),<br>
+or symmetrically (two or more hosts run applications, and monitor each other)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-operating-system-structure">4 Operating System Structure</h1>
+<ul>
+<li>Commonality
+<ul>
+<li>
+<p>Multiprogramming</p>
+<p>A single user cannot, in general, keep either the CPU or the I/O devices busy at all time</p>
+<p>Multiprogramming increases CPU utilization by organizing jobs (code and data) so that the CPU always has one to execute.</p>
+<p>Multiprogrammed systems provide an environment in which the various system resources are utilized effectively, but they do not provide for user interaction with the computer system.</p>
+</li>
+<li>
+<p>Time Sharing (Multitasking)</p>
+<p>CPU executes multiple jobs by switching among them</p>
+<p>Switches occur so frequently that the users can interact with each program while it is running</p>
+<p>Time-sharing requires an interactive (or hands-on) computer system, which provides direct communication between the user and the system.</p>
+<p>A time-shared operating system allows many users to share the computer simultaneously.</p>
+<p>Uses CPU scheduling and multiprogramming to provide each user with a small portion of a time-shared computer.</p>
+<p>Each user has at least one separate program in memory</p>
+<p>A program loaded into memory and executing is called a “PROCESS”</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-operating-system-services">5 Operating System Services</h1>
+<p>An OS provides an environment for the execution of programs</p>
+<p>It provides certain services to programs and to users of those programs.</p>
+<ol>
+<li>User Interface (Command line Interface, or Graphic User Interface)</li>
+<li>Program Execution</li>
+<li>I/O Operations</li>
+<li>File System Manipulation</li>
+<li>Communications</li>
+<li>Error Detection</li>
+<li>Resource Allocation</li>
+<li>Accounting</li>
+<li>Protection and Security</li>
+</ol>
+<h1 id="6-user-operating-system-interface">6 User Operating System Interface</h1>
+<p>CLI allows users to directly enter commands that are to be performed by the operating system</p>
+<p>GUI allows users to interface with the operating system in a graphic way</p>
+<p>Some operating systems include the command interpreter in the kernel.</p>
+<p>Others, such as Windows XP and UNIX, treat the command interpreter as a special program.</p>
+<p>On systems with multiple command interpreters to choose from, the interpreters are known as shells. (e.g., Bourne shell, C shell, Bourne-Again Shell, Korn shell, etc.)</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#1-introduction">1 Introduction</a></li>
+<li><a href="#2-basics-of-os">2 Basics of OS</a>
+<ul>
+<li><a href="#21-computer-system-operation">2.1 Computer System Operation</a></li>
+<li><a href="#22-storage-structure">2.2 Storage Structure</a></li>
+<li><a href="#23-io-structure">2.3 I/O Structure</a></li>
+</ul>
+</li>
+<li><a href="#3-computer-system-architecture">3 Computer System Architecture</a></li>
+<li><a href="#4-operating-system-structure">4 Operating System Structure</a></li>
+<li><a href="#5-operating-system-services">5 Operating System Services</a></li>
+<li><a href="#6-user-operating-system-interface">6 User Operating System Interface</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://yuzh0507.github.io/post/data-structure-and-algorithm-in-c/">
+              <h3 class="post-title">
+                Data Structure and Algorithm in C++
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://yuzh0507.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
