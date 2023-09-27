@@ -2,14 +2,109 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yuzh0507.github.io</id>
     <title>Station of Alvin</title>
-    <updated>2022-09-04T14:54:08.573Z</updated>
+    <updated>2023-09-27T19:11:38.166Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yuzh0507.github.io"/>
     <link rel="self" href="https://yuzh0507.github.io/atom.xml"/>
     <subtitle>Record every step of my way</subtitle>
     <logo>https://yuzh0507.github.io/images/avatar.png</logo>
     <icon>https://yuzh0507.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, Station of Alvin</rights>
+    <rights>All rights reserved 2023, Station of Alvin</rights>
+    <entry>
+        <title type="html"><![CDATA[Git]]></title>
+        <id>https://yuzh0507.github.io/post/git/</id>
+        <link href="https://yuzh0507.github.io/post/git/">
+        </link>
+        <updated>2023-09-27T12:48:44.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="initialize-repo">Initialize Repo</h1>
+<pre><code class="language-bash">git init
+# Based on ~/.gitconfig, build a set of files, store in ./.git/
+# The rest of current folder is workspace, used for project files
+
+git config user.name &quot;a&quot;
+# Only modify information in ./.git/config
+
+git config --global user.name &quot;A&quot;
+#Modify ~/.gitconfig
+</code></pre>
+<h1 id="git-add">git add</h1>
+<pre><code class="language-bash">git cat-file
+# Check git files
+# -t : Check types
+# -p : Check content
+# -s : Check size
+
+git add &lt;filename&gt;
+# Creat blob file under ./.git/objects/, store added files or changes
+# Files in bolb under ./.git/objects/ are compressed added files or changes
+# The file name of blob is a calculated string according to hash
+</code></pre>
+<h1 id="withdraw">Withdraw</h1>
+<pre><code class="language-bash">git reset --&lt;filename&gt;
+# Withdraw &quot;git add &lt;filename&gt;&quot;
+
+git checkout --&lt;filename&gt;
+# Withdraw a commit, back to the last commit
+
+git reset --soft HEAD~&lt;n&gt;
+# Roll back n times commit
+</code></pre>
+<h1 id="git-commit">git commit</h1>
+<pre><code class="language-bash">git commit -m &quot;commit message&quot;
+# Commit files to Git Repository
+# Create commit file in ./.git/objects/, store commit information (tree, author, commit time, ...)
+# Create tree in ./.git/objects/, store files information (permission, blob, file name, ...)
+
+
+# ./.git/HEAD is a pointer pointing the working branch
+# Details for branch can be found in ./.git/refs/heads
+
+# Making a &quot;git commit&quot; to modified files, will create new commit file in ./.git/objects/, the &quot;parent&quot; pointer will point to the old commit file
+</code></pre>
+<h1 id="branch">Branch</h1>
+<pre><code class="language-bash">git branch
+# List all branches
+
+git branch -a 
+# List all branches including remote branches
+
+git branch &lt;branch name&gt;
+# Create a new branch
+
+git branch -d/D &lt;branch name&gt;
+# d: Confirm if this branch is merged before delete the branch
+# D: Force delete
+
+git checkout &lt;branch name&gt;
+# Change working branch
+
+git checkout -b &lt;branch name&gt;
+# Create a new branch and change working branch to it
+
+# Recover a branch:
+# 1. Check the history
+git reflog
+# 2. Check out to specified commit
+git checkout &lt;commit code&gt;
+# 3. Create a new branch and checkout to it
+git checkout -b &lt;branch name&gt;
+</code></pre>
+<h1 id="git-diff">git diff</h1>
+<pre><code class="language-bash">git diff
+# Show the difference between files in working repository and index, used to check changed content before &quot;git add&quot;
+
+git diff --cached
+# Show the difference between files in index and repo, used to check changed content before &quot;git commit&quot;
+</code></pre>
+<h1 id="add-remote-repo">Add Remote Repo</h1>
+<pre><code class="language-bash">git remote add &lt;repo name&gt; &lt;Github URL&gt;
+# Add remote repo information in .git/config
+
+git push -u &lt;repo name&gt; &lt;branch&gt;
+# Push commit to specifed branch in a remote repo
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Operating System]]></title>
         <id>https://yuzh0507.github.io/post/operating-system/</id>

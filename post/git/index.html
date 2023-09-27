@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>61. Rotate List | Station of Alvin</title>
+<title>Git | Station of Alvin</title>
 <meta name="description" content="Record every step of my way" />
 <link rel="shortcut icon" href="https://yuzh0507.github.io/favicon.ico?v=1695841867737">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,121 +79,134 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              61. Rotate List
+              Git
             </h2>
             <div class="post-info">
               <span>
-                2022-06-12
+                2023-09-27
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
-              
-                <a href="https://yuzh0507.github.io/tag/z2tXe6pLC/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://yuzh0507.github.io/tag/0ZYWufUiK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><strong>Problem</strong><br>
-Given the head of a linked list, rotate the list to the right by k places.</p>
-<p><strong>Example</strong><br>
-<img src="https://yuzh0507.github.io/post-images/1655044709535.jpg" alt="" loading="lazy"></p>
-<pre><code>Input: head = [1,2,3,4,5], k = 2
-Output: [4,5,1,2,3]
+                <h1 id="initialize-repo">Initialize Repo</h1>
+<pre><code class="language-bash">git init
+# Based on ~/.gitconfig, build a set of files, store in ./.git/
+# The rest of current folder is workspace, used for project files
+
+git config user.name &quot;a&quot;
+# Only modify information in ./.git/config
+
+git config --global user.name &quot;A&quot;
+#Modify ~/.gitconfig
 </code></pre>
-<p><strong>Constraints</strong></p>
-<ul>
-<li>The number of nodes in the list is in the range [0, 500].</li>
-<li>-100 &lt;= Node.val &lt;= 100</li>
-<li>0 &lt;= k &lt;= 2 * 10<sup>9</sup></li>
-</ul>
-<p><strong>Link:</strong> <a href="https://leetcode.com/problems/rotate-list/">https://leetcode.com/problems/rotate-list/</a></p>
-<p><strong>Description</strong></p>
-<ol>
-<li>Build a new ListNode, value = last.value, next = head</li>
-<li>Refresh the head and tail</li>
-</ol>
-<ul>
-<li>Time Complexity: O(n)</li>
-<li>Space Complexity: O(n)</li>
-</ul>
-<p><strong>Code</strong></p>
-<pre><code class="language-C++">/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-private:
-    int ListLength(ListNode * head)
-    {
-        int length = 0;
-        ListNode * tmp = head;
-        for(; tmp != nullptr; tmp = tmp-&gt;next)
-            length++;
+<h1 id="git-add">git add</h1>
+<pre><code class="language-bash">git cat-file
+# Check git files
+# -t : Check types
+# -p : Check content
+# -s : Check size
 
-        return length;
-    }
-public:
-    ListNode* rotateRight(ListNode* head, int k) {
-        if(head == nullptr)
-            return nullptr;
-        
-        if(head-&gt;next == nullptr)
-            return head;
-
-        // only k % length is necessary 
-        k = k % ListLength(head);
-        while(k&gt;0)
-        {
-            ListNode * newHead = new ListNode;
-            ListNode * tail = head;
-            ListNode * beforeTail;
-            while(tail-&gt;next != nullptr)
-            {
-                if(tail-&gt;next-&gt;next == nullptr)
-                    beforeTail = tail;
-                tail = tail-&gt;next;
-            }
-            newHead-&gt;val = tail-&gt;val;
-            newHead-&gt;next = head;
-            head = newHead;
-            beforeTail-&gt;next = nullptr;
-
-            k--;
-        }
-
-        return head;
-    }
-};
+git add &lt;filename&gt;
+# Creat blob file under ./.git/objects/, store added files or changes
+# Files in bolb under ./.git/objects/ are compressed added files or changes
+# The file name of blob is a calculated string according to hash
 </code></pre>
-<p><strong>Result</strong></p>
-<ul>
-<li>Runtime: 20 ms, faster than 9.22% of C++ online submissions for Rotate List.</li>
-<li>Memory Usage: 11.7 MB, less than 88.78% of C++ online submissions for Rotate List.</li>
-</ul>
-<p><a href="https://yuzh0507.github.io/post/leetcode-record/">Back to the catalog</a></p>
+<h1 id="withdraw">Withdraw</h1>
+<pre><code class="language-bash">git reset --&lt;filename&gt;
+# Withdraw &quot;git add &lt;filename&gt;&quot;
+
+git checkout --&lt;filename&gt;
+# Withdraw a commit, back to the last commit
+
+git reset --soft HEAD~&lt;n&gt;
+# Roll back n times commit
+</code></pre>
+<h1 id="git-commit">git commit</h1>
+<pre><code class="language-bash">git commit -m &quot;commit message&quot;
+# Commit files to Git Repository
+# Create commit file in ./.git/objects/, store commit information (tree, author, commit time, ...)
+# Create tree in ./.git/objects/, store files information (permission, blob, file name, ...)
+
+
+# ./.git/HEAD is a pointer pointing the working branch
+# Details for branch can be found in ./.git/refs/heads
+
+# Making a &quot;git commit&quot; to modified files, will create new commit file in ./.git/objects/, the &quot;parent&quot; pointer will point to the old commit file
+</code></pre>
+<h1 id="branch">Branch</h1>
+<pre><code class="language-bash">git branch
+# List all branches
+
+git branch -a 
+# List all branches including remote branches
+
+git branch &lt;branch name&gt;
+# Create a new branch
+
+git branch -d/D &lt;branch name&gt;
+# d: Confirm if this branch is merged before delete the branch
+# D: Force delete
+
+git checkout &lt;branch name&gt;
+# Change working branch
+
+git checkout -b &lt;branch name&gt;
+# Create a new branch and change working branch to it
+
+# Recover a branch:
+# 1. Check the history
+git reflog
+# 2. Check out to specified commit
+git checkout &lt;commit code&gt;
+# 3. Create a new branch and checkout to it
+git checkout -b &lt;branch name&gt;
+</code></pre>
+<h1 id="git-diff">git diff</h1>
+<pre><code class="language-bash">git diff
+# Show the difference between files in working repository and index, used to check changed content before &quot;git add&quot;
+
+git diff --cached
+# Show the difference between files in index and repo, used to check changed content before &quot;git commit&quot;
+</code></pre>
+<h1 id="add-remote-repo">Add Remote Repo</h1>
+<pre><code class="language-bash">git remote add &lt;repo name&gt; &lt;Github URL&gt;
+# Add remote repo information in .git/config
+
+git push -u &lt;repo name&gt; &lt;branch&gt;
+# Push commit to specifed branch in a remote repo
+</code></pre>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li><a href="#initialize-repo">Initialize Repo</a></li>
+<li><a href="#git-add">git add</a></li>
+<li><a href="#withdraw">Withdraw</a></li>
+<li><a href="#git-commit">git commit</a></li>
+<li><a href="#branch">Branch</a></li>
+<li><a href="#git-diff">git diff</a></li>
+<li><a href="#add-remote-repo">Add Remote Repo</a></li>
+</ul>
+
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://yuzh0507.github.io/post/operating-system/">
+              <h3 class="post-title">
+                Operating System
+              </h3>
+            </a>
+          </div>
         
 
         
